@@ -4,7 +4,6 @@ title: Why Raphtory?
 permalink: /why-raphtory/
 ---
 
-# Why Raphtory?
 Data is at the heart of decision making today, and graphs are firmly embedded in the modern data stack. From fraud detection and drug discovery to market and supply modelling, graphs enable previously unachievable insights. However, while graph analytics platforms are increasingly used across the industry, most applications and solutions overlook a crucial element: time. 
  
 Current solutions focus solely on the latest version of the data - missing out on how it has arrived at the state it is in today. 
