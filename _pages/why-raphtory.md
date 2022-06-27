@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Why Raphtory?
-permalink: /why-raphtory?/
+permalink: /why-raphtory/
 ---
 
 # Why Raphtory?
