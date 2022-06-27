@@ -1,14 +1,14 @@
 ---
 layout: post
 title:  "Raphtory's Filter API"
-categories: [Releases,Features]
+categories: [Features,Analysis]
 author: 'Naomi Arnold'
 excerpt: One of the features of the new 0.5.0 release of Raphtory is the Filter API which allows you to remove vertices and edges from a graph perspective, leaving just those which satisfy a given criterion. Graph filtering can be a really beneficial step to include in your data pipeline, particularly if you are working with large or dense networks, but it's not always clear how to start. In this blog post we will cover some of the benefits of filtering, a whistle-stop tour of common graph filtering techniques and how they are implemented in Raphtory.
 ---
 
 # Raphtory's Filter API
 
-One of the features of the new 0.5.0 release of Raphtory is the Filter API which allows you to remove vertices and edges from a graph perspective, leaving just those which satisfy a given criterion. Graph filtering can be a really beneficial step to include in your data pipeline, particularly if you are working with large or dense networks, but it's not always clear how to start. In this blog post we will cover some of the benefits of filtering, a whistle-stop tour of common graph filtering techniques and how they are implemented in Raphtory.
+One of the features of the new 0.1.0 release of Raphtory is the Filter API which allows you to remove vertices and edges from a graph perspective, leaving just those which satisfy a given criterion. Graph filtering can be a really beneficial step to include in your data pipeline, particularly if you are working with large or dense networks, but it's not always clear how to start. In this blog post we will cover some of the benefits of filtering, a whistle-stop tour of common graph filtering techniques and how they are implemented in Raphtory.
 
 ## Why filter?
 
