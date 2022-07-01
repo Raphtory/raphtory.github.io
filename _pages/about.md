@@ -1,11 +1,22 @@
 ---
 layout: page
-title: About Raphtory
+title: Raphtory Overview
 permalink: /about/
 ---
 
-Raphtory is an open-source platform for distributed real-time temporal graph analytics, allowing you to load and process large dynamic datasets across time. If you would like a brief summary of what its used for before fully diving into the getting started guide please check out this [article](https://www.turing.ac.uk/blog/just-add-time-dizzying-potential-dynamic-graphs) from the Alan Turing Institute! For more in-depth info you can watch our most recent talk on Raphtory at [AIUK 2022](https://www.youtube.com/watch?v=7S9Ymnih-YM&list=PLuD_SqLtxSdVEUsCYlb5XjWm9D6WuNKEz&index=9), [KGC 2022](https://www.youtube.com/watch?v=37S4bSN5EaU) and [NetSciX](https://www.youtube.com/watch?v=QxhrONca4FE).
+# Why Raphtory?
+Data is at the heart of decision making today, and graphs are firmly embedded in the modern data stack. From fraud detection and drug discovery to market and supply modelling, graphs enable previously unachievable insights. However, while graph analytics platforms are increasingly used across the industry, most applications and solutions overlook a crucial element: time. 
+ 
+Current solutions focus solely on the latest version of the data - missing out on how it has arrived at the state it is in today. 
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/6665739/154071628-a55fb5f9-6994-4dcf-be03-401afc7d9ee0.png"/> If you like the sound of what we are working on, come join the <a href="https://join.slack.com/t/raphtory/shared_invite/zt-xbebws9j-VgPIFRleJFJBwmpf81tvxA">Slack</a>! <img src="https://user-images.githubusercontent.com/6665739/154071628-a55fb5f9-6994-4dcf-be03-401afc7d9ee0.png"/>
-</p>
+Temporal graphs embed the full history of data, keeping track of every change that has ever occurred. This enables organisations to understand the order of interactions, investigate the evolution of the network over time, and control for risk or prepare for future trends.
+
+In social networks, this can help us understand the outreach of marketing campaigns or, contrarily, control the spread of fake news. In finance, it helps identify emerging markets and allows for a timely response to financial crime. In supply chains, it brings to light highly coupled dependencies and how service outages may impact delivery. 
+ 
+From its inception, Raphtory was developed to fill this clear gap in analytical capabilities. Time is a cornerstone of our graph storage model and integrates seamlessly into the analysis you wish to run. 
+Not only will this expose entirely new contextual insights within your data, based on causal inference, but by working with time-respecting paths you actually shrink the search space of classic algorithms,  drastically reducing run-times.
+
+Raphtory is fully distributed and decentralised, scaling to billions of records in minutes. It is built to slot into your tech stack wherever you need it. Ingest from any external source you can think of, in both a streaming or batched format. Execute quick queries or graph wide analytics and output to any downstream tool or storage. 
+
+
+
