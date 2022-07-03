@@ -87,6 +87,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   - jemoji
+  - jekyll-twitter-plugin
 
 include: ['_pages']
 
