@@ -24,7 +24,7 @@ footer-links:
   email: ben.steer@pometry.com
   facebook:
   flickr:
-  github: amitmerchant1990/reverie
+  github: raphtory/raphtory
   instagram:
   linkedin: 
   pinterest:
@@ -79,6 +79,8 @@ kramdown:
 # Set the Sass partials directory, as we're using @imports
 sass:
   style: :expanded # You might prefer to minify using :compressed
+
+safe: false
 
 # Use the following plug-ins
 plugins:
