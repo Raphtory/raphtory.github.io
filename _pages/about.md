@@ -1,9 +1,30 @@
 ---
 layout: page
-title: Raphtory from 10,000ft
+title: Raphtory Overview
 permalink: /about/
 ---
 
+This page will give you a full run through of what we are up to with the Raphtory project. There is quite a lot of info here, but its broken up with a couple of pit stops along the way. Check out the summary section at the top ([Raphtory from 10,000ft](#raphtory-from-10-000ft)) and from there you can pivot into our tutorial or dive into the details!
+
+![]({{ site.baseurl }}/images/about/diving.gif)
+
+# Table Of Contents
+
+- [Raphtory from 10,000ft](#raphtory-from-10-000ft)
+  * [What questions can I ask?](#what-questions-can-i-ask-)
+  * [How do I get my data in and insights out?](#how-do-i-get-my-data-in-and-insights-out-)
+  * [How do I actually run it?](#how-do-i-actually-run-it-)
+- [Lets take a quick breather](#-warning--lets-take-a-quick-breather--warning-)
+- [Lets dive back in!](#---lets-dive-back-in----)
+  * [The Graph Model](#the-graph-model)
+  * [Ingestion Components](#ingestion-components)
+  * [Analysis Components](#analysis-components)
+- [Analysis in Raphtory](#analysis-in-raphtory)
+- [What’s going on under the hood](#what-s-going-on-under-the-hood)
+- [Deployment](#deployment)
+- [Finished!](#-fireworks--finished---fireworks-)
+
+# Raphtory from 10,000ft
 Data is at the heart of decision making today, and graphs are firmly embedded in the modern data stack. From fraud detection and drug discovery to market and supply modelling, graphs enable previously unachievable insights. However, while graph analytics platforms are increasingly used across the industry, most applications and solutions overlook a crucial element: time. 
  
 Current solutions focus solely on the latest version of the data - missing out on how it has arrived at the state it is in today. 
@@ -187,7 +208,7 @@ Alongside allowing Raphtory to provide seamless real-time data refreshes, integr
 ![]({{ site.baseurl }}/images/about/trinio.png)
 
 
-## Deployment
+# Deployment
 Whilst it is important for Ingestion and Analysis to run fast, from our own experience with other graphy/big data tools, that doesn’t matter if you can’t get a platform to deploy properly. We have put a lot of work into making Raphtory’s deployment process as smooth as possible.
 
 ```scala 
