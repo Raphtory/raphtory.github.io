@@ -75,7 +75,7 @@ Raphtory’s model is very similar to the property graph model that you may have
 
 Raphtory improves on this model by further tracking every update that occurs and when they occur. These updates are recorded in a chronological log maintaining the full property and relationship history of all entities (as opposed to overwriting the information when new data arrives). This in turn allows for a complete historic exploration of the graph.
 
-![]({{ site.baseurl }}/images/about/model.png)
+![]({{ site.baseurl }}/images/about/Model.png)
 
 The figure above shows an example of a Raphtory graph being built from social network data. In this instance there are two clear pieces of information which would be lost in a traditional graph system. 
 
