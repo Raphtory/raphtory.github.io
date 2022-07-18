@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Tracking illicit cryptocurrency across time"
-categories: [Use Case]
+categories: [Analysis With Raphtory]
 author: Ben Steer
 ---
 

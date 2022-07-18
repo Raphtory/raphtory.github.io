@@ -17,7 +17,7 @@ avatar: /images/raphtory.png
 #
 # Flags below are optional
 #
-
+processEscapes: true
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
