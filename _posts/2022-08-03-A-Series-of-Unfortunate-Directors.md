@@ -8,7 +8,7 @@ excerpt: In this article we will explore how we used Raphtory to identify fishy 
 
 ![](https://i.imgur.com/0Le2IAj.jpg)
 
-*29 Harley Street, London*
+*29 Harley Street, London.*
 
 Amongst some of the top private medical clinics, in the heart of London, lies 29 Harley Street. It has been the headquarters for more than 3000 companies. This beautiful Georgian building is the front office for companies around the world seeking an address on a prestigious street in London. However, behind the ornate balconies and the grand double-door entrance, this address has been used by criminals to carry out a <a href="https://archives.fbi.gov/archives/sanfrancisco/press-releases/2011/defendants-in-multi-million-dollar-investment-fraud-scheme-sentenced-to-prison" target="_blank">multi-million-dollar investment fraud scheme</a> and to <a href="https://www.dailymail.co.uk/news/article-3439235/Long-haired-fraudster-posed-Pope-s-banker-fleece-Dutch-shipping-firm-73million-jailed-14-years.html" target="_blank">launder stolen money from Allseas, a Dutch shipping company</a>. At Pometry, we used **Raphtory** to expose other entities utilising UK addresses to hide their criminal activity. Read on to find out more...
 
