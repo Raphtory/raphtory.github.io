@@ -8,7 +8,7 @@ excerpt: In this article we will explore how we used Raphtory to identify fishy 
 
 ![](https://i.imgur.com/0Le2IAj.jpg)
 
-Amongst some of the top private medical clinics, in the heart of London, lies 29 Harley Street. It has been the headquarters for more than 3000 companies. This beautiful Georgian building is the front office for companies around the world seeking an address on a prestigious street in London. However, behind the ornate balconies and the grand double-door entrance, this address has been used by criminals to carry out a [multi-million-dollar investment fraud scheme](https://archives.fbi.gov/archives/sanfrancisco/press-releases/2011/defendants-in-multi-million-dollar-investment-fraud-scheme-sentenced-to-prison) and to [launder stolen money from Allseas, a Dutch shipping company](https://www.dailymail.co.uk/news/article-3439235/Long-haired-fraudster-posed-Pope-s-banker-fleece-Dutch-shipping-firm-73million-jailed-14-years.html). At Pometry, we used **Raphtory** to expose other entities utilising UK addresses to hide their criminal activity. Read on to find out more...
+Amongst some of the top private medical clinics, in the heart of London, lies 29 Harley Street. It has been the headquarters for more than 3000 companies. This beautiful Georgian building is the front office for companies around the world seeking an address on a prestigious street in London. However, behind the ornate balconies and the grand double-door entrance, this address has been used by criminals to carry out a <a href="https://archives.fbi.gov/archives/sanfrancisco/press-releases/2011/defendants-in-multi-million-dollar-investment-fraud-scheme-sentenced-to-prison" target="_blank">multi-million-dollar investment fraud scheme</a> and to <a href="https://www.dailymail.co.uk/news/article-3439235/Long-haired-fraudster-posed-Pope-s-banker-fleece-Dutch-shipping-firm-73million-jailed-14-years.html" target="_blank">launder stolen money from Allseas, a Dutch shipping company</a>. At Pometry, we used **Raphtory** to expose other entities utilising UK addresses to hide their criminal activity. Read on to find out more...
 
 ## What is Companies House? :briefcase: :house: 
 
@@ -30,7 +30,7 @@ A shelf company is an out-of-the-box company that is available to purchase. The 
 
 At Pometry, we used **Raphtory** to investigate [Companies House data](https://developer.company-information.service.gov.uk/), finding patterns of illegal behaviour amongst registered companies in the UK. 
 
-For a subset of 12749 companies collected from the [Companies House Streaming API](https://developer-specs.company-information.service.gov.uk/streaming-api/reference/company-information/stream), we built a Python scraper and left it running overnight to find the list of [officers](https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/officers/list) associated to these companies, and [all the companies they have been or are currently appointed to](https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/officer-appointments/list).
+For a subset of 12749 companies collected from the <a href="https://developer-specs.company-information.service.gov.uk/streaming-api/reference/company-information/stream" target="_blank">Companies House Streaming API</a>, we built a Python scraper and left it running overnight to find the <a href="https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/officers/list" target="_blank">list of officers</a> associated to these companies, and <a href="https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/officer-appointments/list" target="_blank">all the companies they have been or are currently appointed to</a>.
 
 In **Raphtory**, we ran an Edge List algorithm on the Companies House data we had scraped, linking Company Officers to their current and past companies. These so-called "Company Officers" can also be companies that own other companies, giving way to complex company structures. After filtering down Company Officers that had over 50,000 companies (all of which had been dissolved) we found that these Company Officers were in fact Company Formation Agents. A shocking pattern was found when investigating the dates that these companies were created and dissolved.
 
@@ -52,13 +52,13 @@ A project called [#29Leaks](https://www.occrp.org/en/29leaks/), spearheaded by m
 ---
 
 
-In addition to Formation House, two other Company Formation Agents with similar company activities in our analysis were found to be linked to several cases of fraud, including a [telecoms scam backed by the Mafia](https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200). The agents went by the names - Temple Secretaries Limited and Company Directors Limited. Not only were these agents registered at the same address, 788-790 Finchley Road, they were both directors at the same companies, opening and closing companies on the same dates. (See histogram plots below).
+In addition to Formation House, two other Company Formation Agents with similar company activities in our analysis were found to be linked to several cases of fraud, including a <a href="https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200" target="_blank">telecoms scam backed by the Mafia</a>. The agents went by the names - Temple Secretaries Limited and Company Directors Limited. Not only were these agents registered at the same address, 788-790 Finchley Road, they were both directors at the same companies, opening and closing companies on the same dates. (See histogram plots below).
 
 *Histogram plots for "Temple Secretaries Limited" and "Company Directors Limited" respectively, the plots show the duration of time that the companies were active before they were dissolved.*
 ![](https://i.imgur.com/AY0kGZp.png)
 ![](https://i.imgur.com/u0TwFyN.png)
 
-Most of the companies owned by these agents were opened and closed within the same day. Firms registered at this Finchley Road address were eventually found to be linked to [international scandals of money laundering and political corruption](https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200).
+Most of the companies owned by these agents were opened and closed within the same day. Firms registered at this Finchley Road address were eventually found to be linked to <a href="https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200" target="_blank">international scandals of money laundering and political corruption</a>.
 
 *The complex company structure of Finchley Road's formation agents that could explain the similar company activities of Temple Secretaries Limited and Company Directors Limited.*
 ![](https://i.imgur.com/USGDCb8.jpg)
@@ -71,15 +71,15 @@ To this day, there are still active companies registered under Temple Secretarie
 ![](https://i.imgur.com/6wpbJA5.jpg)
 
 ## Conclusion and Future Work
-By the end of March 2022, the number of companies on the Companies House register was [over 4.8m with over 750k new companies](https://www.gov.uk/government/statistics/companies-register-activities-statistical-release-2021-to-2022/companies-register-activities-2021-to-2022). The ease of setting up a company on Companies House and the lack of checks on the platform has given a way for criminals to hide dirty money behind anonymous companies. 
+By the end of March 2022, the number of companies on the Companies House register was <a href="https://www.gov.uk/government/statistics/companies-register-activities-statistical-release-2021-to-2022/companies-register-activities-2021-to-2022" target="_blank">over 4.8m with over 750k new companies</a>. The ease of setting up a company on Companies House and the lack of checks on the platform has given a way for criminals to hide dirty money behind anonymous companies. 
 
 With **Raphtory**, we were able to sift through Companies House data and find these suspicious individuals just by mapping Company Officers to their Companies. Our platform has the sophistication to do more complex algorithms, exposing convuluted company structures just like the ones discussed above, and  identifying individuals that are pocketing most of the companies money  (Ultimate Beneficial Owners).
 
-If you would like to learn more about Raphtory, drop the [Pometry](https://www.pometry.com/contact/) team a message and they will be more than happy to help. 
+If you would like to learn more about Raphtory, drop the <a href="https://www.pometry.com/contact/" target="_blank">Pometry</a> team a message and they will be more than happy to help. 
 
 
 # Interested in giving it a go yourself?
-The basic version of this algorithm is [available](https://github.com/Raphtory/Raphtory/blob/master/core/src/main/scala/com/raphtory/algorithms/generic/EdgeList.scala) for free as part of the [Raphtory Open Source Project](https://github.com/Raphtory/Raphtory). This can be run on any data you like as long as it fits a bipartite model.
+The basic version of this algorithm is <a href="https://github.com/Raphtory/Raphtory/blob/master/core/src/main/scala/com/raphtory/algorithms/generic/EdgeList.scala" target="_blank">available</a> for free as part of the <a href="https://github.com/Raphtory/Raphtory" target="_blank">Raphtory Open Source Project</a>. This can be run on any data you like as long as it fits a bipartite model.
 
-If this is your first step into the world of temporal graphs, consider checking out the [Introduction to Raphtory](https://www.raphtory.com/about) which will lead you into our [Getting Started guide](https://docs.raphtory.com). If you run into any issues you can get assistance from the wonderful Raphtory community on [Slack](https://join.slack.com/t/raphtory/shared_invite/zt-xbebws9j-VgPIFRleJFJBwmpf81tvxA).
-If you would like to run these algorithms at scale in a production environment, drop the team at [Pometry](https://www.pometry.com/contact/) a message, and they will be more than happy to help.
+If this is your first step into the world of temporal graphs, consider checking out the <a href="https://www.raphtory.com/about" target="_blank">Introduction to Raphtory</a> which will lead you into our <a href="https://docs.raphtory.com" target="_blank">Getting Started guide</a>. If you run into any issues you can get assistance from the wonderful Raphtory community on <a href="https://join.slack.com/t/raphtory/shared_invite/zt-xbebws9j-VgPIFRleJFJBwmpf81tvxA" target="_blank">Slack</a>.
+If you would like to run these algorithms at scale in a production environment, drop the team at <a href="https://www.pometry.com/contact/" target="_blank">Pometry</a> a message, and they will be more than happy to help.
