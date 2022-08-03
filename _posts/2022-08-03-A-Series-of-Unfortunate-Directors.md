@@ -18,7 +18,7 @@ Companies House is an institution that stores information on all private limited
 
 Company formation agents started emerging and taking advantage of this new online system. A formation agent is a company that creates other companies on behalf of clients all over the world. Not only do agents reduce the administrative work required to set up a company, it is surprisingly cheap, appealing to many businesses that want to start trading quickly. Some turn to agents for legitimate business reasons, whilst others use these agents to set up dummy corporations to hide their financial dealings.
 
-## Shell or Shelf? :shell: :books: 
+### Shell or Shelf? :shell: :books: 
 
 Formation agents can help clients create a ***shell company*** or offer an existing ***shelf company***. 
 
