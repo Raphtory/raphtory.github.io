@@ -26,7 +26,7 @@ A shell company is created to hold funds and manage another entity's financial t
 
 A shelf company is an out-of-the-box company that is available to purchase. The advantage of a shelf company is that they have years of documents, giving the impression of longevity of a company.
 
-<h2>Dodgy Directors <br> and their fast turnover of companies :dash: </h2>
+### Dodgy Directors and their high turnover of companies :dash:
 
 At Pometry, we used **Raphtory** to investigate [Companies House data](https://developer.company-information.service.gov.uk/), finding patterns of illegal behaviour amongst registered companies in the UK. 
 
