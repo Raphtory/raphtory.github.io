@@ -6,8 +6,6 @@ author: 'Rachel Chan'
 excerpt: In this article we will explore how we used Raphtory to identify fishy behaviour on Companies House.
 ---
 
-# A Series of Unfortunate Directors
-
 ![](https://i.imgur.com/0Le2IAj.jpg)
 
 Amongst some of the top private medical clinics, in the heart of London, lies 29 Harley Street. It has been the headquarters for more than 3000 companies. This beautiful Georgian building is the front office for companies around the world seeking an address on a prestigious street in London. However, behind the ornate balconies and the grand double-door entrance, this address has been used by criminals to carry out a [multi-million-dollar investment fraud scheme](https://archives.fbi.gov/archives/sanfrancisco/press-releases/2011/defendants-in-multi-million-dollar-investment-fraud-scheme-sentenced-to-prison) and to [launder stolen money from Allseas, a Dutch shipping company](https://www.dailymail.co.uk/news/article-3439235/Long-haired-fraudster-posed-Pope-s-banker-fleece-Dutch-shipping-firm-73million-jailed-14-years.html). At Pometry, we used **Raphtory** to expose other entities utilising UK addresses to hide their criminal activity. Read on to find out more...
@@ -16,11 +14,11 @@ Amongst some of the top private medical clinics, in the heart of London, lies 29
 
 Companies House is an institution that stores information on all private limited companies in the United Kingdom. Setting up a company used to be time-consuming and cumbersome, but ever since Companies House introduced online applications, there are now over 4.5m companies registered. It takes a few minutes to fill in an online application, and upon a payment of £12, your company will be registered within 24 hours.
 
-## Company Formation Agents :male-office-worker: :female-office-worker: 
+## Company Formation Agents 
 
 Company formation agents started emerging and taking advantage of this new online system. A formation agent is a company that creates other companies on behalf of clients all over the world. Not only do agents reduce the administrative work required to set up a company, it is surprisingly cheap, appealing to many businesses that want to start trading quickly. Some turn to agents for legitimate business reasons, whilst others use these agents to set up dummy corporations to hide their financial dealings.
 
-## Shell or Shelf? :shell: :books:
+## Shell or Shelf? :shell: :books: 
 
 Formation agents can help clients create a ***shell company*** or offer an existing ***shelf company***. 
 
@@ -44,7 +42,7 @@ One of the company formation agents we found in our analysis was "Nominee Secret
 
 ![](https://i.imgur.com/HHGrrHj.jpg)
 
-> *Histogram plot for "Nominee Secretary Ltd", this plot shows the duration of time that the companies were active before they were dissolved.*
+*Histogram plot for "Nominee Secretary Ltd", this plot shows the duration of time that the companies were active before they were dissolved.*
 ![](https://i.imgur.com/0FiPAEH.png)
 
 As shown in the graph above, most companies owned by Nominees Secretary Ltd did not last long before they were dissolved.
@@ -56,20 +54,20 @@ A project called [#29Leaks](https://www.occrp.org/en/29leaks/), spearheaded by m
 
 In addition to Formation House, two other Company Formation Agents with similar company activities in our analysis were found to be linked to several cases of fraud, including a [telecoms scam backed by the Mafia](https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200). The agents went by the names - Temple Secretaries Limited and Company Directors Limited. Not only were these agents registered at the same address, 788-790 Finchley Road, they were both directors at the same companies, opening and closing companies on the same dates. (See histogram plots below).
 
-> *Histogram plots for "Temple Secretaries Limited" and "Company Directors Limited" respectively, the plots show the duration of time that the companies were active before they were dissolved.*
+*Histogram plots for "Temple Secretaries Limited" and "Company Directors Limited" respectively, the plots show the duration of time that the companies were active before they were dissolved.*
 ![](https://i.imgur.com/AY0kGZp.png)
 ![](https://i.imgur.com/u0TwFyN.png)
 
 Most of the companies owned by these agents were opened and closed within the same day. Firms registered at this Finchley Road address were eventually found to be linked to [international scandals of money laundering and political corruption](https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200).
 
-> *The complex company structure of Finchley Road's formation agents that could explain the similar company activities of Temple Secretaries Limited and Company Directors Limited.*
+*The complex company structure of Finchley Road's formation agents that could explain the similar company activities of Temple Secretaries Limited and Company Directors Limited.*
 ![](https://i.imgur.com/USGDCb8.jpg)
 
 
 
 To this day, there are still active companies registered under Temple Secretaries Ltd and Company Directors Ltd at this derelict Finchley Road office. 
 
-> *The neglected interior of 788-790 Finchley Road, once a bustling front for hundreds and thousands of companies. (Source: Archant)*
+*The neglected interior of 788-790 Finchley Road, once a bustling front for hundreds and thousands of companies. (Source: Archant)*
 ![](https://i.imgur.com/6wpbJA5.jpg)
 
 ## Conclusion and Future Work
