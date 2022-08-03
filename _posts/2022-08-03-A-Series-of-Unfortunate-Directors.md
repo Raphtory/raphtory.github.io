@@ -40,10 +40,10 @@ The companies that were linked to these formation agents in our data were being 
 
 One of the company formation agents we found in our analysis was "Nominee Secretary Ltd", a shell company owned by Corporate Nominees Ltd, which in turn was owned by Legal Nominees, centred at the heart of Formation House's complex structure of companies. It is not illegal to own or control anonymous companies. However, it allows individuals to evade tax, launder money and hide assets behind these anonymous companies.
 
-![Formation House Structure](https://i.imgur.com/HHGrrHj.jpg)
-
+<img src="https://i.imgur.com/HHGrrHj.jpg" alt="Formation House Structure" width="200" height="200" />
 *Histogram plot for "Nominee Secretary Ltd", this plot shows the duration of time that the companies were active before they were dissolved.*
-![](https://i.imgur.com/0FiPAEH.png)
+<br>
+![Histogram plot for "Nominee Secretary Ltd"](https://i.imgur.com/0FiPAEH.png)
 
 As shown in the graph above, most companies owned by Nominees Secretary Ltd did not last long before they were dissolved.
 
@@ -55,20 +55,20 @@ A project called [#29Leaks](https://www.occrp.org/en/29leaks/), spearheaded by m
 In addition to Formation House, two other Company Formation Agents with similar company activities in our analysis were found to be linked to several cases of fraud, including a <a href="https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200" target="_blank">telecoms scam backed by the Mafia</a>. The agents went by the names - Temple Secretaries Limited and Company Directors Limited. Not only were these agents registered at the same address, 788-790 Finchley Road, they were both directors at the same companies, opening and closing companies on the same dates. (See histogram plots below).
 
 *Histogram plots for "Temple Secretaries Limited" and "Company Directors Limited" respectively, the plots show the duration of time that the companies were active before they were dissolved.*
-![](https://i.imgur.com/AY0kGZp.png)
-![](https://i.imgur.com/u0TwFyN.png)
+![Histogram plots for "Temple Secretaries Limited"](https://i.imgur.com/AY0kGZp.png)
+![Histogram plots for "Company Directors Limited"](https://i.imgur.com/u0TwFyN.png)
 
 Most of the companies owned by these agents were opened and closed within the same day. Firms registered at this Finchley Road address were eventually found to be linked to <a href="https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200" target="_blank">international scandals of money laundering and political corruption</a>.
 
 *The complex company structure of Finchley Road's formation agents that could explain the similar company activities of Temple Secretaries Limited and Company Directors Limited.*
-![](https://i.imgur.com/USGDCb8.jpg)
+![The complex company structure of Finchley Road's formation agents](https://i.imgur.com/USGDCb8.jpg)
 
 
 
 To this day, there are still active companies registered under Temple Secretaries Ltd and Company Directors Ltd at this derelict Finchley Road office. 
 
 *The neglected interior of 788-790 Finchley Road, once a bustling front for hundreds and thousands of companies. (Source: Archant)*
-![](https://i.imgur.com/6wpbJA5.jpg)
+![The neglected interior of 788-790 Finchley Road](https://i.imgur.com/6wpbJA5.jpg)
 
 ## Conclusion and Future Work
 By the end of March 2022, the number of companies on the Companies House register was <a href="https://www.gov.uk/government/statistics/companies-register-activities-statistical-release-2021-to-2022/companies-register-activities-2021-to-2022" target="_blank">over 4.8m with over 750k new companies</a>. The ease of setting up a company on Companies House and the lack of checks on the platform has given a way for criminals to hide dirty money behind anonymous companies. 
