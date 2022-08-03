@@ -40,7 +40,7 @@ The companies that were linked to these formation agents in our data were being 
 
 One of the company formation agents we found in our analysis was "Nominee Secretary Ltd", a shell company owned by Corporate Nominees Ltd, which in turn was owned by Legal Nominees, centred at the heart of Formation House's complex structure of companies. It is not illegal to own or control anonymous companies. However, it allows individuals to evade tax, launder money and hide assets behind these anonymous companies.
 
-![](https://i.imgur.com/HHGrrHj.jpg)
+![Formation House Structure](https://i.imgur.com/HHGrrHj.jpg)
 
 *Histogram plot for "Nominee Secretary Ltd", this plot shows the duration of time that the companies were active before they were dissolved.*
 ![](https://i.imgur.com/0FiPAEH.png)
