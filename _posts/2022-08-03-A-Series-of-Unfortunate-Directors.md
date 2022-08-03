@@ -10,7 +10,7 @@ excerpt: In this article we will explore how we used Raphtory to identify fishy 
 
 Amongst some of the top private medical clinics, in the heart of London, lies 29 Harley Street. It has been the headquarters for more than 3000 companies. This beautiful Georgian building is the front office for companies around the world seeking an address on a prestigious street in London. However, behind the ornate balconies and the grand double-door entrance, this address has been used by criminals to carry out a <a href="https://archives.fbi.gov/archives/sanfrancisco/press-releases/2011/defendants-in-multi-million-dollar-investment-fraud-scheme-sentenced-to-prison" target="_blank">multi-million-dollar investment fraud scheme</a> and to <a href="https://www.dailymail.co.uk/news/article-3439235/Long-haired-fraudster-posed-Pope-s-banker-fleece-Dutch-shipping-firm-73million-jailed-14-years.html" target="_blank">launder stolen money from Allseas, a Dutch shipping company</a>. At Pometry, we used **Raphtory** to expose other entities utilising UK addresses to hide their criminal activity. Read on to find out more...
 
-<h2 style="display: inline-block">What is Companies House? :briefcase: :house: </h2>
+## What is Companies House? :briefcase: :house: 
 
 Companies House is an institution that stores information on all private limited companies in the United Kingdom. Setting up a company used to be time-consuming and cumbersome, but ever since Companies House introduced online applications, there are now over 4.5m companies registered. It takes a few minutes to fill in an online application, and upon a payment of £12, your company will be registered within 24 hours.
 
@@ -26,7 +26,7 @@ A shell company is created to hold funds and manage another entity's financial t
 
 A shelf company is an out-of-the-box company that is available to purchase. The advantage of a shelf company is that they have years of documents, giving the impression of longevity of a company.
 
-<h2 style="display: inline-block">Dodgy Directors and their fast turnover of companies :dash: </h2>
+<h2>Dodgy Directors <br> and their fast turnover of companies :dash: </h2>
 
 At Pometry, we used **Raphtory** to investigate [Companies House data](https://developer.company-information.service.gov.uk/), finding patterns of illegal behaviour amongst registered companies in the UK. 
 
