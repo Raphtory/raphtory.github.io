@@ -65,7 +65,7 @@ Most of the companies owned by these agents were opened and closed within the sa
 
 <em>The complex company structure of Finchley Road's formation agents that could explain the similar company activities of Temple Secretaries Limited and Company Directors Limited.</em>
 
-<img src="https://i.imgur.com/USGDCb8.jpg" alt="The complex company structure of Finchley Road's formation agents" width="800" height="650" />
+<img src="https://i.imgur.com/USGDCb8.jpg" alt="The complex company structure of Finchley Road's formation agents" width="800" height="600" />
 
 To this day, there are still active companies registered under Temple Secretaries Ltd and Company Directors Ltd at this derelict Finchley Road office. 
 
