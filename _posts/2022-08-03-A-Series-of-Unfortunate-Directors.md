@@ -14,7 +14,7 @@ Amongst some of the top private medical clinics, in the heart of London, lies 29
 
 Companies House is an institution that stores information on all private limited companies in the United Kingdom. Setting up a company used to be time-consuming and cumbersome, but ever since Companies House introduced online applications, there are now over 4.5m companies registered. It takes a few minutes to fill in an online application, and upon a payment of £12, your company will be registered within 24 hours.
 
-## Company Formation Agents 
+## Company Formation Agents :briefcase: :sunglasses:
 
 Company formation agents started emerging and taking advantage of this new online system. A formation agent is a company that creates other companies on behalf of clients all over the world. Not only do agents reduce the administrative work required to set up a company, it is surprisingly cheap, appealing to many businesses that want to start trading quickly. Some turn to agents for legitimate business reasons, whilst others use these agents to set up dummy corporations to hide their financial dealings.
 
@@ -26,7 +26,7 @@ A shell company is created to hold funds and manage another entity's financial t
 
 A shelf company is an out-of-the-box company that is available to purchase. The advantage of a shelf company is that they have years of documents, giving the impression of longevity of a company.
 
-## Dodgy Directors and their fast turnover of companies :dash:
+### Dodgy Directors and their fast turnover of companies :dash:
 
 At Pometry, we used **Raphtory** to investigate [Companies House data](https://developer.company-information.service.gov.uk/), finding patterns of illegal behaviour amongst registered companies in the UK. 
 
@@ -34,7 +34,7 @@ For a subset of 12749 companies collected from the <a href="https://developer-sp
 
 In **Raphtory**, we ran an Edge List algorithm on the Companies House data we had scraped, linking Company Officers to their current and past companies. These so-called "Company Officers" can also be companies that own other companies, giving way to complex company structures. After filtering down Company Officers that had over 50,000 companies (all of which had been dissolved) we found that these Company Officers were in fact Company Formation Agents. A shocking pattern was found when investigating the dates that these companies were created and dissolved.
 
-## Company Formation Agents or Fraud Formation Agents? :rotating_light:  
+### Company Formation Agents or Fraud Formation Agents? :rotating_light:  
 
 The companies that were linked to these formation agents in our data were being opened and closed in a short space of time, some agents were even opening and closing most of their companies on the same day.
 
