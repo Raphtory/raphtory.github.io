@@ -51,7 +51,7 @@ One of the company formation agents we found in our analysis was "Nominee Secret
 <em>Companies lasting up to 3 years.</em>
 ![]({{ site.baseurl }}/images/companieshouse/harley-street-3-years.png)
 <em>Companies lasting up a year.</em>
-![]({{ site.baseurl }}/images/companieshouse/harley-street-1-years.png)
+![]({{ site.baseurl }}/images/companieshouse/harley-street-1-year.png)
 
 As shown in the graph above, most companies owned by Nominees Secretary Ltd did not last long before they were dissolved.
 
