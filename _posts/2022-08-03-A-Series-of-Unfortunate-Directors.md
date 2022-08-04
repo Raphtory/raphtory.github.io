@@ -44,8 +44,13 @@ One of the company formation agents we found in our analysis was "Nominee Secret
 
 <img src="https://i.imgur.com/HHGrrHj.jpg" alt="Formation House Structure" width="800" height="600" />
 
-<em>Histogram plot for "Nominee Secretary Ltd", this plot shows the duration of time that the companies were active before they were dissolved.</em>
-<img src="https://i.imgur.com/0FiPAEH.png" alt="Histogram plot for 'Nominee Secretary Ltd'" width="400" height="300" />
+<em>Histogram plots for "Nominee Secretary Ltd", these plots shows the duration of time that the companies were active before they were dissolved.</em>
+<em>Companies lasting up to 11 years.</em>
+![]({{ site.baseurl }}/images/companieshouse/harley-street-11-years.png)
+<em>Companies lasting up to 3 years.</em>
+![]({{ site.baseurl }}/images/companieshouse/harley-street-3-years.png)
+<em>Companies lasting up a year.</em>
+![]({{ site.baseurl }}/images/companieshouse/harley-street-1-years.png)
 
 As shown in the graph above, most companies owned by Nominees Secretary Ltd did not last long before they were dissolved.
 
