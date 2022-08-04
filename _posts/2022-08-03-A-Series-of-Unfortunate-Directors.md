@@ -44,13 +44,13 @@ One of the company formation agents we found in our analysis was "Nominee Secret
 
 <img src="https://i.imgur.com/HHGrrHj.jpg" alt="Formation House Structure" width="800" height="600" />
 
-###Histogram plots for "Nominee Secretary Ltd", these plots shows the duration of time that the companies were active before they were dissolved.
+### Histogram plots for "Nominee Secretary Ltd", these plots shows the duration of time that the companies were active before they were dissolved.
 
 <em>Companies lasting up to 11 years.</em>
 ![]({{ site.baseurl }}/images/companieshouse/harley-street-11-years.png)
 <em>Companies lasting up to 3 years.</em>
 ![]({{ site.baseurl }}/images/companieshouse/harley-street-3-years.png)
-<em>Companies lasting up a year.</em>
+<em>Companies lasting up to one year.</em>
 ![]({{ site.baseurl }}/images/companieshouse/harley-street-1-year.png)
 
 As shown in the graph above, most companies owned by Nominees Secretary Ltd did not last long before they were dissolved.
@@ -67,9 +67,9 @@ In addition to Formation House, two other Company Formation Agents with similar 
 ![]({{ site.baseurl }}/images/companieshouse/temple-secretaries-3-years.png)
 <em>Companies lasting up to 3 years for Company Directors Limited.</em>
 ![]({{ site.baseurl }}/images/companieshouse/company-directors-3years.png)
-<em>Companies lasting up to a year for Temple Secretaries Limited.</em>
-![]({{ site.baseurl }}/images/companieshouse/temple-secretaries-3-years.png)
-<em>Companies lasting up to a year for Company Directors Limited.</em>
+<em>Companies lasting up to one year for Temple Secretaries Limited.</em>
+![]({{ site.baseurl }}/images/companieshouse/temple-secretaries-1-year.png)
+<em>Companies lasting up to one year for Company Directors Limited.</em>
 ![]({{ site.baseurl }}/images/companieshouse/company-directors-1-year.png)
 
 Most of the companies owned by these agents were opened and closed within the same day. Firms registered at this Finchley Road address were eventually found to be linked to <a href="https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200" target="_blank">international scandals of money laundering and political corruption</a>.
