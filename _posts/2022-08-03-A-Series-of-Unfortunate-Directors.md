@@ -44,7 +44,7 @@ One of the company formation agents we found in our analysis was "Nominee Secret
 
 <img src="https://i.imgur.com/HHGrrHj.jpg" alt="Formation House Structure" width="800" height="600" />
 
-#### *Histogram plots for "Nominee Secretary Ltd", these plots shows the duration of time that the companies were active before they were dissolved.*
+#### *Histogram plots for "Nominee Secretary Ltd", these plots show the duration of time that the companies were active before they were dissolved.*
 
 <em>Companies lasting up to 11 years.</em>
 ![]({{ site.baseurl }}/images/companieshouse/harley-street-11-years.png)
@@ -61,7 +61,7 @@ A project called [#29Leaks](https://www.occrp.org/en/29leaks/), spearheaded by m
 
 In addition to Formation House, two other Company Formation Agents with similar company activities in our analysis were found to be linked to several cases of fraud, including a <a href="https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200" target="_blank">telecoms scam backed by the Mafia</a>. The agents went by the names - Temple Secretaries Limited and Company Directors Limited. Not only were these agents registered at the same address, 788-790 Finchley Road, they were both directors at the same companies, opening and closing companies on the same dates. (See histogram plots below).
 
-#### *Histogram plots for "Temple Secretaries Limited" and "Company Directors Limited" respectively, the plots show the duration of time that the companies were active before they were dissolved.*
+#### *Histogram plots for "Temple Secretaries Limited" and "Company Directors Limited" respectively, these plots show the duration of time that the companies were active before they were dissolved.*
 
 <em>Companies lasting up to 3 years for Temple Secretaries Limited.</em>
 ![]({{ site.baseurl }}/images/companieshouse/temple-secretaries-3-years.png)
