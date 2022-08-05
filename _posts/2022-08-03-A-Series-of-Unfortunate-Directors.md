@@ -40,7 +40,7 @@ In **Raphtory**, we ran an Edge List algorithm on the Companies House data we ha
 
 The companies that were linked to these formation agents in our data were being opened and closed in a short space of time, some agents were even opening and closing most of their companies on the same day.
 
-One of the company formation agents we found in our analysis was "Nominee Secretary Ltd", a shell company owned by Corporate Nominees Ltd, which in turn was owned by Legal Nominees, centred at the heart of Formation House's complex structure of companies. It is not illegal to own or control anonymous companies. However, it allows individuals to evade tax, launder money and hide assets behind these anonymous companies.
+One of the company formation agents we found in our analysis was "Nominee Secretary Ltd", a shell company owned by Corporate Nominees Ltd, which in turn was owned by Legal Nominees, centred at the heart of Formation House's complex structure of companies. It is not illegal to own or control anonymous companies. However, individuals are able to evade tax, launder money and hide assets behind these anonymous companies.
 
 <img src="https://i.imgur.com/HHGrrHj.jpg" alt="Formation House Structure" width="800" height="600" />
 
@@ -54,7 +54,7 @@ A project called [#29Leaks](https://www.occrp.org/en/29leaks/), spearheaded by m
 
 ---
 
-In addition to Formation House, two other Company Formation Agents with similar company activities in our analysis were found to be linked to several cases of fraud, including a <a href="https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200" target="_blank">telecoms scam backed by the Mafia</a>. The agents went by the names - Temple Secretaries Limited and Company Directors Limited. Not only were these agents registered at the same address, 788-790 Finchley Road, they were both directors at the same companies, opening and closing companies on the same dates. (See histogram plots below).
+In addition to Formation House, two other Company Formation Agents in our analysis were directors of companies found to be linked to cases of fraud, including a <a href="https://www.hamhigh.co.uk/news/finchley-road-company-factory-tenants-speak-out-ahead-of-register-3638200" target="_blank">telecoms scam backed by the Mafia</a>. The agents went by the names - Temple Secretaries Limited and Company Directors Limited. Not only were these agents registered at the same address, 788-790 Finchley Road, they were both directors at the same companies, opening and closing companies on the same dates. (See histogram plots below).
 
 #### *Histogram plots for "Temple Secretaries Limited" and "Company Directors Limited" respectively, these plots show the duration of time that the companies were active before they were dissolved.*
 
