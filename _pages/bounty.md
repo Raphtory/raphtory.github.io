@@ -59,7 +59,7 @@ For anyone interested in getting involved in Raphtory the low hanging fruit (:gr
 * Katz :grapes: 
 * PageRank :heavy_check_mark: 
 * Weighted PageRank :heavy_check_mark: 
-* K-core :grapes: (filter recursively based on degree)
+* K-core :heavy_check_mark: (filter recursively based on degree)
 * Rich-club coefficient (filter by degree then count edges remaining) :grapes: 
 
 ## Classification
