@@ -99,7 +99,7 @@ Below is an interactive graph plotted with Pyvis showing company to PSC edges, w
 
 The Companies House API, together with the NHS contract data, has yet again provided us with fruitful insights into company activity and the people behind these companies. With Raphtory, we were able to identify who were the ultimate beneficiaries of the companies given government during the pandemic. 
 
-In this article, we had a look at government spending in the NHS, especially during the pandemic. We are currently in the process of finding use cases with Raphtory in the health sector. Give us a follow on Linkedin or Twitter to keep up to date with our latest updates and blog articles.
+In this article, we had a look at government spending in the NHS, especially during the pandemic. We are currently in the process of finding use cases with Raphtory in the health sector. Give us a follow on Linkedin or Twitter to keep up to date with our latest updates and blog articles. 
 
 
 # Interested in giving it a go yourself?
