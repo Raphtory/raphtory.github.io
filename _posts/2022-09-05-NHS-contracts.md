@@ -8,7 +8,7 @@ excerpt: In this article we will explore how we used Raphtory to investigate com
 
 On 23rd of March 2020, Boris Johnson announced the first coronavirus lockdown in the UK, ordering people to stay at home. As Covid-19 cases started to rise in the UK, hospital admissions for COVID-19 also started to rise. A substantial amount of personal protective equipment (PPE) needed to be ordered by the government to protect healthcare workers. However, it was already too little too late. The demand for PPE all over the world skyrocketed, leading to limited supplies and a huge price inflation.
 
-To deal with the increased competition for PPE, the government invited industry to come forward as suppliers of PPE for our country. In addition to opening up contracts for fresh suppliers, they introduced the "High Priority Lane" whereby suppliers could pass on offers directly to MPs, ministers, and senior officials, who in turn directed these offers to a dedicated location, skipping the long list of suppliers offering the government their services to provide PPE. In early 2022, this VIP fast track system was ruled as <a href="https://rookirwinsweeney.co.uk/high-court-rules-that-government-acted-illegally-by-operating-a-vip-lane-when-awarding-ppe-contracts-in-a-judicial-review-brought-by-our-clients-good-law-project-and-everydoctor/" target="_blank">unlawful by the High Court</a>. 
+To deal with the increased competition for PPE, the government invited industry to come forward as suppliers of PPE for our country. In addition to opening up contracts for fresh suppliers, they introduced the "High Priority Lane" whereby suppliers could pass on offers directly to MPs, ministers, and senior officials if they had the connection, skipping the long list of suppliers offering the government their services to provide PPE. In early 2022, this VIP fast track system was ruled as <a href="https://rookirwinsweeney.co.uk/high-court-rules-that-government-acted-illegally-by-operating-a-vip-lane-when-awarding-ppe-contracts-in-a-judicial-review-brought-by-our-clients-good-law-project-and-everydoctor/" target="_blank">unlawful by the High Court</a>. 
 
 At Pometry, we had a look into the <a href="https://www.tussell.com/insights/covid" target="_blank">list of companies</a> that were awarded a contract from the government in response to COVID-19. We used Raphtory to find the beneficial owners of these companies, along with their percentage of shares in the company, unveiling the people behind billions and billions of taxpayer's money. Read on to find out how some of these companies benefitted from the VIP lane and wasted hundreds and millions of taxpayers money.
 
@@ -31,13 +31,13 @@ In our previous <a href="https://www.raphtory.com/A-Series-of-Unfortunate-Direct
 
 With the same subset of data, we scraped PSC information from these companies, creating a vertex for PSC and a vertex for company. We attached the PSC's percentage of ownership as the weight of an edge linking PSC to Company. After filtering for PSC's owning more than 100 companies, we plotted scatter plots of PSC's registering new companies over time, in addition to a plot of PSC's closing companies over time. The hue of the points on the plots show the PSC's level of share ownership of the company, the darker the dot, the higher the share ownership percentage.
 
-<em>Unlike for company directors, Companies House does not store unique ID's for PSC's, so we created an ID using the PSC name, along with their date of birth. This explains why PSC's that are a Private Limited Company have "-00" attached to the end of their names.</em>
+<em>Unlike for company directors, Companies House does not store unique ID's for PSC's, so we created an ID using the PSC's name, along with their date of birth. This explains why PSC's that are a Private Limited Company have "-00" attached to the end of their names.</em>
 
 ![]({{ site.baseurl }}/images/nhscontracts/registering.png)
 
 ![]({{ site.baseurl }}/images/nhscontracts/closing.png)
 
-In the second graph, PSCs such as Fd Secretarial Ltd and Woodberry Secretarial Limited are closing many companies where they hold 75% or more shares in short periods of time. Moreover, Sdg Secretaries Limited and Sdg Registrars Limited of the first graph, along with Fd Secretarial Ltd and Woodberry Secretarial Limited of the second graph, are all part of the same company formation agent structure.
+In the second graph, PSCs such as Fd Secretarial Ltd and Woodberry Secretarial Limited are closing many companies where they hold 75% or more shares in short periods of time. The most intriguing finding from this analysis is that Sdg Secretaries Limited and Sdg Registrars Limited of the first graph, along with Fd Secretarial Ltd and Woodberry Secretarial Limited of the second graph, are all part of the same company formation agent structure.
 
 ![]({{ site.baseurl }}/images/nhscontracts/dodgypscs.png)
 
