@@ -101,7 +101,7 @@ The Companies House API, together with the NHS contract data, has yet again prov
 
 In this article, we had a look at government spending in the NHS, especially during the pandemic. We are currently in the process of finding use cases with Raphtory in the health sector. Give us a follow on Linkedin or Twitter to keep up to date with our latest updates and blog articles. 
 
-
+ 
 # Interested in giving it a go yourself?
 
 The basic version of this algorithm is available for free as part of the Raphtory Open Source Project. This can be run on any data you like as long as it fits the bipartite model described above.
