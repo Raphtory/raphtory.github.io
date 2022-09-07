@@ -6,3 +6,4 @@ gem 'jekyll-feed'
 gem 'jekyll-seo-tag'
 gem 'jekyll-paginate'
 gem 'jekyll-twitter-plugin'
+gem "webrick", "~> 1.7"
