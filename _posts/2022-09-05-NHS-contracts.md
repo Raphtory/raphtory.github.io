@@ -12,6 +12,39 @@ To deal with the increased competition for PPE, the government invited industry 
 
 At Pometry, we had a look into the <a href="https://www.tussell.com/insights/covid" target="_blank">list of companies</a> that were awarded a contract from the government in response to COVID-19. We used Raphtory to find the beneficial owners of these companies, along with their percentage of shares in the company. We were able to unveil the people behind billions and billions of taxpayer's money. Read on to find out how some of these companies benefitted from the VIP lane and wasted hundreds and millions of taxpayers money.
 
+## The Chocolate NePPEtism Factory
+
+We took each company number in the <a href="https://www.tussell.com/insights/covid" target="_blank">Tussell NHS Covid Contract data</a> and scraped the corresponding Persons With Significant Control (PSC) for these companies from the Companies House API, along with their date of birth, date of PSC appointment and more. We ran an algorithm in Raphtory that links companies that were awarded an NHS contract with their respective PSCs, showing the share of ownership and the time they were appointed as a PSC in that company. In addition to that, we linked all the PSCs in the same company together, creating a PSC network graph.
+
+After a run of our data in Raphtory, a temporal network graph was created in less than a minute, with clearly labelled nodes displaying companies and people, along with the time at which these edges were created and the percentage of ownership that these people hold. This enabled us to quickly identify the people behind the companies awarded government money during the pandemic and their activity.
+
+In one of the sub-graphs, we found several PSCs registered with the same surname- "Walker", all of which were linked to a company that was awarded money to provide PPE to the NHS. <a href="https://find-and-update.company-information.service.gov.uk/company/NI617785/persons-with-significant-control" target="_blank">Clandeboye Agencies Ltd</a> is the name of the company that received the contract. They are registered on Companies House as dealing with the "wholesale of sugar, chocolate and sugar confectionary". In total, Clandeboye were awarded £108m in PPE contracts and was also part of the government's VIP lane for companies with political connections.
+
+Our output in Raphtory showed that Clady Group Ltd took control of 75% and more of Clandeboye Agencies Ltd on 15th of March 2022. On the Companies House website, <a href="https://find-and-update.company-information.service.gov.uk/company/NI683839/persons-with-significant-control" target="_blank">Clady Group Ltd</a> appointed 8 persons with significant control on the 3rd of April 2022, all of which registered with the surname "Walker", with the youngest being born in 2001. From the period of May to July of 2020, Clandeboye Agencies shipped millions of items such as thumb-looped gowns and aprons from a factory in Cambodia to an NHS warehouse in England. 
+
+Months later, it was revealed in <a href="https://www.bbc.co.uk/iplayer/episode/m0012ljx/spotlight-covid-contracts-hunting-for-ppe" target="_blank">BBC NI's Spotlight programme</a> that boxes from the same shipment had not been used by the NHS, and a box of PPE worth £1000 was being sold online for just £5, rather than ending up in NHS warehouses to be distributed to hospitals across the country.
+
+![]({{ site.baseurl }}/images/nhscontracts/ppebox.jpeg)
+
+*Source: https://www.bbc.co.uk/news/uk-northern-ireland-59651994*
+
+![]({{ site.baseurl }}/images/nhscontracts/clandeboye.png)
+
+*Sub-graph showing the PSC to company relationships in Clandeboye Agencies Ltd*
+
+![]({{ site.baseurl }}/images/nhscontracts/ownershipchain.png)
+By mapping out the companies with their PSCs and their percentage of ownership in Raphtory, you can start to see where the money from NHS contracts is funneling down to. e.g. Patrick Byrne owns more than 50% of Pursuit Marketing Limited, but also owns more than 75% of Pursuit People Limited. The same pattern is seen in the other PSCs of these two companies.
+![]({{ site.baseurl }}/images/nhscontracts/ownershipchain2.png)
+Furthermore, complex network graphs become more clear when mapped out in Raphtory.
+![]({{ site.baseurl }}/images/nhscontracts/complexownership.png)
+
+Below is an interactive graph plotted with Pyvis showing company to PSC edges, with information on ownership and the date the PSC was notified on. You can zoom in and out, hover over edges and move nodes around.
+
+<div>
+{% include nhsPSCGraph.html %}
+</div>
+
+
 ## What is a Person With Significant Control?
 
 A <a href="https://www.gov.uk/guidance/people-with-significant-control-pscs" target="_blank">person with significant control (PSC)</a> is someone who owns or controls a company, sometimes known as a "Beneficial Owner". In the UK, it is required by law to declare your companies PSC when opening up a company.
@@ -62,38 +95,6 @@ In early 2021, the first Covid vaccines were being rolled out in the UK to those
 The NHS said they received many such emails and clarified that hundreds of NHS teams across the country were "working hard to deliver vaccines quickly to those who would benefit most", adding that "NHS staff will never ask for, or accept cash for vaccines." The Department of Health and Social Care said vaccinations were available from the NHS "for free" and "cannot be sold privately in the UK".
 
 At the start of the pandemic, healthcare workers across the country were risking their own and their families lives as they lacked basic PPE. With an increase in global demand for PPE, the government resorted to splurging huge amounts of money - fast tracking huge sums of money to company owners tied to MPs, just to provide PPE that did not meet the standard. £4 billion worth of PPE was reported as unused and 24% of NHS contracts are being <a href="https://committees.parliament.uk/committee/127/public-accounts-committee/news/171306/4-billion-of-unusable-ppe-bought-in-first-year-of-pandemic-will-be-burnt-to-generate-power/" target="_blank">investigated</a>. At Pometry, we used Raphtory to uncover the people behind these NHS contracts, looking at the date on which they were appointed as a person with significant control and their share of the company.
-
-## The Chocolate NePPEtism Factory
-
-We took each company number in the <a href="https://www.tussell.com/insights/covid" target="_blank">Tussell NHS Covid Contract data</a> and scraped the corresponding Persons With Significant Control (PSC) for these companies from the Companies House API, along with their date of birth, date of PSC appointment and more. We ran an algorithm in Raphtory that links companies that were awarded an NHS contract with their respective PSCs, showing the share of ownership and the time they were appointed as a PSC in that company. In addition to that, we linked all the PSCs in the same company together, creating a PSC network graph.
-
-After a run of our data in Raphtory, a temporal network graph was created in less than a minute, with clearly labelled nodes displaying companies and people, along with the time at which these edges were created and the percentage of ownership that these people hold. This enabled us to quickly identify the people behind the companies awarded government money during the pandemic and their activity.
-
-In one of the sub-graphs, we found several PSCs registered with the same surname- "Walker", all of which were linked to a company that was awarded money to provide PPE to the NHS. <a href="https://find-and-update.company-information.service.gov.uk/company/NI617785/persons-with-significant-control" target="_blank">Clandeboye Agencies Ltd</a> is the name of the company that received the contract. They are registered on Companies House as dealing with the "wholesale of sugar, chocolate and sugar confectionary". In total, Clandeboye were awarded £108m in PPE contracts and was also part of the government's VIP lane for companies with political connections.
-
-Our output in Raphtory showed that Clady Group Ltd took control of 75% and more of Clandeboye Agencies Ltd on 15th of March 2022. On the Companies House website, <a href="https://find-and-update.company-information.service.gov.uk/company/NI683839/persons-with-significant-control" target="_blank">Clady Group Ltd</a> appointed 8 persons with significant control on the 3rd of April 2022, all of which registered with the surname "Walker", with the youngest being born in 2001. From the period of May to July of 2020, Clandeboye Agencies shipped millions of items such as thumb-looped gowns and aprons from a factory in Cambodia to an NHS warehouse in England. 
-
-Months later, it was revealed in <a href="https://www.bbc.co.uk/iplayer/episode/m0012ljx/spotlight-covid-contracts-hunting-for-ppe" target="_blank">BBC NI's Spotlight programme</a> that boxes from the same shipment had not been used by the NHS, and a box of PPE worth £1000 was being sold online for just £5, rather than ending up in NHS warehouses to be distributed to hospitals across the country.
-
-![]({{ site.baseurl }}/images/nhscontracts/ppebox.jpeg)
-
-*Source: https://www.bbc.co.uk/news/uk-northern-ireland-59651994*
-
-![]({{ site.baseurl }}/images/nhscontracts/clandeboye.png)
-
-*Sub-graph showing the PSC to company relationships in Clandeboye Agencies Ltd*
-
-![]({{ site.baseurl }}/images/nhscontracts/ownershipchain.png)
-By mapping out the companies with their PSCs and their percentage of ownership in Raphtory, you can start to see where the money from NHS contracts is funneling down to. e.g. Patrick Byrne owns more than 50% of Pursuit Marketing Limited, but also owns more than 75% of Pursuit People Limited. The same pattern is seen in the other PSCs of these two companies.
-![]({{ site.baseurl }}/images/nhscontracts/ownershipchain2.png)
-Furthermore, complex network graphs become more clear when mapped out in Raphtory.
-![]({{ site.baseurl }}/images/nhscontracts/complexownership.png)
-
-Below is an interactive graph plotted with Pyvis showing company to PSC edges, with information on ownership and the date the PSC was notified on. You can zoom in and out, hover over edges and move nodes around.
-
-<div>
-{% include nhsPSCGraph.html %}
-</div>
 
 ## Conclusions and Future Works
 
