@@ -66,23 +66,23 @@ From the period of May to July of 2020, Clandeboye Agencies shipped millions of 
 
 Despite having no experience of making PPE supplies and the government receiving <a href="https://www.irishnews.com/news/northernirelandnews/2020/08/12/news/formal-legal-proceedings-begin-over-multi-million-pound-ppe-award-to-co-antrim-sweet-manufacturer-2032511/" target="_blank">over 24000 offers</a> from prospective suppliers of PPE, the sweets and chocolate manufacturer was directly handed a multimillion contract to provide PPE without any checks.
 
-Another VIP worthy of mention is Fourds Limited. Ide and Cormac Diamond won a <a href="https://ted.europa.eu/udl?uri=TED:NOTICE:338130-2020:TEXT:EN:HTML&src=0" target="_blank">£43.5 million contract</a> to provide PPE, despite being a <a href="https://www.blocblinds.co.uk/" target="_blank">blinds production business</a>, with a contract value 15 times larger than its net assets in 2019. It was a relief that they held political connections, as they made a whopping <a href="https://www.belfasttelegraph.co.uk/business/ulsterbusiness/top-100/bloc-blinds-group-expands-into-us-as-sale-soar-to-1019m-41915552.html" target="_blank">£101.9m turnover for the year ending April 2021</a>. In our output, we found that Ide and Cormac Diamond ceased control of Fourds Limited in 2021. Fourds Limited is now significantly controlled by a shell company with an Isle of Man PO Box address.
+Another VIP worthy of mention is Fourds Limited, a <a href="https://www.blocblinds.co.uk/" target="_blank">blinds production business</a>. Ide and Cormac Diamond won a <a href="https://ted.europa.eu/udl?uri=TED:NOTICE:338130-2020:TEXT:EN:HTML&src=0" target="_blank">£43.5 million contract</a> to provide PPE - a contract value 15 times larger than its net assets in 2019. It was a relief that they held such political connections, as they made a whopping <a href="https://www.belfasttelegraph.co.uk/business/ulsterbusiness/top-100/bloc-blinds-group-expands-into-us-as-sale-soar-to-1019m-41915552.html" target="_blank">£101.9m turnover for the year ending April 2021</a>, despite the economic hardships that the pandemic brought. In our output, we found that Ide and Cormac Diamond ceased control of Fourds Limited in 2021 and is now significantly controlled by a shell company with an Isle of Man PO Box address.
 
 ![]({{ site.baseurl }}/images/nhscontracts/fourds-limited.png)
 
 By mapping out companies with their PSCs and their percentage of ownership in Raphtory, you can start to see where money from NHS contracts funnels down to. e.g. Patrick Byrne owns more than 50% of Pursuit Marketing Limited, but also owns more than 75% of Pursuit People Limited. The same pattern is seen in the other PSCs of these two companies. 
 
 ![]({{ site.baseurl }}/images/nhscontracts/ownershipchain.png)
-<br>
+
 ![]({{ site.baseurl }}/images/nhscontracts/ownershipchain2.png)
 Complex network graphs, such as the one below, become much easier to digest when mapped out in Raphtory.
 ![]({{ site.baseurl }}/images/nhscontracts/complexownership.png)
 
 ## Conclusions and Future Works
 
-The Companies House API, together with the NHS contract data, has yet again provided us with fruitful insights into company activity and the people behind these companies. With Raphtory, we were able to identify the ultimate beneficiaries of companies given NHS contracts during the pandemic. 
+The Companies House API, together with the NHS contract data, has yet again provided us with fruitful insights into company activity and the people behind these companies. With Raphtory, we were able to identify the ultimate beneficiaries of companies given NHS contracts during the pandemic. This information led us to find questionable companies being awarded multimillion contracts without formal due diligence, and millions of taxpayer's money being funnelled down a family tree, all the way to a 20 year old.
 
-In this article, we had a look at government spending in the NHS, especially during the pandemic. We are currently in the process of finding further use cases with Raphtory in the health sector. Give us a follow on Linkedin or Twitter to keep up to date with our latest updates and blog articles. 
+This article uncovered government spending in the NHS during the pandemic. We are currently in the process of finding further use cases with Raphtory in the health sector. Give us a follow on Linkedin or Twitter to keep up to date with our latest updates and blog articles. 
 
 # Interested in giving it a go yourself?
 
