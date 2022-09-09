@@ -45,7 +45,7 @@ We took each company number in the <a href="https://www.tussell.com/insights/cov
 
 After a run of our data in Raphtory, a temporal network graph was created in less than a minute, with nodes displaying companies and people, along with the time at which these edges were created and the percentage of ownership that these people hold. This enabled us to quickly identify the people behind the companies awarded government money during the pandemic and their activity.
 
-*Below is an interactive visualisation of the Raphtory output. It shows the company to PSC edges, with information on ownership and the date the PSC was notified on. We have filtered for companies with two or more PSCs for a cleaner visualisation. You can zoom in and out, hover over edges and move nodes around. The thickness of edges shows the weight of ownership.*
+*<b>Below is an interactive visualisation of the Raphtory output.</b> It shows the company to PSC edges, with information on ownership and the date the PSC was notified on. We have filtered for companies with two or more PSCs for a cleaner visualisation. You can zoom in and out, hover over edges and move nodes around. The thickness of edges shows the weight of ownership.*
 
 <div>
 {% include nhsPSCGraph.html %}
