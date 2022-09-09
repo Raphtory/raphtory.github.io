@@ -45,7 +45,7 @@ We took each company number in the <a href="https://www.tussell.com/insights/cov
 
 After a run of our data in Raphtory, a temporal network graph was created in less than a minute, with nodes displaying companies and people, along with the time at which these edges were created and the percentage of ownership that these people hold. This enabled us to quickly identify the people behind the companies awarded government money during the pandemic and their activity.
 
-*Below is an interactive visualisation of the Raphtory output. It shows the company to PSC edges, with information on ownership and the date the PSC was notified on. You can zoom in and out, hover over edges and move nodes around. The thickness of edges shows the weight of ownership.*
+*Below is an interactive visualisation of the Raphtory output. It shows the company to PSC edges, with information on ownership and the date the PSC was notified on. We have filtered for companies with two or more PSCs for a cleaner visualisation. You can zoom in and out, hover over edges and move nodes around. The thickness of edges shows the weight of ownership.*
 
 <div>
 {% include nhsPSCGraph.html %}
@@ -66,7 +66,9 @@ From the period of May to July of 2020, Clandeboye Agencies shipped millions of 
 
 Despite having no experience of making PPE supplies and the government receiving <a href="https://www.irishnews.com/news/northernirelandnews/2020/08/12/news/formal-legal-proceedings-begin-over-multi-million-pound-ppe-award-to-co-antrim-sweet-manufacturer-2032511/" target="_blank">over 24000 offers</a> from prospective suppliers of PPE, the sweets and chocolate manufacturer was directly handed a multimillion contract to provide PPE without any checks.
 
-Another VIP worthy of mention is Fourds Limited, a <a href="https://www.blocblinds.co.uk/" target="_blank">blinds production business</a>. Ide and Cormac Diamond won a <a href="https://ted.europa.eu/udl?uri=TED:NOTICE:338130-2020:TEXT:EN:HTML&src=0" target="_blank">£43.5 million contract</a> to provide PPE - a contract value 15 times larger than its net assets in 2019. It was a relief that they held such political connections, as they made a whopping <a href="https://www.belfasttelegraph.co.uk/business/ulsterbusiness/top-100/bloc-blinds-group-expands-into-us-as-sale-soar-to-1019m-41915552.html" target="_blank">£101.9m turnover for the year ending April 2021</a>, despite the economic hardships that the pandemic brought. In our output, we found that Ide and Cormac Diamond ceased control of Fourds Limited in 2021 and is now significantly controlled by a shell company with an Isle of Man PO Box address.
+Another VIP worthy of mention is Fourds Limited, a <a href="https://www.blocblinds.co.uk/" target="_blank">blinds production business</a>. Awarded a <a href="https://ted.europa.eu/udl?uri=TED:NOTICE:338130-2020:TEXT:EN:HTML&src=0" target="_blank">£43.5 million contract</a> to provide PPE - a contract value 15 times larger than its net assets in 2019. 
+
+Despite the economic hardships that the pandemic brought on many, Mr Ide and Cormac Diamond, the beneficial owners of Fourds Limited, had made a whopping <a href="https://www.belfasttelegraph.co.uk/business/ulsterbusiness/top-100/bloc-blinds-group-expands-into-us-as-sale-soar-to-1019m-41915552.html" target="_blank">£101.9m turnover for the year ending April 2021</a>. In our output, we found that Ide and Cormac Diamond ceased control of Fourds Limited in 2021, which is now significantly controlled by an overseas shell company with an Isle of Man PO Box address.
 
 ![]({{ site.baseurl }}/images/nhscontracts/fourds-limited.png)
 
