@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "NHS and the Chocolate NePPEtism Factory"
+title:  "The Chocolate NePPEtism Factory"
 categories:  [Analysis With Raphtory]
 author: 'Rachel Chan'
 excerpt: In this article we will explore how we used Raphtory to investigate companies in the UK that received an NHS contract during the pandemic and their Persons with Significant Control.
