@@ -92,5 +92,5 @@ The basic version of this algorithm is available for free as part of the Raphtor
 
 If this is your first step into the world of temporal graphs, consider checking out the Introduction to Raphtory which will lead you into our Getting started guide. If you run into any issues you can get assistance from the wonderful Raphtory community on Slack.
 
-If you would like to run these algorithms at scale in a production environment, drop the team at Pometry a message, and they will be more than happy to help.
+If you would like to run these algorithms at scale in a production environment, drop the team at <a href="https://www.pometry.com/contact/" target="_blank">Pometry</a> a message, and they will be more than happy to help.
 
