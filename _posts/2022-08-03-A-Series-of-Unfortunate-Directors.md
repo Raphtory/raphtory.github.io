@@ -78,6 +78,8 @@ By the end of March 2022, the number of companies on the Companies House registe
 
 With **Raphtory**, we were able to sift through Companies House data and find these suspicious individuals just by mapping Company Officers to their Companies. Our platform has the sophistication to do more complex algorithms, exposing convuluted company structures just like the ones discussed above, and  identifying individuals that are pocketing most of the companies money  (Ultimate Beneficial Owners).
 
+In this blog post, we used the Companies House API to identify companies registered in the UK. However, Raphtory can be used in conjunction with Natural Language Processing (NLP), to extract companies and people from legal documents. We hope to use NLP with Raphtory in the future for further use cases.
+
 If you would like to learn more about Raphtory, drop the <a href="https://www.pometry.com/contact/" target="_blank">Pometry</a> team a message and they will be more than happy to help. 
 
 
