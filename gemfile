@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
-gem 'jemoji'
-gem 'jekyll-sitemap'
-gem 'jekyll-feed'
-gem 'jekyll-seo-tag'
-gem 'jekyll-paginate'
-gem 'jekyll-twitter-plugin'
-gem "webrick", "~> 1.7"
+# gem "rails"
+gem "jekyll"
+gem "jekyll-sitemap"
+gem "jekyll-feed"
+gem "jekyll-seo-tag"
+gem "jekyll-paginate"
+gem "jemoji"
+gem "jekyll-twitter-plugin"
+gem "webrick"
