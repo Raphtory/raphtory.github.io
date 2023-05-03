@@ -661,7 +661,7 @@ One of the spikes in the line plot above is at year 2014. To investigate this fu
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span>filtered_view</span> <span class="o">=</span> <span>g</span><span class="o">.</span><span>window</span><span class="p">(</span><span class="mi">1388534400</span><span class="p">,</span> <span class="mi">1400070400</span><span class="p">)</span>
-<span>filtered_view</span><span class="o">.</span><span>rolling</span><span class="p">(</span><span>100000</span><span class="p">)</span> 
+<span>filtered_views</span> <span class="o">=</span> <span>filtered_view</span><span class="o">.</span><span>rolling</span><span class="p">(</span><span>100000</span><span class="p">)</span> 
 <span>timestamps</span>   <span class="o">=</span> <span class="p">[]</span>
 <span>edge_count</span>   <span class="o">=</span> <span class="p">[]</span>
 
