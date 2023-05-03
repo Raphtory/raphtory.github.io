@@ -8,44 +8,61 @@ excerpt: In this article we will show you how to use Raphtory to analyse Compani
 <br>
 <br>
 ![]({{ site.baseurl }}/images/companieshouse/fish-image.png)
-
 <br>
 <br>
-It takes a few minutes to register a new company on <a href="https://www.gov.uk/limited-company-formation/register-your-company" target="_blank">Companies House</a>. This has given rise to serial company formations and dissolutions by individuals. With so many companies being formed over time, it can be hard to track which individuals are linked to which companies. 
+In the UK, requirements to register a new company are few. Practically anyone over the age of 16 years of age can own and manage a UK limited company. It takes a few minutes to register a new company on <a href="https://www.gov.uk/limited-company-formation/register-your-company" target="_blank">Companies House</a>. This has brought about a rise in serial company formations and dissolutions by individuals. With so many companies being formed over time, it can be hard to track which individuals are linked to which companies. 
+<br>
+<br>
+![]({{ site.baseurl }}/images/companieshouse/detective-map.jpeg)
+<br>
+Raphtory is a powerful analytics tool for large-scale graph analysis. Using Raphtory, it takes a few seconds to turn Companies House data into insights on fishy behaviour going on with companies. In this blog, we will show you exactly how to do that.
 
-Raphtory is a powerful analytics engine for large-scale graph analysis. Using Raphtory, it takes a few seconds to turn Companies House data into insights on fishy behaviour going on with companies. In this blog, we will show you exactly how to do that.
 
 ## Data Collection
 
-We are in luck as Companies House have provided a <a href="https://developer.company-information.service.gov.uk/overview" target="_blank">REST API</a>. At Pometry, we built several Companies House scrapers, utilising the API and giving us direct access to the data we want. Currently, we have 3 scrapers: the first being specifically for this blog post and example, the second is for grabbing Persons with Significant Control from company numbers and the last is for grabbing Directors from company numbers. All our scrapers output JSON data, ready to be loaded into a Raphtory graph for analysis. We have made this <a href="https://test.pypi.org/project/cohospider/" target="_blank">public via pip install</a> and explain how to use it below. 
+We are in luck as Companies House have provided a <a href="https://developer.company-information.service.gov.uk/overview" target="_blank">REST API</a>. At Pometry, we have built several crawlers that scrape the Companies House website. By utilising the API, it has given us direct access to the data we want. Currently, we have 3 crawlers: one for the example below, another for grabbing Persons with Significant Control information and the last for grabbing Company Director information. All our crawlers output JSON data, ready to be loaded into a Raphtory graph for analysis. We have made this <a href="https://test.pypi.org/project/cohospider/" target="_blank">public via pip install</a> and explain how to use it below. 
+<br>
+<br>
+![]({{ site.baseurl }}/images/companieshouse/pip-install-cohospider.png)
 
-## How to use the Companies House Scraper
+## How to use the Companies House crawler
 ### Getting your Companies House API key
-Before scraping the Companies House website, you will need to create an account on the <a href="https://identity.company-information.service.gov.uk/user/register?request=eyJ0eXAiOiJKV0UiLCJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..k598Ksh5HW_W9cU7qz0IjQ.nRrBtC_ZKnw4i11POqeFUFxN-2Se8LGXZfhQlOviAZR7gTTIXJquoU81JzGiObTGjN9W1K-zR99AJmgNbf-OB28ErSI338UrAMD1uv1sCyWga_HGDroSqanv58zrsJ9Khq9tdv2vq3_o8rGDmg1bMtHifhKLMxAsdH4G9R0jR_YXRfeSIuJ9gsnwIttzF7rAp8W2HTxDI0dIDYzD6DchgGawElpUWXdgtx5WCcQmX17zlgYBzP9irJNv6xmQ5dwipKyAPLpe1dy5Apuk1UtIxNSfxFqURF2OIGbe3oum_49dtR8_y8_LkR0FhkhECS5lKZy4Am6mnwREpU78xkgd9ltIayfX4KvuRPKFii-gRdon7R0LTBUgYDasshLzMLdFWGNlmpgonH9NoB3wX8q_Dh2rShcjC6-jtGtcx2amCjLxR97yiWebxta7T0yuu5gJChtvyqRv8bkkQJYn9nq_3kBnZmasP6LPKcT9Ees3GkHGsWCVmeF24ZQzG77NnmqHd2n_LHP6wLIXdZodZhmVoKFUKA-EHnB5tRDcFFSneFx396Od02dBMZ0PKalvJ6F2PCEAH5nUO_6pnGJv3N9F-mMY8q6FPJ3qwKO1RUNfhEXosi2q9z3Rpq_MGft7FkQnV7x-hR9WD2ekJl2sNH0TYKwCEdtiy7B_bv9prnz74xaDsm7n10pPD18FIfUMT94hxDSarz3o4P0p0m6m07XYEo8t7BxlsxfLG0ImqrfQrYbC62n-1ZqVHJ84DKgPPMot_FwPqjwvv4fPcOcuw9lZZA.4YJgVfSsrNnmf5UOxf1qfQ" target="_blank">Companies House Developer Hub</a>. 
+Before scraping the Companies House website, you will need to create an account on the <a href="https://identity.company-information.service.gov.uk/user/register?request=eyJ0eXAiOiJKV0UiLCJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..k598Ksh5HW_W9cU7qz0IjQ.nRrBtC_ZKnw4i11POqeFUFxN-2Se8LGXZfhQlOviAZR7gTTIXJquoU81JzGiObTGjN9W1K-zR99AJmgNbf-OB28ErSI338UrAMD1uv1sCyWga_HGDroSqanv58zrsJ9Khq9tdv2vq3_o8rGDmg1bMtHifhKLMxAsdH4G9R0jR_YXRfeSIuJ9gsnwIttzF7rAp8W2HTxDI0dIDYzD6DchgGawElpUWXdgtx5WCcQmX17zlgYBzP9irJNv6xmQ5dwipKyAPLpe1dy5Apuk1UtIxNSfxFqURF2OIGbe3oum_49dtR8_y8_LkR0FhkhECS5lKZy4Am6mnwREpU78xkgd9ltIayfX4KvuRPKFii-gRdon7R0LTBUgYDasshLzMLdFWGNlmpgonH9NoB3wX8q_Dh2rShcjC6-jtGtcx2amCjLxR97yiWebxta7T0yuu5gJChtvyqRv8bkkQJYn9nq_3kBnZmasP6LPKcT9Ees3GkHGsWCVmeF24ZQzG77NnmqHd2n_LHP6wLIXdZodZhmVoKFUKA-EHnB5tRDcFFSneFx396Od02dBMZ0PKalvJ6F2PCEAH5nUO_6pnGJv3N9F-mMY8q6FPJ3qwKO1RUNfhEXosi2q9z3Rpq_MGft7FkQnV7x-hR9WD2ekJl2sNH0TYKwCEdtiy7B_bv9prnz74xaDsm7n10pPD18FIfUMT94hxDSarz3o4P0p0m6m07XYEo8t7BxlsxfLG0ImqrfQrYbC62n-1ZqVHJ84DKgPPMot_FwPqjwvv4fPcOcuw9lZZA.4YJgVfSsrNnmf5UOxf1qfQ" target="_blank">Companies House Developer Hub</a>:
+<br>
 <br>
 ![]({{ site.baseurl }}/images/companieshouse/register-account.png)
+
+After logging into your account, create an application where your API keys will be stored:
 <br>
-After logging into your account, create an application where your API keys will be stored.
 <br>
 ![]({{ site.baseurl }}/images/companieshouse/create-an-application.png)
-<br>
-Once created, go into your application and create a new REST API key. This key will be used to authenticate your scrape requests. 
 
+Once created, go into your application and create a new REST API key. This key will be used to authenticate your scrape requests:
+<br>
+<br>
 ![]({{ site.baseurl }}/images/companieshouse/create-new-key.png)
 <br>
-Make sure you select REST when creating your application.
+<br>
+Make sure you select REST when creating your application:
+<br>
+<br>
 ![]({{ site.baseurl }}/images/companieshouse/create-new-key2.png)
 <br>
-Copy your API key which will be used to scrape Companies House website.
+<br>
+Copy your API key which will be used to scrape Companies House website:
+<br>
+<br>
 ![]({{ site.baseurl }}/images/companieshouse/keys-for-application.png)
+<br>
+<br>
+You are now ready to install the crawler and start scraping the Companies House website.
+<br>
+<br>
 
+### Installing and running our Companies House crawler
+![]({{ site.baseurl }}/images/companieshouse/animated-detective-searching-for-clues.gif)
+*Install the crawler using pip*:
 <br>
-You are now ready to install the scraper and starting scraping the Companies House website.
-<br>
-<br>
-
-### Installing and running our Companies House scraper
-Install the scraper using pip.
 <br>
 <div class="highlight">
 <code-black>
@@ -53,7 +70,9 @@ pip install -i https://test.pypi.org/simple/ cohospider
 </code-black>
 </div>
 <br>
-Go into a Python terminal and run the following code.
+*Go into a Python terminal and run the following code*:
+<br>
+<br>
 <div class="highlight">
 <code-black>
 from spiders import BarbaraSpiderRun
@@ -73,11 +92,12 @@ runner.start()
 </div>
 <br>
 
-Our scraper will start to scrape the Companies House API, finding all of Barbara's company data. Once finished, all your data can be found in the `data/aqWJlHS4_rJSJ7rLgTK49iO4gAg` folder in your root directory. We can now start the analysis using Raphtory.
+Our crawler will start to scrape the Companies House API, finding all of Barbara's company data. Once finished, all your data can be found in the `data/aqWJlHS4_rJSJ7rLgTK49iO4gAg` folder in your root directory. We can now start the analysis using Raphtory.
 
 ## Analysing the data with Raphtory
-
-Install Raphtory via pip.
+![]({{ site.baseurl }}/images/companieshouse/analyse-data-python.jpeg)
+*Install Raphtory via pip*:
+<br>
 <br>
 <div class="highlight">
 <code-black>
@@ -85,8 +105,9 @@ pip install raphtory
 </code-black>
 </div>
 <br>
-Import all the dependencies needed for this example.
-
+*Open a Python Terminal of your choice. We use Jupyter Notebook for this example. Import all the dependencies needed for this example*:
+<br>
+<br>
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 
@@ -114,12 +135,14 @@ Import all the dependencies needed for this example.
 </div>
 </div>
 </div>
+<br>
 
-We use the in-built Python JSON library to parse the JSON files obtained via the crawler. Through this, we can create a Raphtory graph and add our values to the graph via the `add_edge` function.
+We use the Python JSON library to parse the JSON files outputted from the crawler. Through this, we can create a Raphtory graph and add our values to the graph via the `add_edge()` function.
 
 <br>
-Enter the directory path to your json files inside the path_to_json quotation marks, it should look something like: `~/Pometry/companies_house_scraper/tutorial/data/aqWJlHS4_rJSJ7rLgTK49iO4gAg`.
-
+*Enter the directory path to your json files inside the `path_to_json` variable, it should look something like: `~/companies_house_scraper/tutorial/data/aqWJlHS4_rJSJ7rLgTK49iO4gAg`* : 
+<br>
+<br>
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -131,14 +154,15 @@ Enter the directory path to your json files inside the path_to_json quotation ma
 <div class=" highlight hl-ipython3"><pre><span></span><span>path_to_json</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 <span>json_files</span> <span class="o">=</span> <span class="p">[</span><span>pos_json</span> <span class="k">for</span> <span>pos_json</span> <span class="ow">in</span> <span>os</span><span class="o">.</span><span>listdir</span><span class="p">(</span><span>path_to_json</span><span class="p">)</span> <span class="k">if</span> <span>pos_json</span><span class="o">.</span><span>endswith</span><span class="p">(</span><span class="s1">&#39;.json&#39;</span><span class="p">)]</span>
 </pre></div>
-
-     </div>
 </div>
 </div>
 </div>
+</div>
+<br>
 
-Create a Raphtory graph.
-
+<em>Create a Raphtory graph</em>:
+<br>
+<br>
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -150,15 +174,17 @@ Create a Raphtory graph.
 <div class=" highlight hl-ipython3"><pre><span></span><span>g</span> <span class="o">=</span> <span>Graph</span><span class="p">()</span>
 </pre></div>
 
-     </div>
+</div>
 </div>
 </div>
 </div>
 
 </div>
 </div>
-Iterate through all the json files (there are many files since the crawler works by crawling page by page) and add values to your Raphtory graph via `add_edge` function.
-
+<br>
+*Iterate through all the JSON files (there are many files since the crawler works by crawling page by page) and add values to your Raphtory graph via `add_edge()` function*:
+<br>
+<br>
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -170,19 +196,17 @@ Iterate through all the json files (there are many files since the crawler works
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span>index</span><span class="p">,</span> <span>js</span> <span class="ow">in</span> <span>enumerate</span><span class="p">(</span><span>json_files</span><span class="p">):</span>
     <span class="k">with</span> <span>open</span><span class="p">(</span><span>os</span><span class="o">.</span><span>path</span><span class="o">.</span><span>join</span><span class="p">(</span><span>path_to_json</span><span class="p">,</span> <span>js</span><span class="p">))</span> <span class="k">as</span> <span>json_file</span><span class="p">:</span>
         <span>json_text</span> <span class="o">=</span> <span>json</span><span class="o">.</span><span>load</span><span class="p">(</span><span>json_file</span><span class="p">)</span>
-<span class="c1"># Try assigning values to variables. Note that we convert datetime format to epoch timestamps since Raphtory requires time to be in Epoch format.</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span>ap_d</span> <span class="o">=</span> <span>datetime</span><span class="o">.</span><span>strptime</span><span class="p">(</span><span>json_text</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;appointed_on&#39;</span><span class="p">],</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span>appointed_on</span> <span class="o">=</span> <span>int</span><span class="p">(</span><span>datetime</span><span class="o">.</span><span>timestamp</span><span class="p">(</span><span>ap_d</span><span class="p">))</span>
-            <span>re_d</span> <span class="o">=</span>  <span>datetime</span><span class="o">.</span><span>strptime</span><span class="p">(</span><span>json_text</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;resigned_on&#39;</span><span class="p">],</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span>resigned_on</span> <span class="o">=</span> <span>int</span><span class="p">(</span><span>datetime</span><span class="o">.</span><span>timestamp</span><span class="p">(</span><span>re_d</span><span class="p">))</span>
-            <span>company_name</span> <span class="o">=</span> <span>json_text</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;appointed_to&#39;</span><span class="p">][</span><span class="s1">&#39;company_name&#39;</span><span class="p">]</span>
-            <span>director_name</span> <span class="o">=</span> <span>json_text</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-<span class="c1"># Create an edge with time director was appointed to this company, source node is the director name and target node is the company name. The date the director resigned on is set as a property.</span>
-            <span>g</span><span class="o">.</span><span>add_edge</span><span class="p">(</span><span>appointed_on</span><span class="p">,</span> <span>director_name</span><span class="p">,</span> <span>company_name</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;resigned_on&#39;</span><span class="p">:</span> <span>resigned_on</span><span class="p">})</span>
-<span class="c1"># Catch any missing values in the json files (could be because the director has not resigned at this company yet.)</span>
-        <span class="k">except</span> <span>KeyError</span> <span class="k">as</span> <span>e</span><span class="p">:</span>
-            <span>print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;key </span><span class="si">{</span><span>e</span><span class="si">}</span><span class="s2"> not found in json block&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span>ap_d</span> <span class="o">=</span> <span>datetime</span><span class="o">.</span><span>strptime</span><span class="p">(</span><span>json_text</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;appointed_on&#39;</span><span class="p">],</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span>appointed_on</span> <span class="o">=</span> <span>int</span><span class="p">(</span><span>datetime</span><span class="o">.</span><span>timestamp</span><span class="p">(</span><span>ap_d</span><span class="p">))</span>
+    <span>re_d</span> <span class="o">=</span>  <span>datetime</span><span class="o">.</span><span>strptime</span><span class="p">(</span><span>json_text</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;resigned_on&#39;</span><span class="p">],</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span>resigned_on</span> <span class="o">=</span> <span>int</span><span class="p">(</span><span>datetime</span><span class="o">.</span><span>timestamp</span><span class="p">(</span><span>re_d</span><span class="p">))</span>
+    <span>company_name</span> <span class="o">=</span> <span>json_text</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;appointed_to&#39;</span><span class="p">][</span><span class="s1">&#39;company_name&#39;</span><span class="p">]</span>
+    <span>director_name</span> <span class="o">=</span> <span>json_text</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span>g</span><span class="o">.</span><span>add_edge</span><span class="p">(</span><span>appointed_on</span><span class="p">,</span> <span>director_name</span><span class="p">,</span> <span>company_name</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;resigned_on&#39;</span><span class="p">:</span> <span>resigned_on</span><span class="p">})</span>
+
+<span class="k">except</span> <span>KeyError</span> <span class="k">as</span> <span>e</span><span class="p">:</span>
+    <span>print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;key </span><span class="si">{</span><span>e</span><span class="si">}</span><span class="s2"> not found in json block&quot;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -195,11 +219,13 @@ Iterate through all the json files (there are many files since the crawler works
 
 ### Finding quick statistics about our data via graphs in Raphtory
 
-With the Raphtory API, we can quickly find stats from our data such as the number of companies the director was assigned to, the earliest/latest date the director was assigned to a company and the earliest/latest date the director resigned from a company.
+With the Raphtory API, we can quickly find statistics from our data such as the number of companies the director was assigned to, the earliest/latest date the director was assigned to a company and the earliest/latest date the director resigned from a company.
 <br>
 <br>
-*Create a list of directors to see how many different names the director goes by*
-
+![]({{ site.baseurl }}/images/companieshouse/boardroom.jpeg)
+*Create a list of directors to see how many different names the director goes by:*
+<br>
+<br>
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -209,8 +235,10 @@ With the Raphtory API, we can quickly find stats from our data such as the numbe
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span>list_of_src</span><span class="o">=</span> <span class="p">[]</span>
+
 <span class="k">for</span> <span>e</span> <span class="ow">in</span> <span>g</span><span class="o">.</span><span>edges</span><span class="p">():</span>
    <span>list_of_src</span><span class="o">.</span><span>append</span><span class="p">(</span><span>e</span><span class="o">.</span><span>src</span><span class="p">()</span><span class="o">.</span><span>name</span><span class="p">())</span>
+
 <span>print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List of director names: </span><span class="si">{</span><span>set</span><span class="p">(</span><span>list_of_src</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -242,8 +270,9 @@ With the Raphtory API, we can quickly find stats from our data such as the numbe
 
 </div>
 <br>
-*Using num_edges() function to find the number of companies formed by the director (director -- company edge)*
-
+*Using `num_edges()` function to find the number of companies formed by the director (Director to Company edges):*
+<br>
+<br>
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -284,8 +313,9 @@ With the Raphtory API, we can quickly find stats from our data such as the numbe
 </div>
 <br>
 
-*Using Python's datetime library to convert epoch back into dates to see what the earliest and latest date the director was assigned to a company.*
-
+*Using Python's Datetime library to convert epoch timestamps back into dates in format YYYY-MM-DD to see what the earliest and latest date the director was assigned to a company:*
+<br>
+<br>
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -328,10 +358,18 @@ Latest date director was assigned to company: 2016-02-09 00:00:00
 </div>
 <br>
 
-To obtain the date the director resigned from the company, we have stored this in a property. You can have an infinite number of properties on edges and vertices in Raphtory to store extra information.
+The date that the director resigned from the company can be accessed via the edge <b>property</b>. This is the API for adding properties to edges in Raphtory:
 <br>
 <br>
-Through creating a list of these times, we can see what the earliest and latest resignation that the director made.
+<code-black>
+g.add_edge(time, source, target, {'property_name': property_value})
+</code-black>
+<br>
+<br>
+It is possible to have an infinite number of properties on edges and vertices in Raphtory to store extra information.
+<br>
+<br>
+By creating a list of resignation times, we can see the earliest and latest resignation that the director has made.
 <br>
 <br>
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -343,10 +381,13 @@ Through creating a list of these times, we can see what the earliest and latest 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span>list_resigned_on</span> <span class="o">=</span> <span class="p">[]</span>
+
 <span class="k">for</span> <span>e</span> <span class="ow">in</span> <span>g</span><span class="o">.</span><span>edges</span><span class="p">():</span>
     <span>list_resigned_on</span><span class="o">.</span><span>append</span><span class="p">(</span><span>e</span><span class="o">.</span><span>property</span><span class="p">(</span><span class="s2">&quot;resigned_on&quot;</span><span class="p">))</span>
+
 <span>list_resigned_on_max</span> <span class="o">=</span> <span>max</span><span class="p">(</span><span>list_resigned_on</span><span class="p">)</span>
 <span>list_resigned_on_min</span> <span class="o">=</span> <span>min</span><span class="p">(</span><span>list_resigned_on</span><span class="p">)</span>
+
 <span>print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Earliest company resignation date: </span><span class="si">{</span><span>datetime</span><span class="o">.</span><span>fromtimestamp</span><span class="p">(</span><span>list_resigned_on_min</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span>print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latest company resignation date: </span><span class="si">{</span><span>datetime</span><span class="o">.</span><span>fromtimestamp</span><span class="p">(</span><span>list_resigned_on_max</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -380,6 +421,9 @@ Latest company resignation date: 2020-03-30 00:00:00
 
 </div>
 <br>
+![]({{ site.baseurl }}/images/companieshouse/Closed-out-of-business.jpeg)
+
+<br>
 ### Finding information about a particular time window of our graph
 
 We can pick a small view of our graph to filter down all the companies this director was assigned to from 2008 to 2015. We do this with the `g.window()` function which takes a start and end time.
@@ -387,8 +431,9 @@ We can pick a small view of our graph to filter down all the companies this dire
 <br>
 
 
-After creating a view, we can see how many companies the director was appointed to by running the `.degree()` functions on our view.
-
+After creating a view, we can see how many companies the director was appointed to in this time window by running the `.degree()` function on our view.
+<br>
+<br>
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -431,8 +476,15 @@ After creating a view, we can see how many companies the director was appointed 
 
 ### Using Raphtory properties to refine our analysis
 
-We filter the edges to only see the companies that this director is assigned to and then resigned to the same day.
 
+If a director is appointed to a company and resigns not too long after being appointed, it can be indicative of suspicious behaviour, or even a red flag for money laundering/crime. We used Raphtory to filter companies where the director stayed at the company no longer than a day.
+
+<br>
+![]({{ site.baseurl }}/images/companieshouse/offshore-companies.png)
+<br>
+From 2008 to 2015, this director was appointed to and resigned on the same day in 88 out of their 104 companies. That's 84% of the director's companies. The next question to ask is why a director is being appointed to these companies and resigning so quickly.
+<br>
+<br>
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -442,10 +494,12 @@ We filter the edges to only see the companies that this director is assigned to 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span>sus_companies</span> <span class="o">=</span> <span class="p">[]</span>
+
 <span class="k">for</span> <span>edge</span> <span class="ow">in</span> <span>view</span><span class="o">.</span><span>vertex</span><span class="p">(</span><span class="s1">&#39;Barbara KAHAN&#39;</span><span class="p">)</span><span class="o">.</span><span>edges</span><span class="p">():</span>
     <span class="k">if</span> <span>edge</span><span class="o">.</span><span>property</span><span class="p">(</span><span class="s2">&quot;resigned_on&quot;</span><span class="p">)</span> <span class="o">==</span> <span>edge</span><span class="o">.</span><span>earliest_time</span><span class="p">():</span>
        <span>sus_companies</span><span class="o">.</span><span>append</span><span class="p">(</span><span>edge</span><span class="p">)</span>
-<span>print</span><span class="p">(</span><span>sus_companies</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())</span>
+
+<span>print</span><span class="p">(</span><span>sus_companies</span><span class="o">.</span><span>__len__</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -476,17 +530,15 @@ We filter the edges to only see the companies that this director is assigned to 
 
 </div>
 
-### Creating perspectives in Raphtory to create a line plot over time
+### Create a line plot visualisation over time with Raphtory
 
-We can use Perspective which is a struct representing a time range from start to end. We use .rolling() with a window size of 10000000. This window moves forward by a step size (which is the window if you have not specified a step size).
+![]({{ site.baseurl }}/images/companieshouse/rolling_line_chart.gif)
 
-<br>
-
-Through these methods, we "roll" through all the windows/views, counting the number of companies the director was assigned to, and we end up with a line plot of how many companies this director is assigned to over time.
+In Raphtory, we have a function `.rolling()` with a window size of 10000000 milliseconds (3 hours). This enables us to "roll" through all the windows/views, counting the number of companies the director was assigned to over time.
 <br>
 <br>
 
-*Create a perspective with a rolling window of 10000000 moving forward with a step of 10000000.*
+*Roll through the graph with a window of 10000000 milliseconds:*
 
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -496,8 +548,8 @@ Through these methods, we "roll" through all the windows/views, counting the num
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span>p</span> <span class="o">=</span> <span>Perspective</span><span class="o">.</span><span>rolling</span><span class="p">(</span><span>window</span><span class="o">=</span><span class="mi">10000000</span><span class="p">)</span> 
-<span>views</span> <span class="o">=</span> <span>g</span><span class="o">.</span><span>through</span><span class="p">(</span><span>p</span><span class="p">)</span> 
+<div class=" highlight hl-ipython3"><pre>
+<span>views</span> <span class="o">=</span> <span>g</span><span class="o">.</span><span>rolling</span><span class="p">(</span><span>10000000</span><span class="p">)</span> 
 </pre></div>
 
      </div>
@@ -507,7 +559,7 @@ Through these methods, we "roll" through all the windows/views, counting the num
 
 </div>
 <br>
-*For each view, count the number of edges and note the time.*
+*For each view, count the number of edges:*
 
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -532,7 +584,7 @@ Through these methods, we "roll" through all the windows/views, counting the num
 
 </div>
 <br>
-*Create the line plot visualisation with seaborn library.*
+*Create the line plot visualisation with the Seaborn library:*
 
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -595,8 +647,10 @@ class="
 
 </div>
 
+Now that we can see several spikes in our graph, especially between 2012 and 2016, we can further investigate this window of time.
+
 ### Using windows to filter particular timepoints of interest
-As seen in the line plot, there is a spike at year 2014. To investigate this further we look at a window of 01-01-2014 to 01-01-2015.
+One of the spikes in the line plot above is at year 2014. To investigate this further we look at a window of 01-01-2014 to 01-01-2015.
 
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -607,8 +661,7 @@ As seen in the line plot, there is a spike at year 2014. To investigate this fur
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span>filtered_view</span> <span class="o">=</span> <span>g</span><span class="o">.</span><span>window</span><span class="p">(</span><span class="mi">1388534400</span><span class="p">,</span> <span class="mi">1400070400</span><span class="p">)</span>
-<span>p</span> <span class="o">=</span> <span>Perspective</span><span class="o">.</span><span>rolling</span><span class="p">(</span><span>window</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span> 
-<span>filtered_views</span> <span class="o">=</span> <span>filtered_view</span><span class="o">.</span><span>through</span><span class="p">(</span><span>p</span><span class="p">)</span> 
+<span>filtered_view</span><span class="o">.</span><span>rolling</span><span class="p">(</span><span>100000</span><span class="p">)</span> 
 <span>timestamps</span>   <span class="o">=</span> <span class="p">[]</span>
 <span>edge_count</span>   <span class="o">=</span> <span class="p">[]</span>
 
@@ -681,8 +734,7 @@ There seems to be a spike between 2014-02-01 to 2014-02-15. We create a window f
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span>filtered_view2</span> <span class="o">=</span> <span>g</span><span class="o">.</span><span>window</span><span class="p">(</span><span class="mi">1391212800</span><span class="p">,</span> <span class="mi">1392422400</span><span class="p">)</span>
-<span>p</span> <span class="o">=</span> <span>Perspective</span><span class="o">.</span><span>rolling</span><span class="p">(</span><span>window</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span> 
-<span>filtered_views2</span> <span class="o">=</span> <span>filtered_view2</span><span class="o">.</span><span>through</span><span class="p">(</span><span>p</span><span class="p">)</span> 
+<span>filtered_views2</span> <span class="o">=</span> <span>filtered_view2</span><span class="o">.</span><span>rolling</span><span class="p">(</span><span>10000</span><span class="p">)</span> 
 <span>timestamps</span>   <span class="o">=</span> <span class="p">[]</span>
 <span>edge_count</span>   <span class="o">=</span> <span class="p">[]</span>
 
@@ -743,12 +795,13 @@ class="
 </div>
 
 </div>
+There is a big spike on 2014-02-11 and 2014-02-12. Now that we have specific time points, we can find out the names of the companies in these spikes by visualising the edges of the graph at these time points.
 
 ### Dynamic visualisation of your graph in Raphtory
 
-To visualise specific dates, we first create window of the time we want and use Raphtory's `.to_pyvis()` function to create a dynamic visualisation of the edges. In this way, we clearly see the director's company assignation and resignation behaviour.
+To visualise specific dates, we first create a window which includes the time point we want and use Raphtory's `.to_pyvis()` function to create a dynamic visualisation of the edges. In this way, we clearly see the director's company assignation and resignation behaviour. Below, we have created a window that only includes the date 2014-02-12. And so forth, we can visualise all the company names that the director was assigned to and quickly deallocated from.
 
-The visualisation will appear in a file called `nx.html` which can be opened in a web browser.
+<br>
 
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -757,12 +810,12 @@ The visualisation will appear in a file called `nx.html` which can be opened in 
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
+<div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span>twelfth_of_feb</span> <span class="o">=</span> <span>g</span><span class="o">.</span><span>window</span><span class="p">(</span><span class="mi">1392163199</span><span class="p">,</span> <span class="mi">1392163201</span><span class="p">)</span>
 <span>vis</span><span class="o">.</span><span>to_pyvis</span><span class="p">(</span><span>graph</span><span class="o">=</span><span>twelfth_of_feb</span><span class="p">,</span> <span>edge_color</span><span class="o">=</span><span class="s1">&#39;#F6E1D3&#39;</span><span class="p">,</span><span>shape</span><span class="o">=</span><span class="s2">&quot;image&quot;</span><span class="p">)</span>  
 </pre></div>
 
-     </div>
+</div>
 </div>
 </div>
 </div>
@@ -788,7 +841,13 @@ The visualisation will appear in a file called `nx.html` which can be opened in 
 </div>
 
 </div>
-If you would like your graph in a list of vertices and edges, you can call methods such as `vertices()` and `edges()`.
+The visualisation will appear in a file called `nx.html` which can be opened in a web browser.
+<br>
+<br>
+
+![]({{ site.baseurl }}/images/companieshouse/barbara-kahan.png)
+
+If you would like your graph in a list of vertices and edges, you can call methods such as `.vertices()` and `.edges()`.
 <div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -852,9 +911,7 @@ If you would like your graph in a list of vertices and edges, you can call metho
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
-
-
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
@@ -868,12 +925,9 @@ If you would like your graph in a list of vertices and edges, you can call metho
 </div>
 
 </div>
-
-
-
-![]({{ site.baseurl }}/images/companieshouse/barbara-kahan.png)
-
-Temporally analysing data has been difficult in the past, however Raphtory makes it incredibly easy. Rather than looking at data statically, taking into account of time can unlock a lot of interesting insights that may be beneficial to your unique use cases. 
+<br>
+<br>
+Temporally analysing data has been difficult in the past, however Raphtory makes it incredibly easy. Rather than looking at data in a static manner, taking into account of time can unlock a lot of interesting insights that may be beneficial to your unique use cases. 
 
 <br>
 If you would like to run these algorithms at scale in a production environment, drop the team at <a href="https://www.pometry.com/contact/" target="_blank">Pometry</a> a message, and they will be more than happy to help.
