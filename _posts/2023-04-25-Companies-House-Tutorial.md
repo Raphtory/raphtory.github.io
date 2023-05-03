@@ -219,7 +219,7 @@ We use the Python JSON library to parse the JSON files outputted from the crawle
 
 ### Finding quick statistics about our data via graphs in Raphtory
 
-With the Raphtory API, we can quickly find statistics from our data such as the number of companies the director was assigned to, the earliest/latest date the director was assigned to a company and the earliest/latest date the director resigned from a company.
+With the Raphtory API, we can quickly find statistics from our data about the director's company ownership history.
 <br>
 <br>
 ![]({{ site.baseurl }}/images/companieshouse/boardroom.jpeg)
