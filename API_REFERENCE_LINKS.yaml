@@ -1,0 +1,4 @@
+python:
+  Graph: https://docs.raphtory.com/en/v0.5.2/api/raphtory.html#raphtory.Graph
+rust:
+  Graph: https://docs.rs/raphtory/0.5.2/raphtory/db/graph/graph/struct.Graph.html

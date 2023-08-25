@@ -1,0 +1,79 @@
+site_name: Raphtory User Guide
+site_url: http://raphtory.github.io
+theme:
+  palette:
+  # Palette toggle for light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+
+  # Palette toggle for dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    toggle:
+      icon: material/brightness-4
+      name: Switch to light mode
+  name: material
+  custom_dir: overrides
+  logo: assets/logo.png
+  features:
+    - navigation.tracking
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.footer
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+plugins:
+  - search:
+      lang: en
+  - markdown-exec
+  - macros:
+      module_name: scripts/macro
+extra:
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  analytics:
+    provider: google
+    property:
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.snippets:
+      base_path: ['.','docs/src/']
+      check_paths: true
+      dedent_subsections: true
+  - footnotes
+extra_css:
+  - stylesheets/extra.css
+repo_url: https://github.com/pometry/raphtory
+repo_name: pometry/raphtory
+watch:
+  - scripts
+nav:
+  - Home: index.md
+  - Getting Started: 
+    - getting-started/intro.md
+    - getting-started/installation.md
+    - getting-started/ingestion.md
+  - User Guide: 
+    - user-guide/index.md
+
+hooks:
+  - scripts/people.py
+
