@@ -71,6 +71,11 @@ nav:
     - getting-started/intro.md
     - getting-started/installation.md
     - getting-started/ingestion.md
+    - getting-started/querying.md
+    - getting-started/algorithms.md
+    - getting-started/visualisation.md
+    - getting-started/graphql.md
+
   - User Guide: 
     - user-guide/index.md
 
