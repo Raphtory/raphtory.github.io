@@ -1,5 +1,5 @@
 :root {
-    --md-primary-fg-color:        #df2a52    ;
+    --md-primary-fg-color:        #ff3663    ;
     --md-primary-fg-color--light: #C2CCD6;
     --md-primary-fg-color--dark:  #103547;
     --md-text-font: 'Proxima Nova', sans-serif;
@@ -62,3 +62,11 @@ span .md-typeset .emojione, .md-typeset .gemoji, .md-typeset .twemoji {
     -webkit-mask-image: var(--md-admonition-icon--rust);
             mask-image: var(--md-admonition-icon--rust);
   }
+
+[dir=ltr] .md-header__title  {
+  margin-left: 1.3rem;
+}
+
+.md-header__button.md-logo {
+  margin-left: 0.8rem;
+}

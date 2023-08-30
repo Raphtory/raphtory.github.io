@@ -67,17 +67,16 @@ watch:
   - scripts
 nav:
   - Home: index.md
-  - Getting Started: 
-    - getting-started/intro.md
-    - getting-started/installation.md
-    - getting-started/ingestion.md
-    - getting-started/querying.md
-    - getting-started/algorithms.md
-    - getting-started/visualisation.md
-    - getting-started/graphql.md
-
   - User Guide: 
-    - user-guide/index.md
+    - user-guide/intro.md
+    - user-guide/installation.md
+    - user-guide/ingestion.md
+    - user-guide/querying.md
+    - user-guide/algorithms.md
+    - user-guide/visualisation.md
+    - user-guide/graphql.md
+  - API:
+    - https://docs.raphtory.com  
 
 hooks:
   - scripts/people.py

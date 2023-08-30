@@ -55,12 +55,7 @@ If you wish to contribute, check out the open [list of issues](https://github.co
 
 ## About this guide
 
-The `Raphtory` user guide is intended to live alongside the API documentation. Its purpose is to help new users get going with `Raphtory` and to provide meaningful examples. The guide is split into two parts:
-
-- [Getting Started](getting-started/intro.md): A 10 minute whistle stop tour of the library and its primary function.
-- [User Guide](user-guide/index.md): A detailed explanation of how the library is setup and how to use it most effectively. 
-
-If you are looking for details on a specific level / object, it is probably best to go the API documentation: [Python](https://docs.raphtory.com/en/v0.5.2/) | [Rust](https://docs.rs/raphtory/0.5.2/raphtory/).
+The `Raphtory` user guide is intended to live alongside the API documentation. Its purpose is to help new users get going with `Raphtory` and to provide meaningful examples. If you are looking for details on a specific object or functions, it is probably best to go the API documentation: [Python](https://docs.raphtory.com/en/v0.5.2/) | [Rust](https://docs.rs/raphtory/0.5.2/raphtory/).
 
 
 ## Example
