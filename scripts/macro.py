@@ -13,18 +13,18 @@ LANGUAGES = OrderedDict(
         "icon_name": "python",
         "code_name": "python",
     },
-    #rust={
+    # rust={
     #    "extension": ".rs",
     #    "display_name": "Rust",
     #    "icon_name": "rust",
     #    "code_name": "rust",
-    #},
-    #node={
+    # },
+    # node={
     #    "extension": ".js",
     #    "icon_name": "node-js",
     #    "display_name": "NodeJS",
     #    "code_name": "javascript",
-    #},
+    # },
 )
 
 # Load all links to reference docs
