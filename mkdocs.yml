@@ -75,6 +75,7 @@ nav:
     - user-guide/algorithms.md
     - user-guide/visualisation.md
     - user-guide/graphql.md
+    - user-guide/graph-deletions.md
   - API:
     - https://docs.raphtory.com  
 

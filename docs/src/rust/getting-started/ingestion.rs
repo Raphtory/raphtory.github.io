@@ -23,5 +23,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>>{
     // --8<-- [start:constant_properties]
     // --8<-- [end:constant_properties]
  
+    //--8<-- [start:graph_from_dataframe]
+    //--8<-- [end:graph_from_dataframe]
+
+    //--8<-- [start:adding_dataframe]
+    //--8<-- [end:adding_dataframe]
+
+    //--8<-- [start:const_dataframe]
+    //--8<-- [end:const_dataframe]
+
+    //--8<-- [start:save_load]
+    //--8<-- [end:save_load]
+
     Ok(())
 }
