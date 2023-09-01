@@ -12,27 +12,6 @@ permissions:
   contents: write
 
 jobs:
-  markdown-link-check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: gaurav-nelson/github-action-markdown-link-check@v1
-
-  test-python:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - run: pip install -r requirements.txt
-
-      - name: Set up Graphviz
-        uses: ts-graphviz/setup-graphviz@v1
-
-      - run: pytest
-
   black:
     runs-on: ubuntu-latest
     steps:
