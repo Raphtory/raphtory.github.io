@@ -63,7 +63,7 @@ Below you can see an example of these APIs and the sort of questions you can ask
 
 ## Excited to give it a go?
 
-This site have been created to get new users of `Raphtory` up to speed by explaining the most important features via meaningful examples. You can get started straight away by heading to the [User Guide](user-guide/intro.md). If you prefer learning via APIs and reading into specific object or functions, your best best it to visit the API documentation: [Python](https://docs.raphtory.com/en/v0.5.2/) | [Rust](https://docs.rs/raphtory/0.5.2/raphtory/).
+This site have been created to get new users of `Raphtory` up to speed by explaining the most important features via meaningful examples. You can get started straight away by heading to the [User Guide](user-guide/intro.md). If you prefer learning via APIs and reading into specific object or functions, your best best it to visit the API documentation: [Python](https://docs.raphtory.com/) | [Rust](https://docs.rs/raphtory/latest/raphtory/).
 
 
 
