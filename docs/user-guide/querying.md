@@ -1,4 +1,27 @@
 # Querying your graph
+ 
+## Graph metrics
 
-!!! warning ":construction: Under Construction :construction: "
-    The Raphtory project has just migrated to a new website and is doing a full revamp of the documentation - please checkout docs.raphtory.com whilst this section is being updated.
+## Vertex metrics
+
+## Edge metrics
+
+## Property queries
+
+### Temporal specific functions
+
+## Vectorised functions
+
+## Querying the graph over time
+
+### At and Windowing
+
+### Rolling and Expanding
+
+## Graph views
+
+### Layered graphs
+
+### Subgraph
+
+### Materialize
