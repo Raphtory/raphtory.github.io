@@ -194,11 +194,9 @@ vertices_df["timestamp"] = pd.to_datetime(vertices_df["timestamp"]).astype(
 )
 
 print("Edge Dataframe:")
-print(edges_df)
-print()
+print(f"{edges_df}\n")
 print("Vertex Dataframe:")
-print(vertices_df)
-print()
+print(f"{vertices_df}\n")
 
 g = Graph.load_from_pandas(
     edges_df=edges_df,

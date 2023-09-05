@@ -8,3 +8,4 @@ raphtory
 markdown-exec[ansi]==1.6.0
 mkdocs-macros-plugin==0.7.0
 PyYAML==6.0
+mkdocs-jupyter

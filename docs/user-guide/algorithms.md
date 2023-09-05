@@ -35,7 +35,7 @@ The second category of algorithms are `vertex centric` and return a value for ea
 ### Continuous Results (PageRank)
 `PageRank` is an centrality metric developed by Google's founders to rank web pages in search engine results based on their importance and relevance. This has since become a standard ranking algorithm for a whole host of other usecases.
 
-Raphtory's implementation returns the score for each node - these are continuous values, meaning we can discover the most important characters via `top_k`.
+Raphtory's implementation returns the score for each node - these are continuous values, meaning we can discover the most important characters in our Lord of the Rings dataset via `top_k`.
 
 In the code below we first get the result of an individual character (Gandalf), followed by the values of the top 5 most important characters. 
 
@@ -59,7 +59,7 @@ In the code below we first run the algorithm and turn the results into a datafra
 
     The `component ID (value)` is generated from the lowest `vertex ID` in the component, hence why they look like a random numbers in the print out.
 
-Next we take the results and group the vertices by these IDs and calculate the size of the latest component. 
+Next we take the results and group the vertices by these IDs and calculate the size of the largest component. 
 
 !!! info 
 
@@ -76,11 +76,21 @@ Next we take the results and group the vertices by these IDs and calculate the s
 
 As with all the queries we saw in the [previous tutorial](querying.md), both `graphwide` and `vertex centric` algorithms can be run on `graph views`. This allows us to see how results change over time, run algorithms on subsets of the layers or remove specific vertices from the graph to see the impact this has. 
 
-Below is an example looking at how Gandaf's importance changes over the course of the books by splitting the graph into 1000 sentence rolling windows and running the algorithm on each one.
+To demonstrate this, below is an example of how you could track Gandaf's importance over the course of the story using rolling windows and the `PageRank` algorithm we explored above. 
 
 Within each windowed graph we use the [AlgorithmResult](https://docs.raphtory.com/en/master/api/raphtory.html#raphtory.AlgorithmResultStrU64) api to extract Gandalf's score and record it alongside the earliest timestamp in the window, which can then be plotted via matplotlib.
+
 
 {{code_block('getting-started/algorithms','rolling',['Graph'])}}
 
 !!! Output
-    ![Gandalf Rank](./gandalf_rank.png)
+
+    ```python exec="on" result="text" session="algorithms"
+    --8<-- "python/getting-started/algorithms.py:rolling"
+    ```
+
+    <p align="center">
+        <img src="../../output/gandalf_rank.png" alt="Description of Image">
+    </p>
+
+
