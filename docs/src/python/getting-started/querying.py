@@ -14,16 +14,16 @@ import raphtory as rp
 
 g = rp.Graph()
 g.load_edges_from_pandas(edge_df = edges_df, src_col="Actor", dst_col="Recipient", time_col="DateTime", layer_in_df="Behavior",props=["Weight"])
-print(g)
-print("Earliest datetime: ",g.earliest_date_time())
-print("Latest datetime: ",g.latest_date_time())
-print("Unique layers: ",g.get_unique_layers())
+print(f"{g}\n")
+print(f"Earliest datetime: {g.earliest_date_time()}\n")
+print(f"Latest datetime: {g.latest_date_time()}\n")
+print(f"Unique layers: {g.get_unique_layers()}\n")
 # --8<-- [end:new_graph]
 
 # --8<-- [start:neighbours]
 v = g.vertex("FELIPE")
 print(v.neighbours())
-print("Felipe has "+str(v.in_degree())+" incoming friendships and "+str(v.out_degree())+" outgoing friendships.")
+print("Felipe has "+str(v.in_degree())+" incoming friendship edges and "+str(v.out_degree())+" outgoing friendship edges.")
 
 # neighbours_sorted = sorted(v.out_edges(), key = lambda nb : nb.explode().weight().sum())
 # --8<-- [end:neighbours]
@@ -33,6 +33,6 @@ e = g.edge("FELIPE","MAKO")
 e_reversed = g.edge("MAKO","FELIPE")
 print(e)
 print(e_reversed)
+print("Interaction times from FELIPE to MAKO: ")
 print(e.history())
-# neighbours_sorted = sorted(v.out_edges(), key = lambda nb : nb.explode().weight().sum())
 # --8<-- [end:frienship]

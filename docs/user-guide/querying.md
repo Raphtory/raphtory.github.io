@@ -35,7 +35,12 @@ As Raphtory models things as a directed graph, we can look also at incoming and 
     --8<-- "python/getting-started/querying.py:neighbours"
     ```
 
+!!! info
+    Why is PathFromVertex returned from `neighbours` rather than a simple list of vertices? We will discuss this in `Vectorised functions`, but if you need just a list you can wrap this in python's `list` function.
+
 ## Edge metrics
+
+We can also investigate individual edges. Here we can look at the edges in both directions between `FELIPE` and `MAKO`.
 
 {{code_block('getting-started/querying','friendship',['Edge'])}}
 !!! Output
