@@ -19,3 +19,20 @@ print("Earliest datetime: ",g.earliest_date_time())
 print("Latest datetime: ",g.latest_date_time())
 print("Unique layers: ",g.get_unique_layers())
 # --8<-- [end:new_graph]
+
+# --8<-- [start:neighbours]
+v = g.vertex("FELIPE")
+print(v.neighbours())
+print("Felipe has "+str(v.in_degree())+" incoming friendships and "+str(v.out_degree())+" outgoing friendships.")
+
+# neighbours_sorted = sorted(v.out_edges(), key = lambda nb : nb.explode().weight().sum())
+# --8<-- [end:neighbours]
+
+# --8<-- [start:friendship]
+e = g.edge("FELIPE","MAKO")
+e_reversed = g.edge("MAKO","FELIPE")
+print(e)
+print(e_reversed)
+print(e.history())
+# neighbours_sorted = sorted(v.out_edges(), key = lambda nb : nb.explode().weight().sum())
+# --8<-- [end:frienship]

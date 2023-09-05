@@ -24,7 +24,25 @@ Below we model this as a Raphtory graph using the `load_edges_from_pandas` funct
 
 ## Vertex metrics
 
+When we used the `load_edges_from_pandas` function, this created a vertex for each of the unique baboon names in our Actor and Recipient columns and gave them an `id` property accordingly. When we are then interacting with the graph, we can select them by name. For example, we can query the baboon `FELIPE` for his neighbours: the baboons he interacted with at some point during the collection period. 
+
+As Raphtory models things as a directed graph, we can look also at incoming and outgoing interactions, as well as viewing these as combined.
+
+{{code_block('getting-started/querying','neighbours',['Vertex'])}}
+!!! Output
+
+    ```python exec="on" result="text" session="getting-started/querying"
+    --8<-- "python/getting-started/querying.py:neighbours"
+    ```
+
 ## Edge metrics
+
+{{code_block('getting-started/querying','friendship',['Edge'])}}
+!!! Output
+
+    ```python exec="on" result="text" session="getting-started/querying"
+    --8<-- "python/getting-started/querying.py:friendship"
+    ```
 
 ## Property queries
 
