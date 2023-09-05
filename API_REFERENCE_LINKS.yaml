@@ -1,6 +1,8 @@
 python:
   Graph: https://docs.raphtory.com/en/v0.5.2/api/raphtory.html#raphtory.Graph
   Vertex: https://docs.raphtory.com/en/v0.5.2/api/raphtory.html#raphtory.Vertex
+  Vertices: https://docs.raphtory.com/en/v0.5.2/api/raphtory.html#raphtory.Vertices
   Edge: https://docs.raphtory.com/en/v0.5.2/api/raphtory.html#raphtory.Edge
+  Edges: https://docs.raphtory.com/en/v0.5.2/api/raphtory.html#raphtory.Edges
 rust:
   Graph: https://docs.rs/raphtory/0.5.2/raphtory/db/graph/graph/struct.Graph.html

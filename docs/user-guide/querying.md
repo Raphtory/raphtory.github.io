@@ -40,7 +40,7 @@ As Raphtory models things as a directed graph, we can look also at incoming and 
 
 ## Edge metrics
 
-We can also investigate individual edges. Here we can look at the edges in both directions between `FELIPE` and `MAKO`.
+We can also investigate individual edges. Here we can look at the edges in both directions between `FELIPE` and `MAKO`. Here, while there were many interactions between the two baboons, these interactions are represented by just two edges, one for each direction, with each interaction marked as an update in the edge's history. Below, we can see the edge between Felipe and Mako and the times of each interaction.
 
 {{code_block('getting-started/querying','friendship',['Edge'])}}
 !!! Output
@@ -54,6 +54,19 @@ We can also investigate individual edges. Here we can look at the edges in both 
 ### Temporal specific functions
 
 ## Vectorised functions
+
+When we called `v.neighbours()` earlier, a `PathFromVertex` was returned rather than a straightforward list. This is an example of the vectorised functionality that Raphtory makes use of. In the Vertex API, this allows for functions that take a vertex and return a PathfromVertex to be chained in sequence. 
+
+For example, for a vertex object `v`, `v.neighbours().neighbours()` will return the two-hop neighbours of `v`. The first call of `neighbours()` returns the immediate neighbours of `v`, the second applies `neighbours()` to each of the vertices returned by the first call. These are flattened under the hood such that a single `PathFromVertex` is returned. Similarly, any functions that a vertex can call can sit within this chain.
+
+The same is also true for edges. One important function for edge is `explode()` which returns an edge view for each interaction represented by that edge. When these interactions have properties like weight, we can 
+
+{{code_block('getting-started/querying','exploded_edge',['Edges'])}}
+!!! Output
+
+    ```python exec="on" result="text" session="getting-started/querying"
+    --8<-- "python/getting-started/querying.py:exploded_edge"
+    ```
 
 ## Querying the graph over time
 
