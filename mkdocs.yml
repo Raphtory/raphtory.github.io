@@ -1,5 +1,6 @@
 site_name: Raphtory User Guide
 site_url: http://raphtory.github.io
+
 theme:
   palette:
   # Palette toggle for light mode
@@ -65,6 +66,10 @@ repo_url: https://github.com/pometry/raphtory
 repo_name: pometry/raphtory
 watch:
   - scripts
+  - docs/examples
+  - docs/src
+  - docs/stylesheets
+  - docs/user-guide
 nav:
   - Home: index.md
   - User Guide: 

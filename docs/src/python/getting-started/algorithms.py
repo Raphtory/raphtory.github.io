@@ -24,20 +24,18 @@ results = rp.weakly_connected_components(lotr_graph)
 
 # Convert the results to a dataframe so we can have a look at them
 df = results.to_df()
-print(df)
-print()
+print(f"{df}\n")
 
 #Group the components together
 components = results.group_by()
-print(components)
-print()
+print(f"{components}\n")
 
 #Get the size of each component
 component_sizes = {key: len(value) for key, value in components.items()}
-#Get the key for the largest connected component
+#Get the key for the largest component
 largest_component = max(component_sizes,key=component_sizes.get)
 #Print the size of the largest component
-print("The largest component contains",component_sizes[largest_component], "of the",lotr_graph.num_vertices(),"vertices in the graph.")
+print(f"The largest component contains {component_sizes[largest_component]} of the {lotr_graph.num_vertices()} vertices in the graph.")
 # --8<-- [end:connectedcomponents]
 
 # --8<-- [start:pagerank]
@@ -46,30 +44,35 @@ results = rp.pagerank(lotr_graph)
 
 #Getting the results for an individual character (Gandalf)
 gandalf_rank = results.get("Gandalf")
-print("Gandalf's ranking is", gandalf_rank)
-print()
+print(f"Gandalf's ranking is {gandalf_rank}\n")
 
 #Getting the top 5 most important characters and printing out their scores
 top_5 = results.top_k(5)
 for rank, (name, score) in enumerate(top_5, 1):
     print(f"Rank {rank}: {name} with a score of {score:.5f}")
-
 # --8<-- [end:pagerank]
 
 # --8<-- [start:rolling]
-import matplotlib.pyplot as plt 
+
+import matplotlib.pyplot as plt
+
 importance = []
 time = []
 
 for windowed_graph in lotr_graph.rolling(window=2000):
-    result =rp.pagerank(windowed_graph)
+    result = rp.pagerank(windowed_graph)
     importance.append(result.get("Gandalf"))
     time.append(windowed_graph.earliest_time())
 
+print("Outputting the results via matplotlib:")
+
 plt.plot(time, importance, marker='o')
-plt.xlabel('Time')
+plt.xlabel('Sentence (Time)')
 plt.ylabel('Pagerank Score')
 plt.title("Gandalf's importance over time")
 plt.grid(True)
-plt.savefig("results/gandalf_rank")
-# --8<-- [end:rolling]    
+plt.savefig("docs/output/gandalf_rank")
+# --8<-- [end:rolling]
+
+
+    
