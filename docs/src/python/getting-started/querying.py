@@ -23,7 +23,7 @@ print(f"Unique layers: {g.get_unique_layers()}\n")
 # --8<-- [start:neighbours]
 v = g.vertex("FELIPE")
 print(v.neighbours())
-print("Felipe has "+str(v.in_degree())+" incoming friendship edges and "+str(v.out_degree())+" outgoing friendship edges.")
+print(f"Felipe has {v.in_degree()} incoming friendship edges and {v.out_degree()} outgoing friendship edges.")
 
 # --8<-- [end:neighbours]
 

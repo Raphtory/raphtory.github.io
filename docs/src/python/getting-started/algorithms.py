@@ -10,12 +10,14 @@ lotr_graph = Graph.load_from_pandas(edges_df=df,src="src",dst="dst",time="time")
 
 # --8<-- [start:global]
 from raphtory import algorithms as rp
+
 density = rp.directed_graph_density(lotr_graph)
 clustering_coefficient = rp.global_clustering_coefficient(lotr_graph)
 reciprocity = rp.global_reciprocity(lotr_graph)
-print("The graph's density is",density)
-print("The graph's clustering coefficient is",clustering_coefficient)
-print("The graph's reciprocity is",reciprocity)
+
+print(f"The graph's density is {density}")
+print(f"The graph's clustering coefficient is {clustering_coefficient}")
+print(f"The graph's reciprocity is {reciprocity}")
 # --8<-- [end:global]
 
 # --8<-- [start:connectedcomponents]
@@ -71,7 +73,6 @@ plt.xlabel('Sentence (Time)')
 plt.ylabel('Pagerank Score')
 plt.title("Gandalf's importance over time")
 plt.grid(True)
-print("howdy")
 
 # --8<-- [end:rolling]
 
