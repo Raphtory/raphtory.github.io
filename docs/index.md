@@ -82,7 +82,9 @@ Join the growing community of open-source enthusiasts using Raphtory to power th
 
 ## Contribute 
 
-If you wish to contribute you can checkout our [Contributing Guide](https://github.com/Pometry/Raphtory/blob/master/CONTRIBUTING.md), the open [list of issues](https://github.com/Pometry/Raphtory/issues), our [bounty board](https://github.com/Raphtory/Raphtory/discussions/categories/bounty-board) or hit us up directly on [slack](https://join.slack.com/t/raphtory/shared_invite/zt-xbebws9j-VgPIFRleJFJBwmpf81tvxA). Successful contributions will be reward with swizzling swag!
+The best way to start contributing is to give Raphtory a :star: on github! Once you have done that, if you want to raise an issue, submit a PR or give us some feedback, you can checkout our [Contributing Guide](https://github.com/Pometry/Raphtory/blob/master/CONTRIBUTING.md), the open [list of issues](https://github.com/Pometry/Raphtory/issues), or hit us up directly on [slack](https://join.slack.com/t/raphtory/shared_invite/zt-xbebws9j-VgPIFRleJFJBwmpf81tvxA). 
+
+
 
 ## License
 

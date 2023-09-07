@@ -55,8 +55,14 @@ for rank, (name, score) in enumerate(top_5, 1):
 # --8<-- [end:pagerank]
 
 # --8<-- [start:rolling]
-
+# mkdocs: render
 import matplotlib.pyplot as plt
+import pandas as pd
+from raphtory import algorithms as rp
+from raphtory import Graph
+
+df=pd.read_csv("data/lotr.csv")
+lotr_graph = Graph.load_from_pandas(edges_df=df,src="src",dst="dst",time="time")
 
 importance = []
 time = []
@@ -65,8 +71,6 @@ for windowed_graph in lotr_graph.rolling(window=2000):
     result = rp.pagerank(windowed_graph)
     importance.append(result.get("Gandalf"))
     time.append(windowed_graph.earliest_time())
-
-print("Outputting the results via matplotlib:")
 
 plt.plot(time, importance, marker='o')
 plt.xlabel('Sentence (Time)')

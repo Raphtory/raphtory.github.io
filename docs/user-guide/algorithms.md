@@ -83,14 +83,4 @@ Within each windowed graph we use the [AlgorithmResult](https://docs.raphtory.co
 
 {{code_block('getting-started/algorithms','rolling',['Graph'])}}
 
-!!! Output
-
-    ```python exec="on" result="text" session="algorithms"
-    --8<-- "python/getting-started/algorithms.py:rolling"
-    ```
-
-    <p align="center">
-        <img src="../../output/gandalf_rank.png" alt="Description of Image">
-    </p>
-
 
