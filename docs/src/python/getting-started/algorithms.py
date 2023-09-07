@@ -71,7 +71,8 @@ plt.xlabel('Sentence (Time)')
 plt.ylabel('Pagerank Score')
 plt.title("Gandalf's importance over time")
 plt.grid(True)
-plt.savefig("docs/output/gandalf_rank")
+print("howdy")
+
 # --8<-- [end:rolling]
 
 

@@ -38,7 +38,17 @@ print(e.history())
 
 # --8<-- [start:exploded_edge]
 
-neighbours_weighted = list(zip(v.out_edges().dst().name(), map(lambda u: sum(g.edge(v,u).explode().properties["Weight"]), v.out_edges().dst())))
-print(f"Felipe's favourite baboons in descending order are {sorted(neighbours_weighted,key= lambda v: v[1],reverse=True)}")
+neighbours_weighted = list(
+    zip(
+        v.out_edges().dst().name(),
+        map(
+            lambda u: sum(g.edge(v, u).explode().properties["Weight"]),
+            v.out_edges().dst(),
+        ),
+    )
+)
+print(
+    f"Felipe's favourite baboons in descending order are {sorted(neighbours_weighted,key= lambda v: v[1],reverse=True)}"
+)
 
 # --8<-- [end:exploded_edge]

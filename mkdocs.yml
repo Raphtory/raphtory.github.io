@@ -29,11 +29,13 @@ theme:
   icon:
     repo: fontawesome/brands/github
 plugins:
+  - mkdocs_matplotlib
   - search:
       lang: en
   - markdown-exec
   - macros:
       module_name: scripts/macro
+
 extra:
   consent:
     title: Cookie consent
