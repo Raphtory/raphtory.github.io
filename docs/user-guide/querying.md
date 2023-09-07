@@ -59,7 +59,7 @@ When we called `v.neighbours()` earlier, a `PathFromVertex` was returned rather 
 
 For example, for a vertex object `v`, `v.neighbours().neighbours()` will return the two-hop neighbours of `v`. The first call of `neighbours()` returns the immediate neighbours of `v`, the second applies `neighbours()` to each of the vertices returned by the first call. These are flattened under the hood such that a single `PathFromVertex` is returned. Similarly, any functions that a vertex can call can sit within this chain.
 
-The same is also true for edges. One important function for edge is `explode()` which returns an edge view for each interaction represented by that edge. When these interactions have properties like weight, we can 
+The same is also true for edges. One important function for edge is `explode()` which returns an edge view for each interaction represented by that edge. When these interactions have properties like weight, we can combine these across different temporal instances to get some notion of strength of the connection. In the case below we sum the `Weight` value of each of Felipe's out-neighbours to rank them by the number of positive interactions he has initialted with them.
 
 {{code_block('getting-started/querying','exploded_edge',['Edges'])}}
 !!! Output
