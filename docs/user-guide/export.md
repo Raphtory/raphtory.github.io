@@ -1,9 +1,9 @@
 # Exporting and visualising your graph
-As with Raphtory's connectors for ingesting data, we also provide a host of different formats and libraries that you can export your graphs into. Below we shall go over three of these, namely Pandas Dataframes, NetworkX graphs and PyVis graphs.
+As with Raphtory's connectors for ingesting data, there are a host of different formats and libraries that you can export your graphs into. Below we explore three of these, namely Pandas Dataframes, NetworkX graphs and Pyvis graphs.
 
-All functions inside of `export` work on all `graph views` allowing you to specify different windows, layers and subgraphs before conversion. 
+All functions inside of the `export` module work on both `graphs` and `graph views`, allowing you to specify different windows, layers and subgraphs before conversion. 
 
-By default exports will include all properties and all update history. However, these can be disabled, depending on use case requirements, via a set of flags on each export function. You can find a description of all of these flags in the [export API.](https://docs.raphtory.com/en/v0.5.6/#module-raphtory.export)
+By default exporting will include all properties and all update history. However, this can be modified via flags on each export function, depending on use case requirements. You can find a description of these flags in the [export API.](https://docs.raphtory.com/en/v0.5.6/#module-raphtory.export)
 
 !!! Info
     This page doesn't contain an exhaustive list of all the different conversion methods - please feel free to check the [API documentation](https://docs.raphtory.com/) for this list. If we are missing a format that you believe to be important, please raise an [issue](https://github.com/Pometry/Raphtory/issues) and it will be available before you know it!
@@ -45,7 +45,7 @@ In the below example we first create a subgraph of the monkey interactions, sele
 
  We then call `to_edge_df` on the subgraph with all default arguments. In the output you can see the update/property history for each interaction type (layer) between `ANGELE` and `FELIPE`.
 
- Finally we recall `to_edge_df` again, turning off the property history and exploding the edges. In the out you can each each time this interaction occurred between `ANGELE` and `FELIPE`.
+ Finally, we call `to_edge_df` again, turning off the property history and exploding the edges. In the output you can see each interaction which occurred between `ANGELE` and `FELIPE`.
  
 !!! info 
 
@@ -61,14 +61,14 @@ In the below example we first create a subgraph of the monkey interactions, sele
 
 ## Exporting to NetworkX
 
-Converting to a networkx graph works in a similar manner to the conversions to a dataframe above. In this instance there is only one function`to_networkx`, which has flags for vertex/edge history and for exploding edges. By default all history is included and the edges are separated by layer. 
+For converting to a networkx graph there is only one function (`to_networkx`), which has flags for vertex/edge history and for exploding edges. By default all history is included and the edges are separated by layer. 
 
-In the below code snippet we call `to_networkx` on the network traffic graph, keeping all the default arguments and, therefore, exporting the full history. We have extracted `ServerA` from this graph and printed it so that you may see how the history is modelled for the nodes and edges. 
+In the below code snippet we call `to_networkx` on the network traffic graph, keeping all the default arguments and, therefore, exporting the full history. We have extracted `ServerA` from this graph and printed it so that you may see how the history is modelled. 
 
 !!! info 
     Note that the resulting graph is a networkx `MultiDiGraph` as Raphtory graphs are both directed and have multiple edges between nodes.
 
- We then call `to_networkx` again, disabling the property/update history and reprint `ServerA` allowing you to see the diffence.   
+ We then call `to_networkx` again, disabling the property/update history and reprint `ServerA` allowing you to see the difference.   
 
 {{code_block('getting-started/export','networkX',['Graph'])}}
 
@@ -86,12 +86,24 @@ In the code snippet below we use this functionality to draw the network traffic 
 {{code_block('getting-started/export','networkX_vis',['Graph'])}}
 
 
-## Exporting to PyVis
+## Exporting to Pyvis
+For a more interactive visualisation you can export your graphs to [Pyvis](https://pyvis.readthedocs.io/en/latest/), a network visualisation library built on top of [VisJS](https://visjs.github.io/vis-network/examples/).
+
+Due to the nature of Pyvis's model and API, the parameters for `to_pyvis` are quite different to the other export functions discussed above. To allow you to fully customize the final output, the function takes a `kwargs` (key word arguments) map which is passed directly to the pyvis graph created by Raphtory. You can check the [pyvis documentation](https://pyvis.readthedocs.io/en/latest/documentation.html) for all available arguments to this. 
+
+!!! info    
+    These values can also be dynamically set on the pyvis graph, allowing you to experiment with different values without reexporting. This is useful when fine turing elements such as the strength of the gravity in the physics engine.
+
+The other parameters are for exploding the edges and for values which are immutable after an edge/vertex has been inserted into the pyvis model (such as an edges colour or weight). The description of these arguments can be found in the [export API](https://docs.raphtory.com/en/master/#module-raphtory.export). 
+
+
+In the code below we first call `to_pyvis` on the network traffic graph. Within this we set two Raphtory arguments (`edge_weight` and `edge_color`), specifying that an edge's thickness should be based on the amount of data sent between the servers it links. We then set a pyvis keyword (`directed`) to add arrows to the output, showing the direction of this traffic.
+
+Once the pyvis graph has been generated, we create and apply a style config, setting an appropriate layout algorithm.
+
+Finally, calling the `.show()` function creates a html file where the graph can be interacted with. This is embedded in an iframe below the code for you to try.
+
+
 {{code_block('getting-started/export','pyvis',['Graph'])}}
 
-!!! Output
-
-    ```python exec="on" result="text" session="export"
-    --8<-- "python/getting-started/export.py:pyvis"
-    ```
-
+<iframe src="../../src/output/nx.html" width="800" height="600"></iframe>

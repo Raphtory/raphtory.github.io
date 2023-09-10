@@ -120,7 +120,9 @@ v = g.add_vertex(timestamp=1, id="User 1")
 e = g.add_edge(timestamp=2, src="User 1", dst="User 2")
 
 g.add_constant_properties(properties={"name": "Example Graph"})
-v.add_constant_properties(properties={"date of birth": datetime.strptime("1990-02-03", "%Y-%m-%d")},)
+v.add_constant_properties(
+    properties={"date of birth": datetime.strptime("1990-02-03", "%Y-%m-%d")},
+)
 e.add_constant_properties(properties={"data source": "https://link-to-repo.com"})
 
 print(g)

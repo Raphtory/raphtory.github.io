@@ -2,10 +2,10 @@
 from raphtory import Graph
 import pandas as pd
 
-df=pd.read_csv("data/lotr.csv")
+df = pd.read_csv("data/lotr.csv")
 print(df)
 
-lotr_graph = Graph.load_from_pandas(edges_df=df,src="src",dst="dst",time="time")
+lotr_graph = Graph.load_from_pandas(edges_df=df, src="src", dst="dst", time="time")
 # --8<-- [end:data_loading]
 
 # --8<-- [start:global]
@@ -22,33 +22,37 @@ print(f"The graph's reciprocity is {reciprocity}")
 
 # --8<-- [start:connectedcomponents]
 from raphtory import algorithms as rp
+
 results = rp.weakly_connected_components(lotr_graph)
 
 # Convert the results to a dataframe so we can have a look at them
 df = results.to_df()
 print(f"{df}\n")
 
-#Group the components together
+# Group the components together
 components = results.group_by()
 print(f"{components}\n")
 
-#Get the size of each component
+# Get the size of each component
 component_sizes = {key: len(value) for key, value in components.items()}
-#Get the key for the largest component
-largest_component = max(component_sizes,key=component_sizes.get)
-#Print the size of the largest component
-print(f"The largest component contains {component_sizes[largest_component]} of the {lotr_graph.num_vertices()} vertices in the graph.")
+# Get the key for the largest component
+largest_component = max(component_sizes, key=component_sizes.get)
+# Print the size of the largest component
+print(
+    f"The largest component contains {component_sizes[largest_component]} of the {lotr_graph.num_vertices()} vertices in the graph."
+)
 # --8<-- [end:connectedcomponents]
 
 # --8<-- [start:pagerank]
 from raphtory import algorithms as rp
+
 results = rp.pagerank(lotr_graph)
 
-#Getting the results for an individual character (Gandalf)
+# Getting the results for an individual character (Gandalf)
 gandalf_rank = results.get("Gandalf")
 print(f"Gandalf's ranking is {gandalf_rank}\n")
 
-#Getting the top 5 most important characters and printing out their scores
+# Getting the top 5 most important characters and printing out their scores
 top_5 = results.top_k(5)
 for rank, (name, score) in enumerate(top_5, 1):
     print(f"Rank {rank}: {name} with a score of {score:.5f}")
@@ -61,8 +65,8 @@ import pandas as pd
 from raphtory import algorithms as rp
 from raphtory import Graph
 
-df=pd.read_csv("data/lotr.csv")
-lotr_graph = Graph.load_from_pandas(edges_df=df,src="src",dst="dst",time="time")
+df = pd.read_csv("data/lotr.csv")
+lotr_graph = Graph.load_from_pandas(edges_df=df, src="src", dst="dst", time="time")
 
 importance = []
 time = []
@@ -72,13 +76,10 @@ for windowed_graph in lotr_graph.rolling(window=2000):
     importance.append(result.get("Gandalf"))
     time.append(windowed_graph.earliest_time())
 
-plt.plot(time, importance, marker='o')
-plt.xlabel('Sentence (Time)')
-plt.ylabel('Pagerank Score')
+plt.plot(time, importance, marker="o")
+plt.xlabel("Sentence (Time)")
+plt.ylabel("Pagerank Score")
 plt.title("Gandalf's importance over time")
 plt.grid(True)
 
 # --8<-- [end:rolling]
-
-
-    
