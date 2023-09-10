@@ -1,5 +1,5 @@
 # Exporting and visualising your graph
-As with Raphtory's connectors for ingesting data, there are a host of different formats and libraries that you can export your graphs into. Below we explore three of these, namely Pandas Dataframes, NetworkX graphs and Pyvis graphs.
+As with Raphtory's connectors for ingesting data, there are a host of different formats and libraries that you can export your graphs into. Below we explore three of these, namely Pandas dataframes, NetworkX graphs and Pyvis graphs.
 
 All functions inside of the `export` module work on both `graphs` and `graph views`, allowing you to specify different windows, layers and subgraphs before conversion. 
 
@@ -8,7 +8,7 @@ By default exporting will include all properties and all update history. However
 !!! Info
     This page doesn't contain an exhaustive list of all the different conversion methods - please feel free to check the [API documentation](https://docs.raphtory.com/) for this list. If we are missing a format that you believe to be important, please raise an [issue](https://github.com/Pometry/Raphtory/issues) and it will be available before you know it!
 
-For the examples we are going to be using the network traffic dataset from the [ingestion tutorial](ingestion.md) and the monkey interaction network from [querying your graph](querying.md). In the below code segment you can get a refresher of what these datasets looks like. 
+For the examples in this tutorial we are going to be reusing the network traffic dataset from the [ingestion tutorial](ingestion.md) and the monkey interaction network from [querying your graph](querying.md). In the below code segment you can get a refresher of what these datasets looks like. 
 
 {{code_block('getting-started/export','ingest_data',['Graph'])}}
 
@@ -18,12 +18,12 @@ For the examples we are going to be using the network traffic dataset from the [
     --8<-- "python/getting-started/export.py:ingest_data"
     ```
 
-## Exporting to Pandas Dataframes
+## Exporting to Pandas dataframes
 As we are ingesting from a set of dataframes, let's kick off by looking at how to convert back into them. For this Raphtory provides two functions `to_vertex_df` and `to_edge_df` as part of the `export` module. As the names suggest, these extract information about the vertices and edges respectively. 
 
 ### Vertex Dataframe
 
-To explore the use of `to_vertex_df` we first we call the function passing only our graph. As we don't set any flags this exports the full history by default which can be seen within the printed dataframe. The `property` column for `ServerA` has been extracted and printed so this can be seen in full.
+To explore the use of `to_vertex_df` we first we call the function passing only our graph. As we don't set any flags this exports the full history, which can be seen within the printed dataframe. The `property` column for `ServerA` has been extracted and printed so this can be seen in full.
 
 To demonstrate some of the flags which can be utilised, we call `to_vertex_df` again, this time disabling the update and property history. You can see in the second set of prints that now only the most recent property values are present and the `update_history` column has been removed.
 
@@ -43,7 +43,7 @@ Exporting to an Edge dataframe via `to_edge_df` works exactly the same as `to_ve
 
 In the below example we first create a subgraph of the monkey interactions, selecting some monkeys we are interested in (`ANGELE` and `FELIPE`). This isn't a required step, but is to demonstrate the export working on graph views. 
 
- We then call `to_edge_df` on the subgraph with all default arguments. In the output you can see the update/property history for each interaction type (layer) between `ANGELE` and `FELIPE`.
+ We then call `to_edge_df` on the subgraph, setting no flags. In the output you can see the update/property history for each interaction type (layer) between `ANGELE` and `FELIPE`.
 
  Finally, we call `to_edge_df` again, turning off the property history and exploding the edges. In the output you can see each interaction which occurred between `ANGELE` and `FELIPE`.
  
@@ -89,19 +89,18 @@ In the code snippet below we use this functionality to draw the network traffic 
 ## Exporting to Pyvis
 For a more interactive visualisation you can export your graphs to [Pyvis](https://pyvis.readthedocs.io/en/latest/), a network visualisation library built on top of [VisJS](https://visjs.github.io/vis-network/examples/).
 
-Due to the nature of Pyvis's model and API, the parameters for `to_pyvis` are quite different to the other export functions discussed above. To allow you to fully customize the final output, the function takes a `kwargs` (key word arguments) map which is passed directly to the pyvis graph created by Raphtory. You can check the [pyvis documentation](https://pyvis.readthedocs.io/en/latest/documentation.html) for all available arguments to this. 
+Due to the nature of Pyvis's model and API, the parameters for `to_pyvis` are quite different to the other export functions discussed above. These are split between Raphtory specific parameters and a `kwargs` (key word arguments) map which is passed directly to the pyvis graph during initialisation.
 
-!!! info    
-    These values can also be dynamically set on the pyvis graph, allowing you to experiment with different values without reexporting. This is useful when fine turing elements such as the strength of the gravity in the physics engine.
+!!! info 
+    The Raphtory specific parameters are used to explode the edges and for setting values which are immutable after an edge/vertex has been inserted into the pyvis model (such as an edges colour or weight). The description of these arguments can be found in the [export API](https://docs.raphtory.com/en/master/#module-raphtory.export). 
 
-The other parameters are for exploding the edges and for values which are immutable after an edge/vertex has been inserted into the pyvis model (such as an edges colour or weight). The description of these arguments can be found in the [export API](https://docs.raphtory.com/en/master/#module-raphtory.export). 
-
+    The `kwargs` for pyvis are described in their own [documentation](https://pyvis.readthedocs.io/en/latest/documentation.html). These values can also be dynamically set on the pyvis graph, allowing you to experiment with different values without reexporting. This is useful when fine turing elements such as the strength of the gravity in the physics engine.
 
 In the code below we first call `to_pyvis` on the network traffic graph. Within this we set two Raphtory arguments (`edge_weight` and `edge_color`), specifying that an edge's thickness should be based on the amount of data sent between the servers it links. We then set a pyvis keyword (`directed`) to add arrows to the output, showing the direction of this traffic.
 
 Once the pyvis graph has been generated, we create and apply a style config, setting an appropriate layout algorithm.
 
-Finally, calling the `.show()` function creates a html file where the graph can be interacted with. This is embedded in an iframe below the code for you to try.
+Finally, calling the `.show()` function creates a html file where the graph can be interacted with. This is embedded in an iframe below for you to try.
 
 
 {{code_block('getting-started/export','pyvis',['Graph'])}}
