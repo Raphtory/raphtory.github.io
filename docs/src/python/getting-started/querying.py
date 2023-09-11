@@ -24,20 +24,77 @@ g.load_edges_from_pandas(
     layer_in_df="Behavior",
     props=["Weight"],
 )
-print(f"{g}\n")
-print(f"Earliest datetime: {g.earliest_date_time()}\n")
-print(f"Latest datetime: {g.latest_date_time()}\n")
-print(f"Unique layers: {g.get_unique_layers()}\n")
+print(g)
 # --8<-- [end:new_graph]
 
-# --8<-- [start:neighbours]
-v = g.vertex("FELIPE")
-print(v.neighbours())
-print(
-    f"Felipe has {v.in_degree()} incoming friendship edges and {v.out_degree()} outgoing friendship edges."
-)
+# --8<-- [start:graph_metrics]
 
-# --8<-- [end:neighbours]
+print("Stats on the graph structure:")
+
+number_of_vertices = g.num_vertices()
+number_of_edges= g.num_edges()
+total_interactions = g.num_temporal_edges()
+unique_layers = g.get_unique_layers()
+
+print("Number of vertices (Baboons):",number_of_vertices)
+print("Number of unique edges (src,dst,layer):",number_of_edges)
+print("Total interactions (edge updates):",total_interactions)
+print("Unique layers:",unique_layers,"\n")
+
+
+print("Stats on the graphs time range:")
+
+earliest_datetime = g.earliest_date_time()
+latest_datetime = g.latest_date_time()
+earliest_epoch = g.earliest_time()
+latest_epoch = g.latest_time()
+
+print("Earliest datetime:",earliest_datetime)
+print("Latest datetime:",latest_datetime)
+print("Earliest time (Unix Epoch):",earliest_epoch)
+print("Latest time (Unix Epoch):",latest_epoch)
+# --8<-- [end:graph_metrics]
+
+# --8<-- [start:graph_functions]
+print("Checking if specific vertices and edges are in the graph:")
+if(g.has_vertex("LOME")):
+    print("Lomme is in the graph")
+if(g.has_edge("LOME","NEKKE","Playing with")):
+    print("Lomme has played with Nekke \n")
+
+print("Getting individual vertices and edges:")  
+print(g.vertex("LOME"))  
+print(g.edge("LOME","NEKKE"),"\n")
+
+print("Getting iterators over all vertices and edges:")
+print(g.vertices())
+print(g.edges())
+# --8<-- [end:graph_functions]
+
+
+# --8<-- [start:vertex_metrics]
+v = g.vertex("FELIPE")
+print(f"{v.name()}'s first interaction was at {v.earliest_date_time()} and their last interaction was at {v.latest_date_time()}\n")
+print(f"{v.name()} had interactions at the following times: {v.history()}\n")
+
+# --8<-- [end:vertex_metrics]
+
+# --8<-- [start:vertex_neighbours]
+v = g.vertex("FELIPE")
+v_name = v.name()
+in_degree = v.in_degree()
+out_degree = v.out_degree()
+in_edges= v.in_edges()
+neighbours = v.neighbours()
+neighbour_names = v.neighbours().name().collect()
+
+print(
+    f"{v_name} has {in_degree} incoming interactions and {out_degree} outgoing interactions.\n"
+)
+print(in_edges)
+print(neighbours,"\n")
+print(f"{v_name} interacted with the following baboons {neighbour_names}")
+# --8<-- [end:vertex_neighbours]
 
 # --8<-- [start:friendship]
 e = g.edge("FELIPE", "MAKO")
@@ -64,3 +121,11 @@ print(
 )
 
 # --8<-- [end:exploded_edge]
+
+
+#functions for graph views:
+#g.end()
+#g.end_date_time()
+#g.start()
+#g.start_date_time()
+#g.window_size()
