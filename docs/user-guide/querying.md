@@ -18,7 +18,7 @@ In the below code we load this dataset into a dataframe and do a small amount of
     --8<-- "python/getting-started/querying.py:read_data"
     ```
 
-Next we load this into a Raphtory graph using the `load_edges_from_pandas` function, modelling it as a weighted multi-layer graph, with a layer per unique `behaviour`. 
+Next we load this into Raphtory using the `load_edges_from_pandas` function, modelling it as a weighted multi-layer graph, with a layer per unique `behaviour`. 
 
 {{code_block('getting-started/querying','new_graph',['Graph'])}}
 !!! Output
@@ -35,9 +35,9 @@ Now that we have our graph let's start probing it for some basic metrics, such a
 Note, as the property APIs are the same for the graph, vertices and edges, these are discussed together in [property queries](#property-queries) below.
 
 !!! info
-    In the below code segment you will see the functions `num_edges` and `num_temporal_edges` being called and returning different results. This is because `num_edges` returns the number of unique edges (src,dst) which exist and `num_temporal_edges` returns the total edge updates which have occurred. 
+    In the below code segment you will see the functions `num_edges` and `num_temporal_edges` being called and returning different results. This is because `num_edges` returns the number of unique edges and `num_temporal_edges` returns the total edge updates which have occurred. 
     
-    The second is useful if you want to imagine each edge update as a separate connection between the two nodes. The edges can be accessed in this manner via `edge.explode()`, as is discussed in [edge metrics](#edge-metrics) below.
+    The second is useful if you want to imagine each edge update as a separate connection between the two nodes. The edges can be accessed in this manner via `edge.explode()`, as is discussed in [edge metrics and functions](#edge-metrics-and-functions) below.
 
 {{code_block('getting-started/querying','graph_metrics',['Graph'])}}
 !!! Output
@@ -49,9 +49,9 @@ Note, as the property APIs are the same for the graph, vertices and edges, these
 ### Accessing vertices and edges  
 Three types of functions are provided for accessing the vertices and edges within the graph: 
 
-* **Existance check:** Via `has_vertex` and `has_edge` you can check if an entity is present within the graph.
-* **Direct access:** `vertex` and `edge` will return a vertex/edge object if the entity is present and `None` if it is not.
-* **Iterator access:** `vertices` and `edges` will return iterators for all vertices/edges which can be used within a for loop or as part of a [function chain](#chaining-functions).
+* **Existance check:** Via `has_vertex()` and `has_edge()` you can check if an entity is present within the graph.
+* **Direct access:** `vertex()` and `edge()` will return a vertex/edge object if the entity is present and `None` if it is not.
+* **Iterable access:** `vertices()` and `edges()` will return iterables for all vertices/edges which can be used within a for loop or as part of a [function chain](#chaining-functions).
 
 All of these functions are shown in the code below and will appear in several other examples throughout this tutorial.
 
@@ -64,11 +64,11 @@ All of these functions are shown in the code below and will appear in several ot
 
 
 ## Vertex metrics and functions
-Vertices can be accessed by storing the object returned from a call to `add_vertex()`, by directly asking for a specific node via `vertex()`, or by iterating over all nodes via `vertices()`. Once you have a vertex, we can start by asking it some questions. 
+Vertices can be accessed by storing the object returned from a call to `add_vertex()`, by directly asking for a specific node via `vertex()`, or by iterating over all nodes via `vertices()`. Once you have a vertex, we can ask it some questions. 
 
 ### Update history 
 
-Vertices have functions for querying their earliest/latest update time, as an epoch or datetime, as well as their full history (`history()`). In the code below we create a vertex object for `Felipe` and see when their updates occurred. 
+Vertices have functions for querying their earliest/latest update time (as an epoch or datetime) as well as for accessing their full history (`history()`). In the code below we create a vertex object for `Felipe` and see when their updates occurred. 
 
 {{code_block('getting-started/querying','vertex_metrics',['Vertex'])}}
 !!! Output
@@ -82,14 +82,14 @@ Vertices have functions for querying their earliest/latest update time, as an ep
 To investigate who a vertex is connected with we can ask for its `degree()`, `edges()`, or `neighbours()`. As Raphtory is a directed graph all of these functions also have an `in_` and `out_` variation, allowing you get only incoming and outgoing connections respectively. These functions return the following:
 
 * **degree:** A count of the number of unique connections a vertex has.
-* **edges:** An iterator (`Edges`) of edge objects, one for each unique `(src,dst)` pair.
-* **neighbours:** An iterator of vertex objects (`PathFromVertex`), one for each node the vertex shares an edge with.
+* **edges:** An iterable (`Edges`) of edge objects, one for each unique `(src,dst)` pair.
+* **neighbours:** An iterable of vertex objects (`PathFromVertex`), one for each node the vertex shares an edge with.
 
 In the code below we call a selection of these functions to show the sort of questions you may ask. 
 
 !!! info
 
-    The final section of the code makes use of `v.neighbours().name().collect()` - this is a chain of functions which are run on each vertex in the `PathFromVertex` iterator. We will discuss these sort of operations more in [Chaining functions](#chaining-functions) below. 
+    The final section of the code makes use of `v.neighbours().name().collect()` - this is a chain of functions which are run on each vertex in the `PathFromVertex` iterable. We will discuss these sort of operations more in [Chaining functions](#chaining-functions) below. 
 
 {{code_block('getting-started/querying','vertex_neighbours',['Vertex'])}}
 !!! Output
@@ -99,34 +99,88 @@ In the code below we call a selection of these functions to show the sort of que
     ```
 
 ## Edge metrics and functions 
-Edges can be accessed by storing the object returned from a call to `add_edge()`, by directly asking for a specific edge via `edge()`, or by iterating over all edge via `in-edges()`/`out-edges()`/`edges()`. 
+Edges can be accessed by storing the object returned from a call to `add_edge()`, by directly asking for a specific edge via `edge()`, or by iterating over all edges via `in-edges()`/`out-edges()`/`edges()`. 
 
- Here we can look at the connections between `FELIPE` and `MAKO`. While there were many interactions between the two baboons, these interactions are represented by just two edges, one for each direction, with each interaction marked as an update in the edge's history. Below, we can see the edge between Felipe and Mako and the times of each interaction.
+### Edge structure and update history
+An edge object in Raphtory will by default contain all updates over all layers between the given source and destination vertices. As an example of this, we can look at the two edges between `FELIPE` and `MAKO` (one for each direction). 
 
-### Basic metrics 
-`dst()`
-`src()`
-`layer_name()`
-`layer_names()`
+In the code below we create the two edge objects by requesting them from the graph and then print out the layers each is involved in via the `layer_names()` function. We can see here that there are multiple behaviours in each direction represented within the edges.
 
-### Update history 
-`earliest_date_time()`, `latest_date_time()` `history()`
+Following this we access the history and earliest/latest update time, as we have previously with the graph and vertices. This update history consists all interactions across all the aforementioned layers.
 
-### Exploded edges
-`date_time()`
-`explode()`
-`explode_layers()`
-`time()`
+!!!info 
+    Note that we call `e.src().name()` because `src()` and `dst()` return a vertex object, instead of just an id/name.
 
-
-## Property queries
-
-### Temporal specific functions
-{{code_block('getting-started/querying','friendship',['Edge'])}}
+{{code_block('getting-started/querying','edge_history',['Vertex'])}}
 !!! Output
 
     ```python exec="on" result="text" session="getting-started/querying"
-    --8<-- "python/getting-started/querying.py:friendship"
+    --8<-- "python/getting-started/querying.py:edge_history"
+    ```
+
+### Exploded edges
+The very first question you may have after reading this is "What if I don't want all of the layers?". For this Raphtory offers you three different ways to split the edge, depending on your use case:
+
+* `.layers()`: which takes a list of layer names and returns a new `Edge View` which only contains updates for the specified layers - This is discussed in more detail in the [Graph views](#graph-views) section below.
+* `.explode_layers()`: which returns an iterable of `Edge Views`, each containing the updates for one layer.
+* `.explode()`: which returns an `Exploded Edge` containing only the information from one call to `add_edge` i.e. an edge object for each update. 
+
+In the code below you can see usage of all of these functions. We first call `explode_layers()`, seeing which layer each edge object represents and output its update history. Next we fully `explode()` the edge and see each update as an individual object. Thirdly we use the `layer()` function to look at only the `Touching` and `Carrying` layers and chain this with a call to `explode()` to see the updates within these individually. 
+
+!!! info
+    Within the examples and in the API documentation you will see singular and plural versions of the same functions (i.e. `.layer_names()/.layer_name()` `.history()/.time()`) these singular versions are simply helpers which return only the first value of the list for when you know an edge is exploded and will only have one value. 
+
+{{code_block('getting-started/querying','edge_explode_layer',['Vertex'])}}
+!!! Output
+
+    ```python exec="on" result="text" session="getting-started/querying"
+    --8<-- "python/getting-started/querying.py:edge_explode_layer"
+    ```
+
+
+## Property queries
+As you will have seen in the [ingestion tutorial](ingestion.md), graphs, vertices and edges may all have `constant` and `temporal` properties, consisting of a wide range of data types. Raphtory provides a unified API for accessing this data via the [Properties](https://docs.raphtory.com/en/master/#raphtory.Properties) object available on all classes by calling `.properties`. 
+
+This `Properties` class offers several functions for you to access the values you are interested in in the most appropriate format. To demonstrate this let's create a simple graph with one vertex that has a variety of different properties, both temporal and constant. 
+
+We can grab this vertices property object and call all of the functions to access the data:
+
+* `keys()`: Returns all of the property keys (names).
+* `values()`: Returns the latest value for each property.
+* `items()`: Combines the `keys()` and `values()` into a list of tuples.
+* `get()`: Returns the latest value for a given key if the property exists or `None` if it does not.
+* `as_dict()`: Converts the `Properties` object into a standard python dictionary.
+
+The `Properties` class also has two attributes `constant` and `temporal` which have all of the above functions, but are restricted to only the properties which fall within their respective catagories. The API and semantics for [ConstProperties](https://docs.raphtory.com/en/master/#raphtory.ConstProperties) are exactly the same as described above. [TemporalProperties](https://docs.raphtory.com/en/master/#raphtory.TemporalProperties) on the other hand allow you to do much more, as is discussed below.
+
+{{code_block('getting-started/querying','properties',['Vertex'])}}
+!!! Output
+
+    ```python exec="on" result="text" session="getting-started/querying"
+    --8<-- "python/getting-started/querying.py:properties"
+    ```
+
+### Temporal specific functions
+As temporal properties have a history, we may often want to do more than just look at the latest value. As such, calling `get()`, `values()` or `items()` on `TemporalProperties` will return a [TemporalProp](https://docs.raphtory.com/en/master/#raphtory.TemporalProp) object which contains all of the value history.
+
+`TemporalProp` has a host of helper functions covering anything that you may want to do with this history. This includes:
+
+* `value()`/`values()`: Get the latest value or all values of the property.
+* `at()`: Get the latest value of the property at the specified time.
+* `history()`: Get the timestamps of all updates to the property.
+* `items()`: Merges `values()` and `history()` into a list of tuples.
+* `mean()`/`median()`/`average()`: If the property is orderable, get the average value for the property.
+* `min()`/`max()`: If the property is orderable, get the minimum or maximum value.
+* `count()`: Get the number of updates which have occurred
+* `sum()`: If the property is additive, sum the values and return the result.
+
+In the code below, we call a subset of these functions on the `Weight` property of the edge between `FELIPE` and `MAKO` in our monkey graph.
+
+{{code_block('getting-started/querying','temporal_properties',['Edge'])}}
+!!! Output
+
+    ```python exec="on" result="text" session="getting-started/querying"
+    --8<-- "python/getting-started/querying.py:temporal_properties"
     ```
 
 
@@ -138,13 +192,13 @@ For example, for a vertex object `v`, `v.neighbours().neighbours()` will return 
 
 The same is also true for edges. One important function for edge is `explode()` which returns an edge view for each interaction represented by that edge. When these interactions have properties like weight, we can combine these across different temporal instances to get some notion of strength of the connection. In the case below we sum the `Weight` value of each of Felipe's out-neighbours to rank them by the number of positive interactions he has initialted with them.
 
-once you call `collect()`, turn it into a list via `list(iterator)` or iterate through it in a loop etc
+once you call `collect()`, turn it into a list via `list(iterable)` or iterate through it in a loop etc
 
-{{code_block('getting-started/querying','exploded_edge',['Edges'])}}
+{{code_block('getting-started/querying','friendship',['Edges'])}}
 !!! Output
 
     ```python exec="on" result="text" session="getting-started/querying"
-    --8<-- "python/getting-started/querying.py:exploded_edge"
+    --8<-- "python/getting-started/querying.py:friendship"
     ```
 
 ## Querying the graph over time
