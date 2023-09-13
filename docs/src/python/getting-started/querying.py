@@ -230,10 +230,30 @@ print(f"{most_annoying[0]} is the most annoying monkey with an average score of 
 
 # --8<-- [end:friendship]
 
+# --8<-- [start:at]
+v = g.vertex("LOME")
+print(f"Across the full dataset {v.name()} interacted with {v.degree()} other monkeys.")
+v_at = g.vertex("LOME").at("2019-06-14 9:07:31")
+print(f"Between {v_at.start_date_time()} and {v_at.end_date_time()}, {v_at.name()} interacted with {v_at.degree()} other monkeys.")
+v_at_2 = g.at(1560428239000).vertex("LOME") # 13/06/2019 12:17:19 as epoch
+print(f"Between {v_at_2.start_date_time()} and {v_at_2.end_date_time()}, {v_at_2.name()} interacted with {v_at_2.degree()} other monkeys.")
 
-# functions for graph views:
-# g.end()
-# g.end_date_time()
-# g.start()
-# g.start_date_time()
-# g.window_size()
+print(f"Window start: {v_at_2.start_date_time()}, First update: {v_at_2.earliest_date_time()}, Last update: {v_at_2.latest_date_time()}, Window End: {v_at_2.end_date_time()}")
+
+# --8<-- [end:at]
+
+# --8<-- [start:window]
+from datetime import datetime
+start_day = datetime.strptime("2019-06-13", '%Y-%m-%d')
+end_day = datetime.strptime("2019-06-14", '%Y-%m-%d')
+e = g.edge("LOME","NEKKE")
+print(f"Across the full dataset {e.src().name()} interacted with {e.dst().name()} {len(e.history())} times")
+e = e.window(start_day,end_day)
+print(f"Between {v_at_2.start_date_time()} and {v_at_2.end_date_time()}, {e.src().name()} interacted with {e.dst().name()} {len(e.history())} times")
+print(f"Window start: {e.start_date_time()}, First update: {e.earliest_date_time()}, Last update: {e.latest_date_time()}, Window End: {e.end_date_time()}")
+
+# --8<-- [end:window]
+
+# --8<-- [start:taster]
+
+# --8<-- [end:taster]

@@ -218,14 +218,66 @@ In the code below we sum the `Weight` value of each of `Felipe's` out-neighbours
     --8<-- "python/getting-started/querying.py:friendship"
     ```
 
-## Querying the graph over time
-
-### At and Windowing
-
-### Rolling and Expanding
-
 ## Graph views
+All of the operations we have discussed up to this point have been executed on the whole graph, including the full history. In this section we will look at applying `Graph Views` which provide a way to look at the subset of this data without having to reingest it. 
 
+Raphtory can maintain hundreds of thousands of `Graph Views` in parallel, allows chaining view functions together to create as specific a filter as is required for your use case, and provides a unified API such that all functions mentioned can be called on a graph, vertex or edge.
+
+### Querying the graph over time
+The first set of views we will look at are for traveling through time, viewing the graph as it was at a specific point, or between two points (applying a `time-window`). For this Raphtory provides four different functions: `at()`, `window()`, `expand()` and `rolling()`.
+
+#### At
+
+The `at()` function takes a `time` argument in epoch (integer) or datetime (string/datetime object) format and can be called on a graph, vertex, or edge. This will return an equivalent `Graph View`, `Vertex View` or `Edge View` which includes all updates between the beginning of the graphs history and the provided time (**inclusive of the time provided**). 
+
+This returned object has all of the same functions as its unfiltered counterpart and will pass the view criteria onto any entities it returns. For example if you call `at()` on a graph and then call `vertex()`, this will return a `Vertex View` filtered to the time passed to `at()`.
+
+An example of this can be seen in the code below where we print the degree of `Lome` on the full dataset, at 9:07 on the 14th of June (as a datetime string) and at 12:17 on the 13th of June (as an epoch integer).
+
+!!! info 
+
+    You will see in these function calls that we can both do `graph.at().vertex()` and `graph.vertex().at()` and the same results can be achieved.
+
+We also introduce two new time functions here, `start()` and `end()`, which specify the `time-window` a view is filtered to if one has been applied. You can see in the last line of the example we print the `start`, `earliest_time`, `latest_time` and `end` of the vertex to show you how these differ.
+
+{{code_block('getting-started/querying','at',[])}}
+!!! Output
+
+    ```python exec="on" result="text" session="getting-started/querying"
+    --8<-- "python/getting-started/querying.py:at"
+    ```
+
+
+#### Window
+The `window()` function works the same as `at()`, but allows you to set a `start` time as well as an `end` time (**inclusive of start, exclusive of end**). 
+
+This is useful for digging into specific periods of the history that you are interested in, for example a given day within your data. An example of this can be seen below where we look at the number of times `Lome` interacts wth `Nekke` within the full dataset and for one day between the 13th of June and the 14th of June (using a window).
+
+{{code_block('getting-started/querying','window',[])}}
+!!! Output
+
+    ```python exec="on" result="text" session="getting-started/querying"
+    --8<-- "python/getting-started/querying.py:window"
+    ```
+
+
+#### Expanding
+
+
+#### Rolling 
+
+
+* 
+* `window(start,end)`: calling this will return a view which includes all updates between the given start time and end time 
+* `expanding(step)`: calling this will return an iterable of views as if you called `at()` from the earliest time to the latest time at increments of the given `step`. If you wish to reduce the range over which this runs it can be chained with an initial call to `at()` or `window()`.
+
+{{code_block('getting-started/querying','taster',[])}}
+!!! Output
+
+    ```python exec="on" result="text" session="getting-started/querying"
+    --8<-- "python/getting-started/querying.py:taster"
+    ```
+    
 ### Layered graphs
 
 ### Subgraph
