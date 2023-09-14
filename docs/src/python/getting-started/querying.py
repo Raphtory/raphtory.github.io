@@ -220,40 +220,201 @@ annoying_monkeys = list(
         .in_edges()
         .properties.temporal.get("Weight")
         .values()
-        .sum() #sum the weights within each edge
-        .mean() #average the summed weights for each monkey
+        .sum()  # sum the weights within each edge
+        .mean()  # average the summed weights for each monkey
         .collect(),
     )
 )
-most_annoying = sorted(annoying_monkeys,key= lambda v: v[1])[0]
-print(f"{most_annoying[0]} is the most annoying monkey with an average score of {most_annoying[1]}")
+most_annoying = sorted(annoying_monkeys, key=lambda v: v[1])[0]
+print(
+    f"{most_annoying[0]} is the most annoying monkey with an average score of {most_annoying[1]}"
+)
 
 # --8<-- [end:friendship]
 
 # --8<-- [start:at]
 v = g.vertex("LOME")
-print(f"Across the full dataset {v.name()} interacted with {v.degree()} other monkeys.")
-v_at = g.vertex("LOME").at("2019-06-14 9:07:31")
-print(f"Between {v_at.start_date_time()} and {v_at.end_date_time()}, {v_at.name()} interacted with {v_at.degree()} other monkeys.")
-v_at_2 = g.at(1560428239000).vertex("LOME") # 13/06/2019 12:17:19 as epoch
-print(f"Between {v_at_2.start_date_time()} and {v_at_2.end_date_time()}, {v_at_2.name()} interacted with {v_at_2.degree()} other monkeys.")
 
-print(f"Window start: {v_at_2.start_date_time()}, First update: {v_at_2.earliest_date_time()}, Last update: {v_at_2.latest_date_time()}, Window End: {v_at_2.end_date_time()}")
+print(f"Across the full dataset {v.name()} interacted with {v.degree()} other monkeys.")
+
+v_at = g.vertex("LOME").at("2019-06-14 9:07:31")
+print(
+    f"Between {v_at.start_date_time()} and {v_at.end_date_time()}, {v_at.name()} interacted with {v_at.degree()} other monkeys."
+)
+
+v_at_2 = g.at(1560428239000).vertex("LOME")  # 13/06/2019 12:17:19 as epoch
+print(
+    f"Between {v_at_2.start_date_time()} and {v_at_2.end_date_time()}, {v_at_2.name()} interacted with {v_at_2.degree()} other monkeys."
+)
+
+print(
+    f"Window start: {v_at_2.start_date_time()}, First update: {v_at_2.earliest_date_time()}, Last update: {v_at_2.latest_date_time()}, Window End: {v_at_2.end_date_time()}"
+)
 
 # --8<-- [end:at]
 
 # --8<-- [start:window]
 from datetime import datetime
-start_day = datetime.strptime("2019-06-13", '%Y-%m-%d')
-end_day = datetime.strptime("2019-06-14", '%Y-%m-%d')
-e = g.edge("LOME","NEKKE")
-print(f"Across the full dataset {e.src().name()} interacted with {e.dst().name()} {len(e.history())} times")
-e = e.window(start_day,end_day)
-print(f"Between {v_at_2.start_date_time()} and {v_at_2.end_date_time()}, {e.src().name()} interacted with {e.dst().name()} {len(e.history())} times")
-print(f"Window start: {e.start_date_time()}, First update: {e.earliest_date_time()}, Last update: {e.latest_date_time()}, Window End: {e.end_date_time()}")
+
+start_day = datetime.strptime("2019-06-13", "%Y-%m-%d")
+end_day = datetime.strptime("2019-06-14", "%Y-%m-%d")
+e = g.edge("LOME", "NEKKE")
+print(
+    f"Across the full dataset {e.src().name()} interacted with {e.dst().name()} {len(e.history())} times"
+)
+e = e.window(start_day, end_day)
+print(
+    f"Between {v_at_2.start_date_time()} and {v_at_2.end_date_time()}, {e.src().name()} interacted with {e.dst().name()} {len(e.history())} times"
+)
+print(
+    f"Window start: {e.start_date_time()}, First update: {e.earliest_date_time()}, Last update: {e.latest_date_time()}, Window End: {e.end_date_time()}"
+)
 
 # --8<-- [end:window]
 
-# --8<-- [start:taster]
+# --8<-- [start:expanding]
+print(
+    f"The full range of time in the graph is {g.earliest_date_time()} to {g.latest_date_time()}\n"
+)
 
-# --8<-- [end:taster]
+for expanding_g in g.expanding("1 week"):
+    print(
+        f"From {expanding_g.start_date_time()} to {expanding_g.end_date_time()} there were {expanding_g.num_temporal_edges()} monkey interactions"
+    )
+
+print()
+start_day = datetime.strptime("2019-06-13", "%Y-%m-%d")
+end_day = datetime.strptime("2019-06-23", "%Y-%m-%d")
+for expanding_g in g.window(start_day, end_day).expanding(
+    "2 days, 3 hours, 12 minutes and 6 seconds"
+):
+    print(
+        f"From {expanding_g.start_date_time()} to {expanding_g.end_date_time()} there were {expanding_g.num_temporal_edges()} monkey interactions"
+    )
+
+# --8<-- [end:expanding]
+
+# --8<-- [start:rolling_intro]
+print("Rolling 1 week")
+for expanding_g in g.rolling(window="1 week"):
+    print(
+        f"From {expanding_g.start_date_time()} to {expanding_g.end_date_time()} there were {expanding_g.num_temporal_edges()} monkey interactions"
+    )
+# --8<-- [end:rolling_intro]
+
+# --8<-- [start:rolling_intro_2]
+print("\nRolling 1 week, stepping 2 days (overlapping window)")
+for expanding_g in g.rolling(window="1 week", step="2 days"):
+    print(
+        f"From {expanding_g.start_date_time()} to {expanding_g.end_date_time()} there were {expanding_g.num_temporal_edges()} monkey interactions"
+    )
+# --8<-- [end:rolling_intro_2]
+
+# --8<-- [start:rolling]
+# mkdocs: render
+###RECREATION OF THE GRAPH SO IT CAN BE RENDERED
+import matplotlib.pyplot as plt
+import pandas as pd
+from raphtory import Graph
+
+edges_df = pd.read_csv(
+    "data/OBS_data.txt", sep="\t", header=0, usecols=[0, 1, 2, 3, 4], parse_dates=[0]
+)
+edges_df["DateTime"] = pd.to_datetime(edges_df["DateTime"]).astype("datetime64[ms]")
+edges_df.dropna(axis=0, inplace=True)
+edges_df["Weight"] = edges_df["Category"].apply(
+    lambda c: 1 if (c == "Affiliative") else (-1 if (c == "Agonistic") else 0)
+)
+
+g = Graph.load_from_pandas(
+    edges_df=edges_df,
+    src="Actor",
+    dst="Recipient",
+    time="DateTime",
+    layer_in_df="Behavior",
+    props=["Weight"],
+)
+
+###ACTUAL IMPORT CODE
+importance = []
+time = []
+for rolling_lome in g.vertex("LOME").rolling("1 day"):
+    importance.append(rolling_lome.degree())
+    time.append(rolling_lome.end_date_time())
+
+plt.plot(time, importance, marker="o")
+plt.xlabel("Date")
+plt.xticks(rotation=45)
+plt.ylabel("Daily Unique Interactions")
+plt.title("Lome's daily interaction count")
+plt.grid(True)
+# --8<-- [end:rolling]
+
+# --8<-- [start:layered]
+total_weight = g.edges().properties.temporal.get("Weight").values().sum().sum()
+print(f"Total weight across all edges is {total_weight}.")
+
+total_weight = (
+    g.layers(["Grooming", "Resting"])
+    .edges()
+    .properties.temporal.get("Weight")
+    .values()
+    .sum()
+    .sum()
+)
+print(f"Total weight across Grooming and Resting is {total_weight}.")
+
+start_day = datetime.strptime("2019-06-13", "%Y-%m-%d")
+end_day = datetime.strptime("2019-06-20", "%Y-%m-%d")
+total_weight = (
+    g.layers(["Grooming", "Resting"])
+    .window(start_day, end_day)
+    .edges()
+    .properties.temporal.get("Weight")
+    .values()
+    .sum()
+    .sum()
+)
+print(
+    f"Total weight across Grooming and Resting between {start_day} and {end_day} is {total_weight}."
+)
+# --8<-- [end:layered]
+
+# --8<-- [start:subgraph]
+print(f"There are {g.num_vertices()} monkeys in the whole graph")
+subgraph = g.subgraph(["FELIPE", "LIPS", "NEKKE", "LOME", "BOBO"])
+print(f"There are {subgraph.num_vertices()} monkeys in the subgraph")
+neighbours = g.vertex("FELIPE").neighbours().name().collect()
+print(f"FELIPE has the following neighbours in the full graph: {neighbours}")
+neighbours = subgraph.vertex("FELIPE").neighbours().name().collect()
+print(f"FELIPE has the following neighbours in the subgraph: {neighbours}")
+start_day = datetime.strptime("2019-06-17", "%Y-%m-%d")
+end_day = datetime.strptime("2019-06-18", "%Y-%m-%d")
+neighbours = (
+    subgraph.vertex("FELIPE").window(start_day, end_day).neighbours().name().collect()
+)
+print(
+    f"FELIPE has the following neighbours in the subgraph between {start_day} and {end_day}: {neighbours}"
+)
+
+# --8<-- [end:subgraph]
+
+# --8<-- [start:materialize]
+start_time = datetime.strptime("2019-06-17", "%Y-%m-%d")
+end_time = datetime.strptime("2019-06-18", "%Y-%m-%d")
+windowed_view = g.window(start_time, end_time)
+materialized_view = windowed_view.materialize()
+print(
+    f"Before the update the view had {windowed_view.num_temporal_edges()} edge updates"
+)
+print(
+    f"Before the update the materialized view had {materialized_view.num_temporal_edges()} edge updates"
+)
+g.add_edge(start_time, "FELIPE", "LOME", properties={"Weight": 1}, layer="Grooming")
+print(
+    f"After the update the view had {windowed_view.num_temporal_edges()} edge updates"
+)
+print(
+    f"After the update the materialized view had {materialized_view.num_temporal_edges()} edge updates"
+)
+# --8<-- [end:materialize]
