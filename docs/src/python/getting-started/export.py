@@ -71,8 +71,6 @@ print(f"{df}\n")
 print("The properties of ServerA:")
 print(f"{df[df['id'] == 'ServerA'].properties.iloc[0]}\n")
 
-print("**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**\n")
-
 df = ex.to_vertex_df(
     traffic_graph, include_update_history=False, include_property_histories=False
 )

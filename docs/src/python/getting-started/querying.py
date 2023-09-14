@@ -57,9 +57,9 @@ print("Latest time (Unix Epoch):", latest_epoch)
 
 # --8<-- [start:graph_functions]
 print("Checking if specific vertices and edges are in the graph:")
-if g.has_vertex("LOME"):
+if g.has_vertex(id="LOME"):
     print("Lomme is in the graph")
-if g.has_edge("LOME", "NEKKE", "Playing with"):
+if g.has_edge(src="LOME", dst="NEKKE", layer="Playing with"):
     print("Lomme has played with Nekke \n")
 
 print("Getting individual vertices and edges:")

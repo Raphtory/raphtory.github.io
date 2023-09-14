@@ -74,13 +74,36 @@ watch:
   - docs/user-guide
 nav:
   - Home: index.md
-  - User Guide: 
-    - user-guide/intro.md
+  - User Guide:
     - user-guide/installation.md
-    - user-guide/ingestion.md
-    - user-guide/querying.md
-    - user-guide/algorithms.md
-    - user-guide/export.md
+    - Getting data into Raphtory:
+      -  user-guide/ingestion/creating-a-graph.md
+      -  user-guide/ingestion/direct-updates.md
+      -  user-guide/ingestion/dataframes.md
+      -  user-guide/ingestion/saving.md
+    - Querying:
+      - user-guide/querying/intro.md
+      - user-guide/querying/graph-metrics.md
+      - user-guide/querying/vertex-metrics.md
+      - user-guide/querying/edge-metrics.md
+      - user-guide/querying/properties.md
+      - user-guide/querying/chaining.md
+    - Graph views:
+      - user-guide/views/intro.md
+      - user-guide/views/time.md
+      - user-guide/views/layer.md
+      - user-guide/views/subgraph.md
+      - user-guide/views/materialize.md
+    - Running Algorithms:
+      - user-guide/algorithms/intro.md
+      - user-guide/algorithms/graph-algorithms.md
+      - user-guide/algorithms/vertex-algorithms.md
+      - user-guide/algorithms/view-algorithms.md
+    - Exporting:
+      - user-guide/export/intro.md
+      - user-guide/export/dataframes.md
+      - user-guide/export/networkx.md
+      - user-guide/export/pyvis.md
   - API: api.md 
 
 hooks:
