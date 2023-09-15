@@ -13,7 +13,6 @@ Vertices have functions for querying their earliest/latest update time (as an ep
     --8<-- "python/getting-started/querying.py:vertex_metrics"
     ```
 
-
 ## Neighbours, edges and paths
 To investigate who a vertex is connected with we can ask for its `degree()`, `edges()`, or `neighbours()`. As Raphtory is a directed graph all of these functions also have an `in_` and `out_` variation, allowing you get only incoming and outgoing connections respectively. These functions return the following:
 
