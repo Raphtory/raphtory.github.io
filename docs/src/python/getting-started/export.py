@@ -71,8 +71,6 @@ print(f"{df}\n")
 print("The properties of ServerA:")
 print(f"{df[df['id'] == 'ServerA'].properties.iloc[0]}\n")
 
-print("**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**\n")
-
 df = ex.to_vertex_df(
     traffic_graph, include_update_history=False, include_property_histories=False
 )
@@ -146,7 +144,9 @@ nx.draw(nx_g, with_labels=True, node_color="lightblue", edge_color="gray")
 import raphtory.export as ex
 import json
 
-pyvis_g = ex.to_pyvis(traffic_graph, edge_weight="data_size_MB", edge_color="#8e9b9e", directed=True)
+pyvis_g = ex.to_pyvis(
+    traffic_graph, edge_weight="data_size_MB", edge_color="#8e9b9e", directed=True
+)
 
 options = {
     "edges": {

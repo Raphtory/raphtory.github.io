@@ -1,6 +1,6 @@
 # Installation
 
-Raphtory is a library and installation is as simple as invoking the package manager of the corresponding programming language.
+Raphtory is a library for Python and Rust. Installation is as simple as invoking the package manager of the corresponding programming language.
 
 === ":fontawesome-brands-python: Python"
 

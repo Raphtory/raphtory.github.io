@@ -176,7 +176,7 @@ print(unlayered_edge.properties.temporal.get("weight").values())
 print(layered_edge.properties.temporal.get("weight").values())
 # --8<-- [end:edge_layers]
 
-# --8<-- [start:graph_from_dataframe]
+# --8<-- [start:server_data]
 from raphtory import Graph
 import pandas as pd
 
@@ -195,6 +195,10 @@ print(f"{edges_df}\n")
 print("Vertex Dataframe:")
 print(f"{vertices_df}\n")
 
+# --8<-- [end:server_data]
+
+
+# --8<-- [start:graph_from_dataframe]
 g = Graph.load_from_pandas(
     edges_df=edges_df,
     src="source",
@@ -219,19 +223,6 @@ print(g.edge("ServerA", "ServerB"))
 # --8<-- [end:graph_from_dataframe]
 
 # --8<-- [start:adding_dataframe]
-from raphtory import Graph
-import pandas as pd
-
-edges_df = pd.read_csv("data/network_traffic_edges.csv")
-edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
-
-vertices_df = pd.read_csv("data/network_traffic_vertices.csv")
-vertices_df["timestamp"] = pd.to_datetime(vertices_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
-
 g = Graph()
 g.load_edges_from_pandas(
     edge_df=edges_df,
@@ -260,19 +251,6 @@ print(g.edge("ServerA", "ServerB"))
 # --8<-- [end:adding_dataframe]
 
 # --8<-- [start:const_dataframe]
-from raphtory import Graph
-import pandas as pd
-
-edges_df = pd.read_csv("data/network_traffic_edges.csv")
-edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
-
-vertices_df = pd.read_csv("data/network_traffic_vertices.csv")
-vertices_df["timestamp"] = pd.to_datetime(vertices_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
-
 g = Graph()
 g.load_edges_from_pandas(
     edge_df=edges_df,
