@@ -24,7 +24,7 @@ In the code below we call a selection of these functions to show the sort of que
 
 !!! info
 
-    The final section of the code makes use of `v.neighbours().name().collect()` - this is a chain of functions which are run on each vertex in the `PathFromVertex` iterable. We will discuss these sort of operations more in [Chaining functions](../querying/chaining.md). 
+    The final section of the code makes use of `v.neighbours().name().collect()` - this is a chain of functions which are run on each vertex in the `PathFromVertex` iterable. We will discuss these sort of operations more in [Chaining functions](../querying/6_chaining.md). 
 
 {{code_block('getting-started/querying','vertex_neighbours',['Vertex'])}}
 !!! Output

@@ -21,7 +21,7 @@ Following this we access the history and earliest/latest update time, as we have
 ## Exploded edges
 The very first question you may have after reading this is "What if I don't want all of the layers?". For this Raphtory offers you three different ways to split the edge, depending on your use case:
 
-* `.layers()`: which takes a list of layer names and returns a new `Edge View` which only contains updates for the specified layers - This is discussed in more detail in the [Layer views](../views/layer.md) chapter.
+* `.layers()`: which takes a list of layer names and returns a new `Edge View` which only contains updates for the specified layers - This is discussed in more detail in the [Layer views](../views/3_layer.md) chapter.
 * `.explode_layers()`: which returns an iterable of `Edge Views`, each containing the updates for one layer.
 * `.explode()`: which returns an `Exploded Edge` containing only the information from one call to `add_edge()` i.e. an edge object for each update. 
 

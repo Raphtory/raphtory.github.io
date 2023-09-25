@@ -1,6 +1,6 @@
 
 # Property queries
-As you will have seen in the [ingestion tutorial](../ingestion/direct-updates.md), graphs, vertices and edges may all have `constant` and `temporal` properties, consisting of a wide range of data types. Raphtory provides a unified API for accessing this data via the [Properties](https://docs.raphtory.com/en/master/#raphtory.Properties) object available on all classes by calling `.properties`. 
+As you will have seen in the [ingestion tutorial](../ingestion/2_direct-updates.md), graphs, vertices and edges may all have `constant` and `temporal` properties, consisting of a wide range of data types. Raphtory provides a unified API for accessing this data via the [Properties](https://docs.raphtory.com/en/master/#raphtory.Properties) object available on all classes by calling `.properties`. 
 
 This `Properties` class offers several functions for you to access the values you are interested in in the most appropriate format. To demonstrate this let's create a simple graph with one vertex that has a variety of different properties, both temporal and constant. 
 

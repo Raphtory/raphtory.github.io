@@ -2,7 +2,7 @@
 If you prefer to initially manipulate your data in a `dataframe` before converting into a graph, you can easily hand this directly to Raphtory once your preprocessing is complete.
 
 ## Creating a graph from dataframes
-The all-in-one way to do this is via the `load_from_pandas()` function on the `Graph` which will take a dataframe for your edges (and optionally for vertices) and return a graph built from these. This function has optional arguments to cover everything we have seen in the prior [direct updates tutorial](direct-updates.md).
+The all-in-one way to do this is via the `load_from_pandas()` function on the `Graph` which will take a dataframe for your edges (and optionally for vertices) and return a graph built from these. This function has optional arguments to cover everything we have seen in the prior [direct updates tutorial](2_direct-updates.md).
 
 In the example below we are ingesting some network traffic data looking at different types of interactions between servers. In the first half of the code we ingest information about the servers and their interactions into two dataframes and make some changes to the timestamp column such that its handled in milliseconds not nanoseconds. The two dataframes are then printed out so you can see the headers and values.
 

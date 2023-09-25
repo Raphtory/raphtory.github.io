@@ -1,6 +1,6 @@
 # Layered graphs
 !!!info 
-    Edge layers have been discussed several times, notably in [Ingestion](../ingestion/direct-updates.md#edge-layers) and [Exploded Edges](../querying/edge-metrics.md#exploded-edges). Please check these before reading this section.
+    Edge layers have been discussed several times, notably in [Ingestion](../ingestion/2_direct-updates.md#edge-layers) and [Exploded Edges](../querying/4_edge-metrics.md#exploded-edges). Please check these before reading this section.
 
  As previously discussed, an edge object by default will contain information on all layers between its source and destination vertices. However, it is often the case that there are a subset of these relationships that we are interested in. To handle this the `Graph`, `Vertex` and `Edge` provide the `layers()` function. 
 
