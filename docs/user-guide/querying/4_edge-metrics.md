@@ -1,15 +1,15 @@
 # Edge metrics and functions 
-Edges can be accessed by storing the object returned from a call to `add_edge()`, by directly asking for a specific edge via `edge()`, or by iterating over all edges via `in-edges()`/`out-edges()`/`edges()`. 
+Edges can be accessed by storing the object returned from a call to `add_edge()`, by directly asking for a specific edge via `edge()`, or by iterating over all edges via `in-edges`/`out-edges`/`edges`. 
 
 ## Edge structure and update history
 An edge object in Raphtory will by default contain all updates over all layers between the given source and destination vertices. As an example of this, we can look at the two edges between `FELIPE` and `MAKO` (one for each direction). 
 
-In the code below we create the two edge objects by requesting them from the graph and then print out the layers each is involved in via the `layer_names()` function. We can see here that there are multiple behaviours in each direction represented within the edges.
+In the code below we create the two edge objects by requesting them from the graph and then print out the layers each is involved in via `layer_names`. We can see here that there are multiple behaviours in each direction represented within the edges.
 
 Following this we access the history and earliest/latest update time, as we have previously with the graph and vertices. This update history consists all interactions across all the aforementioned layers.
 
 !!!info 
-    Note that we call `e.src().name()` because `src()` and `dst()` return a vertex object, instead of just an id/name.
+    Note that we call `e.src.name` because `src` and `dst` return a vertex object, instead of just an id/name.
 
 {{code_block('getting-started/querying','edge_history',['Vertex'])}}
 !!! Output
