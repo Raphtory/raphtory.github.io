@@ -1,9 +1,9 @@
 
 # Chaining functions
 
-When we called `v.neighbours()` in [Vertex metrics](../querying/3_vertex-metrics.md#neighbours-edges-and-paths), a `PathFromVertex` was returned rather than a `List`. This, along with all other iterables previously mentioned (`Vertices`,`Edges`,`Properties`), are [lazy](https://en.wikipedia.org/wiki/Lazy_evaluation) data structures which allow you to chain multiple functions together before a final execution. 
+When we called `v.neighbours` in [Vertex metrics](../querying/3_vertex-metrics.md#neighbours-edges-and-paths), a `PathFromVertex` was returned rather than a `List`. This, along with all other iterables previously mentioned (`Vertices`,`Edges`,`Properties`), are [lazy](https://en.wikipedia.org/wiki/Lazy_evaluation) data structures which allow you to chain multiple functions together before a final execution. 
 
-For example, for a vertex `v`, `v.neighbours().neighbours()` will return the two-hop neighbours. The first call of `neighbours()` returns the immediate neighbours of `v`, the second applies the`neighbours()` function to each of the vertices returned by the first call. 
+For example, for a vertex `v`, `v.neighbours.neighbours` will return the two-hop neighbours. The first call of `neighbours` returns the immediate neighbours of `v`, the second applies the`neighbours` function to each of the vertices returned by the first call. 
 
 We can continue this chain for as long as we like, with any functions in the Vertex, Edge or Property API until we either: 
 

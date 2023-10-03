@@ -38,7 +38,7 @@ g.add_vertex(timestamp=datetime_obj, id=10)
 
 print(g)
 print(g.vertex(id=10).history())
-print(g.earliest_date_time())
+print(g.earliest_date_time)
 # --8<-- [end:different_time_types]
 
 # --8<-- [start:id_types]

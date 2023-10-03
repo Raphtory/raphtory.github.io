@@ -42,6 +42,11 @@ requirements: .venv
 serve: .venv
 	@unset CONDA_PREFIX && source $(VENV_BIN)/activate && mkdocs serve --quiet
 
+
+.PHONY: build
+build: .venv
+	@unset CONDA_PREFIX && source $(VENV_BIN)/activate && mkdocs build --quiet	
+
 .PHONY: lint
 lint: .venv node_modules
 # python

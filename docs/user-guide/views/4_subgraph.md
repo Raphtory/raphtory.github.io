@@ -1,5 +1,5 @@
 # Subgraph
-Similar to only being interested in a subset of edge layers, for some use cases we may only be interested in a subset of vertices within the graph. One solution to this could be to call `g.vertices()` and filter this before continuing your workflow. However, this does not remove anything for later calls to `neighbours()`, `edges()`, etc. Meaning you will have to constantly recheck these lists. 
+Similar to only being interested in a subset of edge layers, for some use cases we may only be interested in a subset of vertices within the graph. One solution to this could be to call `g.vertices` and filter this before continuing your workflow. However, this does not remove anything for later calls to `neighbours`, `edges`, etc. Meaning you will have to constantly recheck these lists. 
 
 To handle all of these corner cases Raphtory provides the `subgraph()` function which takes a list of nodes of interest. This applies a view such that all vertices not in the list are hidden from all future function calls. This also hides any edges linked to hidden vertices to keep the subgraph consistent. 
 

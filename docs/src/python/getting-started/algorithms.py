@@ -39,7 +39,7 @@ component_sizes = {key: len(value) for key, value in components.items()}
 largest_component = max(component_sizes, key=component_sizes.get)
 # Print the size of the largest component
 print(
-    f"The largest component contains {component_sizes[largest_component]} of the {lotr_graph.num_vertices()} vertices in the graph."
+    f"The largest component contains {component_sizes[largest_component]} of the {lotr_graph.count_vertices()} vertices in the graph."
 )
 # --8<-- [end:connectedcomponents]
 
@@ -74,7 +74,7 @@ time = []
 for windowed_graph in lotr_graph.rolling(window=2000):
     result = rp.pagerank(windowed_graph)
     importance.append(result.get("Gandalf"))
-    time.append(windowed_graph.earliest_time())
+    time.append(windowed_graph.earliest_time)
 
 plt.plot(time, importance, marker="o")
 plt.xlabel("Sentence (Time)")
