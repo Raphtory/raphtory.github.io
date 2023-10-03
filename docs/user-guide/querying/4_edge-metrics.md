@@ -28,7 +28,7 @@ The very first question you may have after reading this is "What if I don't want
 In the code below you can see usage of all of these functions. We first call `explode_layers()`, seeing which layer each edge object represents and output its update history. Next we fully `explode()` the edge and see each update as an individual object. Thirdly we use the `layer()` function to look at only the `Touching` and `Carrying` layers and chain this with a call to `explode()` to see the updates within these individually. 
 
 !!! info
-    Within the examples and in the API documentation you will see singular and plural versions of the same functions (i.e. `.layer_names()/.layer_name()` `.history()/.time()`) these singular versions are simply helpers which return only the first value of the list for when you know an edge is exploded and will only have one value. 
+    Within the examples and in the API documentation you will see singular and plural versions of the same functions (i.e. `.layer_names/.layer_name` `.history()/.time`) these singular versions are simply helpers which return only the first value of the list for when you know an edge is exploded and will only have one value. 
 
 {{code_block('getting-started/querying','edge_explode_layer',['Vertex'])}}
 !!! Output
