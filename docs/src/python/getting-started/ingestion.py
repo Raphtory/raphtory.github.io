@@ -200,17 +200,17 @@ print(f"{vertices_df}\n")
 
 # --8<-- [start:graph_from_dataframe]
 g = Graph.load_from_pandas(
-    edges_df=edges_df,
-    src="source",
-    dst="destination",
-    time="timestamp",
-    props=["data_size_MB"],
-    layer_in_df="transaction_type",
-    const_props=["is_encrypted"],
-    shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    edge_df=edges_df,
+    edge_src="source",
+    edge_dst="destination",
+    edge_time="timestamp",
+    edge_props=["data_size_MB"],
+    edge_layer="transaction_type",
+    edge_const_props=["is_encrypted"],
+    edge_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
     vertex_df=vertices_df,
-    vertex_col="server_id",
-    vertex_time_col="timestamp",
+    vertex_id="server_id",
+    vertex_time="timestamp",
     vertex_props=["OS_version", "primary_function", "uptime_days"],
     vertex_const_props=["server_name", "hardware_type"],
     vertex_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
@@ -225,20 +225,20 @@ print(g.edge("ServerA", "ServerB"))
 # --8<-- [start:adding_dataframe]
 g = Graph()
 g.load_edges_from_pandas(
-    edge_df=edges_df,
-    src_col="source",
-    dst_col="destination",
-    time_col="timestamp",
+    df=edges_df,
+    src="source",
+    dst="destination",
+    time="timestamp",
     props=["data_size_MB"],
-    layer_in_df="transaction_type",
+    layer="transaction_type",
     const_props=["is_encrypted"],
     shared_const_props={"datasource": "data/network_traffic_edges.csv"},
 )
 
 g.load_vertices_from_pandas(
-    vertices_df=vertices_df,
-    vertex_col="server_id",
-    time_col="timestamp",
+    df=vertices_df,
+    id="server_id",
+    time="timestamp",
     props=["OS_version", "primary_function", "uptime_days"],
     const_props=["server_name", "hardware_type"],
     shared_const_props={"datasource": "data/network_traffic_edges.csv"},
@@ -253,33 +253,33 @@ print(g.edge("ServerA", "ServerB"))
 # --8<-- [start:const_dataframe]
 g = Graph()
 g.load_edges_from_pandas(
-    edge_df=edges_df,
-    src_col="source",
-    dst_col="destination",
-    time_col="timestamp",
+    df=edges_df,
+    src="source",
+    dst="destination",
+    time="timestamp",
     props=["data_size_MB"],
-    layer_in_df="transaction_type",
+    layer="transaction_type",
 )
 
 g.load_vertices_from_pandas(
-    vertices_df=vertices_df,
-    vertex_col="server_id",
-    time_col="timestamp",
+    df=vertices_df,
+    id="server_id",
+    time="timestamp",
     props=["OS_version", "primary_function", "uptime_days"],
 )
 
 g.load_edge_props_from_pandas(
-    edge_df=edges_df,
-    src_col="source",
-    dst_col="destination",
-    layer_in_df="transaction_type",
+    df=edges_df,
+    src="source",
+    dst="destination",
+    layer="transaction_type",
     const_props=["is_encrypted"],
     shared_const_props={"datasource": "data/network_traffic_edges.csv"},
 )
 
 g.load_vertex_props_from_pandas(
-    vertices_df=vertices_df,
-    vertex_col="server_id",
+    df=vertices_df,
+    id="server_id",
     const_props=["server_name", "hardware_type"],
     shared_const_props={"datasource": "data/network_traffic_edges.csv"},
 )
@@ -300,12 +300,12 @@ edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"]).astype(
 
 g = Graph()
 g.load_edges_from_pandas(
-    edge_df=edges_df,
-    src_col="source",
-    dst_col="destination",
-    time_col="timestamp",
+    df=edges_df,
+    src="source",
+    dst="destination",
+    time="timestamp",
     props=["data_size_MB"],
-    layer_in_df="transaction_type",
+    layer="transaction_type",
 )
 g.save_to_file("/tmp/saved_graph")
 loaded_graph = Graph.load_from_file("/tmp/saved_graph")

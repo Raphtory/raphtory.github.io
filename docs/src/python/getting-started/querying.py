@@ -17,11 +17,11 @@ import raphtory as rp
 
 g = rp.Graph()
 g.load_edges_from_pandas(
-    edge_df=edges_df,
-    src_col="Actor",
-    dst_col="Recipient",
-    time_col="DateTime",
-    layer_in_df="Behavior",
+    df=edges_df,
+    src="Actor",
+    dst="Recipient",
+    time="DateTime",
+    layer="Behavior",
     props=["Weight"],
 )
 print(g)
@@ -325,12 +325,12 @@ edges_df["Weight"] = edges_df["Category"].apply(
 )
 
 g = Graph.load_from_pandas(
-    edges_df=edges_df,
-    src="Actor",
-    dst="Recipient",
-    time="DateTime",
-    layer_in_df="Behavior",
-    props=["Weight"],
+    edge_df=edges_df,
+    edge_src="Actor",
+    edge_dst="Recipient",
+    edge_time="DateTime",
+    edge_layer="Behavior",
+    edge_props=["Weight"],
 )
 
 ###ACTUAL IMPORT CODE
