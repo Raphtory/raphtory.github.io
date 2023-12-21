@@ -2,8 +2,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>>{
     // --8<-- [start:new_graph]
     // --8<-- [end:new_graph]
 
-    // --8<-- [start:vertex_add]
-    // --8<-- [end:vertex_add]
+    // --8<-- [start:node_add]
+    // --8<-- [end:node_add]
 
     // --8<-- [start:edge_add]
     // --8<-- [end:edge_add]

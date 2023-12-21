@@ -1,10 +1,10 @@
 
 # Property queries
-As you will have seen in the [ingestion tutorial](../ingestion/2_direct-updates.md), graphs, vertices and edges may all have `constant` and `temporal` properties, consisting of a wide range of data types. Raphtory provides a unified API for accessing this data via the [Properties](https://docs.raphtory.com/en/master/#raphtory.Properties) object available on all classes by calling `.properties`. 
+As you will have seen in the [ingestion tutorial](../ingestion/2_direct-updates.md), graphs, nodes and edges may all have `constant` and `temporal` properties, consisting of a wide range of data types. Raphtory provides a unified API for accessing this data via the [Properties](https://docs.raphtory.com/en/master/reference/core/properties.html) object available on all classes by calling `.properties`. 
 
-This `Properties` class offers several functions for you to access the values you are interested in in the most appropriate format. To demonstrate this let's create a simple graph with one vertex that has a variety of different properties, both temporal and constant. 
+This `Properties` class offers several functions for you to access the values you are interested in in the most appropriate format. To demonstrate this let's create a simple graph with one node that has a variety of different properties, both temporal and constant. 
 
-We can grab this vertices property object and call all of the functions to access the data:
+We can grab this nodes property object and call all of the functions to access the data:
 
 * `keys()`: Returns all of the property keys (names).
 * `values()`: Returns the latest value for each property.
@@ -12,7 +12,7 @@ We can grab this vertices property object and call all of the functions to acces
 * `get()`: Returns the latest value for a given key if the property exists or `None` if it does not.
 * `as_dict()`: Converts the `Properties` object into a standard python dictionary.
 
-{{code_block('getting-started/querying','properties',['Vertex'])}}
+{{code_block('getting-started/querying','properties',['Node'])}}
 !!! Output
 
     ```python exec="on" result="text" session="getting-started/querying"
@@ -23,17 +23,17 @@ We can grab this vertices property object and call all of the functions to acces
 The `Properties` class also has two attributes `constant` and `temporal` which have all of the above functions, but are restricted to only the properties which fall within their respective catagories. 
 
 !!! info
-    The semantics for [ConstProperties](https://docs.raphtory.com/en/master/#raphtory.ConstProperties) are exactly the same as described above. [TemporalProperties](https://docs.raphtory.com/en/master/#raphtory.TemporalProperties) on the other hand allow you to do much more, as is discussed below.
+    The semantics for [ConstProperties](https://docs.raphtory.com/en/master/reference/core/properties.html#raphtory.ConstProperties) are exactly the same as described above. [TemporalProperties](https://docs.raphtory.com/en/master/reference/core/temporalproperties.html#raphtory.TemporalProperties) on the other hand allow you to do much more, as is discussed below.
 
 ## Temporal specific functions
-As temporal properties have a history, we may often want to do more than just look at the latest value. As such, calling `get()`, `values()` or `items()` on `TemporalProperties` will return a [TemporalProp](https://docs.raphtory.com/en/master/#raphtory.TemporalProp) object which contains all of the value history.
+As temporal properties have a history, we may often want to do more than just look at the latest value. As such, calling `get()`, `values()` or `items()` on `TemporalProperties` will return a [TemporalProp](https://docs.raphtory.com/en/master/reference/core/temporalproperties.html#raphtory.TemporalProp) object which contains all of the value history.
 
 `TemporalProp` has a host of helper functions covering anything that you may want to do with this history. This includes:
 
 * `value()`/`values()`: Get the latest value or all values of the property.
 * `at()`: Get the latest value of the property at the specified time.
-* `history()`: Get the timestamps of all updates to the property.
-* `items()`: Merges `values()` and `history()` into a list of tuples.
+* `history()`/`history_date_time()`: Get the timestamps of all updates to the property.
+* `items()`/`items_date_time()`: Merges `values()` and `history()`/`history_date_time()` into a list of tuples.
 * `mean()`/`median()`/`average()`: If the property is orderable, get the average value for the property.
 * `min()`/`max()`: If the property is orderable, get the minimum or maximum value.
 * `count()`: Get the number of updates which have occurred

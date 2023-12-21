@@ -5,7 +5,9 @@ import pandas as pd
 df = pd.read_csv("data/lotr.csv")
 print(df)
 
-lotr_graph = Graph.load_from_pandas(edge_df=df, edge_src="src", edge_dst="dst", edge_time="time")
+lotr_graph = Graph.load_from_pandas(
+    edge_df=df, edge_src="src", edge_dst="dst", edge_time="time"
+)
 # --8<-- [end:data_loading]
 
 # --8<-- [start:global]
@@ -39,7 +41,7 @@ component_sizes = {key: len(value) for key, value in components.items()}
 largest_component = max(component_sizes, key=component_sizes.get)
 # Print the size of the largest component
 print(
-    f"The largest component contains {component_sizes[largest_component]} of the {lotr_graph.count_vertices()} vertices in the graph."
+    f"The largest component contains {component_sizes[largest_component]} of the {lotr_graph.count_nodes()} nodes in the graph."
 )
 # --8<-- [end:connectedcomponents]
 
@@ -54,8 +56,8 @@ print(f"Gandalf's ranking is {gandalf_rank}\n")
 
 # Getting the top 5 most important characters and printing out their scores
 top_5 = results.top_k(5)
-for rank, (name, score) in enumerate(top_5, 1):
-    print(f"Rank {rank}: {name} with a score of {score:.5f}")
+for rank, (node, score) in enumerate(top_5, 1):
+    print(f"Rank {rank}: {node.name} with a score of {score:.5f}")
 # --8<-- [end:pagerank]
 
 # --8<-- [start:rolling]
@@ -66,7 +68,9 @@ from raphtory import algorithms as rp
 from raphtory import Graph
 
 df = pd.read_csv("data/lotr.csv")
-lotr_graph = Graph.load_from_pandas(edge_df=df, edge_src="src", edge_dst="dst", edge_time="time")
+lotr_graph = Graph.load_from_pandas(
+    edge_df=df, edge_src="src", edge_dst="dst", edge_time="time"
+)
 
 importance = []
 time = []
