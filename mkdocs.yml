@@ -84,7 +84,7 @@ nav:
     - Querying:
       - user-guide/querying/1_intro.md
       - user-guide/querying/2_graph-metrics.md
-      - user-guide/querying/3_vertex-metrics.md
+      - user-guide/querying/3_node-metrics.md
       - user-guide/querying/4_edge-metrics.md
       - user-guide/querying/5_properties.md
       - user-guide/querying/6_chaining.md
@@ -97,7 +97,7 @@ nav:
     - Running Algorithms:
       - user-guide/algorithms/1_intro.md
       - user-guide/algorithms/2_graph-algorithms.md
-      - user-guide/algorithms/3_vertex-algorithms.md
+      - user-guide/algorithms/3_node-algorithms.md
       - user-guide/algorithms/4_view-algorithms.md
     - Exporting:
       - user-guide/export/1_intro.md
