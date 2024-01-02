@@ -1,7 +1,7 @@
 
 # Exporting to NetworkX
 
-For converting to a networkx graph there is only one function (`to_networkx()`), which has flags for vertex/edge history and for exploding edges. By default all history is included and the edges are separated by layer. 
+For converting to a networkx graph there is only one function (`to_networkx()`), which has flags for node/edge history and for exploding edges. By default all history is included and the edges are separated by layer. 
 
 In the below code snippet we call `to_networkx()` on the network traffic graph, keeping all the default arguments and, therefore, exporting the full history. We have extracted `ServerA` from this graph and printed it so that you may see how the history is modelled. 
 

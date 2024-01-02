@@ -7,15 +7,15 @@ server_edges_df["timestamp"] = pd.to_datetime(server_edges_df["timestamp"]).asty
     "datetime64[ms, UTC]"
 )
 
-server_vertices_df = pd.read_csv("data/network_traffic_vertices.csv")
-server_vertices_df["timestamp"] = pd.to_datetime(
-    server_vertices_df["timestamp"]
-).astype("datetime64[ms, UTC]")
+server_nodes_df = pd.read_csv("data/network_traffic_nodes.csv")
+server_nodes_df["timestamp"] = pd.to_datetime(server_nodes_df["timestamp"]).astype(
+    "datetime64[ms, UTC]"
+)
 
 print("Network Traffic Edges:")
 print(f"{server_edges_df}\n")
 print("Network Traffic Servers:")
-print(f"{server_vertices_df}\n")
+print(f"{server_nodes_df}\n")
 
 traffic_graph = Graph.load_from_pandas(
     edge_df=server_edges_df,
@@ -26,12 +26,12 @@ traffic_graph = Graph.load_from_pandas(
     edge_layer="transaction_type",
     edge_const_props=["is_encrypted"],
     edge_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
-    vertex_df=server_vertices_df,
-    vertex_id="server_id",
-    vertex_time="timestamp",
-    vertex_props=["OS_version", "primary_function", "uptime_days"],
-    vertex_const_props=["server_name", "hardware_type"],
-    vertex_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    node_df=server_nodes_df,
+    node_id="server_id",
+    node_time="timestamp",
+    node_props=["OS_version", "primary_function", "uptime_days"],
+    node_const_props=["server_name", "hardware_type"],
+    node_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
 )
 
 monkey_edges_df = pd.read_csv(
@@ -62,16 +62,16 @@ monkey_graph.load_edges_from_pandas(
 # --8<-- [end:ingest_data]
 
 
-# --8<-- [start:vertex_df]
+# --8<-- [start:node_df]
 import raphtory.export as ex
 
-df = ex.to_vertex_df(traffic_graph)
+df = ex.to_node_df(traffic_graph)
 print("Dataframe with full history:")
 print(f"{df}\n")
 print("The properties of ServerA:")
 print(f"{df[df['id'] == 'ServerA'].properties.iloc[0]}\n")
 
-df = ex.to_vertex_df(
+df = ex.to_node_df(
     traffic_graph, include_update_history=False, include_property_histories=False
 )
 print("Dataframe with no history:")
@@ -79,7 +79,7 @@ print(f"{df}\n")
 print("The properties of ServerA:")
 print(f"{df[df['id'] == 'ServerA'].properties.iloc[0]}\n")
 
-# --8<-- [end:vertex_df]
+# --8<-- [end:node_df]
 
 
 # --8<-- [start:edge_df]
@@ -131,7 +131,10 @@ server_edges_df["timestamp"] = pd.to_datetime(server_edges_df["timestamp"]).asty
 )
 
 traffic_graph = Graph.load_from_pandas(
-    edge_df=server_edges_df, edge_src="source", edge_dst="destination", edge_time="timestamp"
+    edge_df=server_edges_df,
+    edge_src="source",
+    edge_dst="destination",
+    edge_time="timestamp",
 )
 
 nx_g = ex.to_networkx(traffic_graph)

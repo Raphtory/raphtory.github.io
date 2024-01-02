@@ -4,7 +4,7 @@ For a more interactive visualisation you can export your graphs to [Pyvis](https
 Due to the nature of Pyvis's model and API, the parameters for `to_pyvis()` are quite different to the other export functions discussed previously. These are split between Raphtory specific parameters and a `kwargs` (key word arguments) map which is passed directly to the pyvis graph during initialisation.
 
 !!! info 
-    The Raphtory specific parameters are used to explode the edges and for setting values which are immutable after an edge/vertex has been inserted into the pyvis model (such as an edges colour or weight). The description of these arguments can be found in the [export API](https://docs.raphtory.com/en/master/#module-raphtory.export). 
+    The Raphtory specific parameters are used to explode the edges and for setting values which are immutable after an edge/node has been inserted into the pyvis model (such as an edges colour or weight). The description of these arguments can be found in the [export API](https://docs.raphtory.com/en/master/reference/export/libraries.html#raphtory.export.to_pyvis). 
 
     The `kwargs` for pyvis are described in their own [documentation](https://pyvis.readthedocs.io/en/latest/documentation.html). These values can also be dynamically set on the pyvis graph, allowing you to experiment with different values without reexporting. This is useful when fine turing elements such as the strength of the gravity in the physics engine.
 

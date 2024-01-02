@@ -5,15 +5,15 @@ g = Graph()
 print(g)
 # --8<-- [end:new_graph]
 
-# --8<-- [start:vertex_add]
+# --8<-- [start:node_add]
 from raphtory import Graph
 
 g = Graph()
-v = g.add_vertex(timestamp=1, id=10)
+v = g.add_node(timestamp=1, id=10)
 
 print(g)
 print(v)
-# --8<-- [end:vertex_add]
+# --8<-- [end:node_add]
 
 # --8<-- [start:edge_add]
 from raphtory import Graph
@@ -30,15 +30,15 @@ from raphtory import Graph
 from datetime import datetime
 
 g = Graph()
-g.add_vertex(timestamp="2021-02-03 14:01:00", id=10)
+g.add_node(timestamp="2021-02-03 14:01:00", id=10)
 
 # Create a python datetime object
 datetime_obj = datetime(2021, 1, 1, 12, 32, 0, 0)
-g.add_vertex(timestamp=datetime_obj, id=10)
+g.add_node(timestamp=datetime_obj, id=10)
 
 print(g)
-print(g.vertex(id=10).history())
-print(g.earliest_date_time)
+print(g.node(id=10).history())
+print(g.node(id=10).history_date_time())
 # --8<-- [end:different_time_types]
 
 # --8<-- [start:id_types]
@@ -46,12 +46,12 @@ from raphtory import Graph
 
 g = Graph()
 
-g.add_vertex(timestamp=123, id="User 1")
-g.add_vertex(timestamp=456, id=200)
+g.add_node(timestamp=123, id="User 1")
+g.add_node(timestamp=456, id=200)
 g.add_edge(timestamp=789, src="User 1", dst=200)
 
-print(g.vertex("User 1"))
-print(g.vertex(200))
+print(g.node("User 1"))
+print(g.node(200))
 print(g.edge("User 1", 200))
 # --8<-- [end:id_types]
 
@@ -61,18 +61,18 @@ from datetime import datetime
 
 g = Graph()
 
-# Primitive type properties added to a vertex
-g.add_vertex(
+# Primitive type properties added to a node
+g.add_node(
     timestamp=1,
     id="User 1",
     properties={"count": 1, "greeting": "hi", "encrypted": True},
 )
-g.add_vertex(
+g.add_node(
     timestamp=2,
     id="User 1",
     properties={"count": 2, "balance": 0.6, "encrypted": False},
 )
-g.add_vertex(
+g.add_node(
     timestamp=3,
     id="User 1",
     properties={"balance": 0.9, "greeting": "hello", "encrypted": True},
@@ -99,12 +99,12 @@ g.add_property(
 
 # Graph property on an edge
 g2 = Graph()
-g2.add_vertex(timestamp=123, id="Inner User")
+g2.add_node(timestamp=123, id="Inner User")
 
 g.add_edge(timestamp=4, src="User 1", dst="User 2", properties={"i_graph": g2})
 
 # Printing everything out
-v = g.vertex(id="User 1")
+v = g.node(id="User 1")
 e = g.edge(src="User 1", dst="User 2")
 print(g)
 print(v)
@@ -116,7 +116,7 @@ from raphtory import Graph
 from datetime import datetime
 
 g = Graph()
-v = g.add_vertex(timestamp=1, id="User 1")
+v = g.add_node(timestamp=1, id="User 1")
 e = g.add_edge(timestamp=2, src="User 1", dst="User 2")
 
 g.add_constant_properties(properties={"name": "Example Graph"})
@@ -185,15 +185,15 @@ edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"]).astype(
     "datetime64[ms, UTC]"
 )
 
-vertices_df = pd.read_csv("data/network_traffic_vertices.csv")
-vertices_df["timestamp"] = pd.to_datetime(vertices_df["timestamp"]).astype(
+nodes_df = pd.read_csv("data/network_traffic_nodes.csv")
+nodes_df["timestamp"] = pd.to_datetime(nodes_df["timestamp"]).astype(
     "datetime64[ms, UTC]"
 )
 
 print("Edge Dataframe:")
 print(f"{edges_df}\n")
-print("Vertex Dataframe:")
-print(f"{vertices_df}\n")
+print("Node Dataframe:")
+print(f"{nodes_df}\n")
 
 # --8<-- [end:server_data]
 
@@ -208,17 +208,17 @@ g = Graph.load_from_pandas(
     edge_layer="transaction_type",
     edge_const_props=["is_encrypted"],
     edge_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
-    vertex_df=vertices_df,
-    vertex_id="server_id",
-    vertex_time="timestamp",
-    vertex_props=["OS_version", "primary_function", "uptime_days"],
-    vertex_const_props=["server_name", "hardware_type"],
-    vertex_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    node_df=nodes_df,
+    node_id="server_id",
+    node_time="timestamp",
+    node_props=["OS_version", "primary_function", "uptime_days"],
+    node_const_props=["server_name", "hardware_type"],
+    node_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
 )
 
-print("The resulting graphs and example vertex/edge:")
+print("The resulting graphs and example node/edge:")
 print(g)
-print(g.vertex("ServerA"))
+print(g.node("ServerA"))
 print(g.edge("ServerA", "ServerB"))
 # --8<-- [end:graph_from_dataframe]
 
@@ -235,8 +235,8 @@ g.load_edges_from_pandas(
     shared_const_props={"datasource": "data/network_traffic_edges.csv"},
 )
 
-g.load_vertices_from_pandas(
-    df=vertices_df,
+g.load_nodes_from_pandas(
+    df=nodes_df,
     id="server_id",
     time="timestamp",
     props=["OS_version", "primary_function", "uptime_days"],
@@ -245,7 +245,7 @@ g.load_vertices_from_pandas(
 )
 
 print(g)
-print(g.vertex("ServerA"))
+print(g.node("ServerA"))
 print(g.edge("ServerA", "ServerB"))
 
 # --8<-- [end:adding_dataframe]
@@ -261,8 +261,8 @@ g.load_edges_from_pandas(
     layer="transaction_type",
 )
 
-g.load_vertices_from_pandas(
-    df=vertices_df,
+g.load_nodes_from_pandas(
+    df=nodes_df,
     id="server_id",
     time="timestamp",
     props=["OS_version", "primary_function", "uptime_days"],
@@ -277,15 +277,15 @@ g.load_edge_props_from_pandas(
     shared_const_props={"datasource": "data/network_traffic_edges.csv"},
 )
 
-g.load_vertex_props_from_pandas(
-    df=vertices_df,
+g.load_node_props_from_pandas(
+    df=nodes_df,
     id="server_id",
     const_props=["server_name", "hardware_type"],
     shared_const_props={"datasource": "data/network_traffic_edges.csv"},
 )
 
 print(g)
-print(g.vertex("ServerA"))
+print(g.node("ServerA"))
 print(g.edge("ServerA", "ServerB"))
 # --8<-- [end:const_dataframe]
 
