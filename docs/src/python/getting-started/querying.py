@@ -59,7 +59,7 @@ print("Latest time (Unix Epoch):", latest_epoch)
 print("Checking if specific nodes and edges are in the graph:")
 if g.has_node(id="LOME"):
     print("Lomme is in the graph")
-if g.has_edge(src="LOME", dst="NEKKE", layer="Playing with"):
+if g.layer("Playing with").has_edge(src="LOME", dst="NEKKE"):
     print("Lomme has played with Nekke \n")
 
 print("Getting individual nodes and edges:")

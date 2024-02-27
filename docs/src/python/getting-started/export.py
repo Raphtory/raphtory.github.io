@@ -63,52 +63,46 @@ monkey_graph.load_edges_from_pandas(
 
 
 # --8<-- [start:node_df]
-import raphtory.export as ex
 
-df = ex.to_node_df(traffic_graph)
+df = traffic_graph.to_node_df()
 print("Dataframe with full history:")
 print(f"{df}\n")
 print("The properties of ServerA:")
-print(f"{df[df['id'] == 'ServerA'].properties.iloc[0]}\n")
+print(f"{df[df['name'] == 'ServerA'].properties.iloc[0]}\n")
 
-df = ex.to_node_df(
-    traffic_graph, include_update_history=False, include_property_histories=False
-)
+df = traffic_graph.to_node_df(include_update_history=False, include_property_histories=False)
 print("Dataframe with no history:")
 print(f"{df}\n")
 print("The properties of ServerA:")
-print(f"{df[df['id'] == 'ServerA'].properties.iloc[0]}\n")
+print(f"{df[df['name'] == 'ServerA'].properties.iloc[0]}\n")
 
 # --8<-- [end:node_df]
 
 
 # --8<-- [start:edge_df]
-import raphtory.export as ex
 
 subgraph = monkey_graph.subgraph(["ANGELE", "FELIPE"])
-df = ex.to_edge_df(subgraph)
+df = subgraph.to_edge_df()
 print("Interactions between Angele and Felipe:")
 print(f"{df}\n")
 
 grunting_graph = subgraph.layer("Grunting-Lipsmacking")
-df = ex.to_edge_df(grunting_graph, explode_edges=True, include_property_histories=False)
+df = grunting_graph.to_edge_df(explode_edges=True, include_property_histories=False)
 print("Exploding the grunting-Lipsmacking layer")
 print(df)
 # --8<-- [end:edge_df]
 
 
 # --8<-- [start:networkX]
-import raphtory.export as ex
-
-nx_g = ex.to_networkx(traffic_graph)
+nx_g = traffic_graph.to_networkx()
 
 print("Networkx graph and the full property history of ServerA:")
 print(nx_g)
 print(nx_g.nodes["ServerA"])
 print()
 
-nx_g = ex.to_networkx(
-    traffic_graph, include_property_histories=False, include_update_history=False
+nx_g = traffic_graph.to_networkx(
+    include_property_histories=False, include_update_history=False
 )
 
 print("Only the latest properties of ServerA:")
@@ -118,7 +112,6 @@ print(nx_g.nodes["ServerA"])
 
 # --8<-- [start:networkX_vis]
 # mkdocs: render
-import raphtory.export as ex
 import matplotlib.pyplot as plt
 import networkx as nx
 
@@ -137,18 +130,17 @@ traffic_graph = Graph.load_from_pandas(
     edge_time="timestamp",
 )
 
-nx_g = ex.to_networkx(traffic_graph)
+nx_g = traffic_graph.to_networkx()
 nx.draw(nx_g, with_labels=True, node_color="lightblue", edge_color="gray")
 
 # --8<-- [end:networkX_vis]
 
 
 # --8<-- [start:pyvis]
-import raphtory.export as ex
 import json
 
-pyvis_g = ex.to_pyvis(
-    traffic_graph, edge_weight="data_size_MB", edge_color="#8e9b9e", directed=True
+pyvis_g = traffic_graph.to_pyvis(
+    edge_weight="data_size_MB", edge_color="#8e9b9e", directed=True
 )
 
 options = {
