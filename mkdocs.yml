@@ -104,8 +104,8 @@ nav:
       - user-guide/export/2_dataframes.md
       - user-guide/export/3_networkx.md
       - user-guide/export/4_pyvis.md
-  - API: open-house.md
-  - Community: 
+  - API: api.md 
+  - Open House: open-house.md
 
 hooks:
   - scripts/people.py
