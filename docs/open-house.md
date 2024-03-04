@@ -1,6 +1,7 @@
 # Raphtory Open House
 
 Join us once a month virtually for a coffee and to hear the latest news about Raphtory. Our open house session is for:
+
 - Discussion of new and in-progress Raphtory features
 - Hearing from researchers who are using Raphtory or temporal networks
 - Making requests for new features or functionality
