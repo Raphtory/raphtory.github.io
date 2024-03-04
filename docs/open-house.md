@@ -13,4 +13,4 @@ Join the Zoom meeting [here](https://northeastern.zoom.us/j/97269483716?pwd=ejN2
 
 If you want to add the recurring event to your calendar, follow the link below:
 
-<a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=cGc0aWJtaWg0ZXZpaXRmZDNobGM4dmFpZjBfMjAyNDA0MDNUMTAwMDAwWiBuYW9taS5hcm5vbGRAbnVsb25kb24uYWMudWs&amp;tmsrc=naomi.arnold%40nulondon.ac.uk&amp;scp=ALL"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
+<a target="_blank" href="https://calendar.google.com/calendar/u/0?cid=ZjRmNDYzNDkxYWVhY2RiOWQ4ODAyOWI0OTM4YjY0MjgwOGZkNGE2NzRkZjE3NWYyZDYzNGNhYTQ3Mjg0YTEyOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
