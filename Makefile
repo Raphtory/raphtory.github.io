@@ -40,12 +40,12 @@ requirements: .venv
 
 .PHONY: serve
 serve: .venv
-	@unset CONDA_PREFIX && source $(VENV_BIN)/activate && mkdocs serve --quiet
+	@unset CONDA_PREFIX && source $(VENV_BIN)/activate && mkdocs serve
 
 
 .PHONY: build
 build: .venv
-	@unset CONDA_PREFIX && source $(VENV_BIN)/activate && mkdocs build --quiet	
+	@unset CONDA_PREFIX && source $(VENV_BIN)/activate && mkdocs build
 
 .PHONY: lint
 lint: .venv node_modules

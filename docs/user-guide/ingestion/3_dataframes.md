@@ -52,7 +52,7 @@ Below we break the above example into a two stage process, first adding the edge
     ```
 
 ## Adding constant properties via dataframes
-As with the direct updates, there may be instances where you are adding a dataset which has no timestamps within it. To handle this when ingesting via dataframes the graph has the `load_edge_props_from_pandas()` and `load_node_props_from_pandas()` functions.
+As with the direct updates, there may be instances where you are adding a dataset which has no timestamps within it. To handle this when ingesting via dataframes the graph has the `load_edge_properties_from_pandas()` and `load_node_properties_from_pandas()` functions.
 
 Below we break the ingestion into a four stage process, adding the constant properties at the end. We make use of the same two dataframes for brevity of the example, but in real instances these would probably be four different dataframes, one for each function call.
 

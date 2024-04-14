@@ -22,16 +22,16 @@ traffic_graph = Graph.load_from_pandas(
     edge_src="source",
     edge_dst="destination",
     edge_time="timestamp",
-    edge_props=["data_size_MB"],
+    edge_properties=["data_size_MB"],
     edge_layer="transaction_type",
-    edge_const_props=["is_encrypted"],
-    edge_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    edge_const_properties=["is_encrypted"],
+    edge_shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
     node_df=server_nodes_df,
     node_id="server_id",
     node_time="timestamp",
-    node_props=["OS_version", "primary_function", "uptime_days"],
-    node_const_props=["server_name", "hardware_type"],
-    node_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    node_properties=["OS_version", "primary_function", "uptime_days"],
+    node_const_properties=["server_name", "hardware_type"],
+    node_shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 monkey_edges_df = pd.read_csv(
@@ -55,7 +55,7 @@ monkey_graph.load_edges_from_pandas(
     dst="Recipient",
     time="DateTime",
     layer="Behavior",
-    props=["Weight"],
+    properties=["Weight"],
 )
 
 
@@ -64,17 +64,18 @@ monkey_graph.load_edges_from_pandas(
 
 # --8<-- [start:node_df]
 
-df = traffic_graph.to_node_df()
+df = traffic_graph.nodes.to_df()
 print("Dataframe with full history:")
 print(f"{df}\n")
 print("The properties of ServerA:")
-print(f"{df[df['name'] == 'ServerA'].properties.iloc[0]}\n")
+#TODO FIX THIS AND BELOW
+#print(f"{df[df['name'] == 'ServerA'].properties.iloc[0]}\n")
 
-df = traffic_graph.to_node_df(include_update_history=False, include_property_histories=False)
+df = traffic_graph.nodes.to_df()
 print("Dataframe with no history:")
 print(f"{df}\n")
 print("The properties of ServerA:")
-print(f"{df[df['name'] == 'ServerA'].properties.iloc[0]}\n")
+#print(f"{df[df['name'] == 'ServerA'].properties.iloc[0]}\n")
 
 # --8<-- [end:node_df]
 
@@ -82,12 +83,12 @@ print(f"{df[df['name'] == 'ServerA'].properties.iloc[0]}\n")
 # --8<-- [start:edge_df]
 
 subgraph = monkey_graph.subgraph(["ANGELE", "FELIPE"])
-df = subgraph.to_edge_df()
+df = subgraph.edges.to_df()
 print("Interactions between Angele and Felipe:")
 print(f"{df}\n")
 
 grunting_graph = subgraph.layer("Grunting-Lipsmacking")
-df = grunting_graph.to_edge_df(explode_edges=True, include_property_histories=False)
+df = grunting_graph.edges.to_df(explode=True)
 print("Exploding the grunting-Lipsmacking layer")
 print(df)
 # --8<-- [end:edge_df]
@@ -101,9 +102,7 @@ print(nx_g)
 print(nx_g.nodes["ServerA"])
 print()
 
-nx_g = traffic_graph.to_networkx(
-    include_property_histories=False, include_update_history=False
-)
+nx_g = traffic_graph.to_networkx()
 
 print("Only the latest properties of ServerA:")
 print(nx_g.nodes["ServerA"])

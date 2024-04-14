@@ -22,7 +22,7 @@ g.load_edges_from_pandas(
     dst="Recipient",
     time="DateTime",
     layer="Behavior",
-    props=["Weight"],
+    properties=["Weight"],
 )
 print(g)
 # --8<-- [end:new_graph]
@@ -365,7 +365,7 @@ g = Graph.load_from_pandas(
     edge_dst="Recipient",
     edge_time="DateTime",
     edge_layer="Behavior",
-    edge_props=["Weight"],
+    edge_properties=["Weight"],
 )
 
 ###ACTUAL IMPORT CODE
