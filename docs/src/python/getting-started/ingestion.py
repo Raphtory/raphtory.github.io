@@ -181,19 +181,17 @@ from raphtory import Graph
 import pandas as pd
 
 edges_df = pd.read_csv("data/network_traffic_edges.csv")
-edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
+edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"])
 
 nodes_df = pd.read_csv("data/network_traffic_nodes.csv")
-nodes_df["timestamp"] = pd.to_datetime(nodes_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
+nodes_df["timestamp"] = pd.to_datetime(nodes_df["timestamp"])
 
-print("Edge Dataframe:")
-print(f"{edges_df}\n")
-print("Node Dataframe:")
-print(f"{nodes_df}\n")
+pd.set_option('display.max_columns', None)  # so all columns are printed
+print("--- Edge Dataframe ---")
+print(f"{edges_df.head(2)}\n")
+print()
+print("--- Node Dataframe ---")
+print(f"{nodes_df.head(2)}\n")
 
 # --8<-- [end:server_data]
 
@@ -294,9 +292,7 @@ from raphtory import Graph
 import pandas as pd
 
 edges_df = pd.read_csv("data/network_traffic_edges.csv")
-edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
+edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"])
 
 g = Graph()
 g.load_edges_from_pandas(

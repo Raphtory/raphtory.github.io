@@ -3,14 +3,10 @@ from raphtory import Graph
 import pandas as pd
 
 server_edges_df = pd.read_csv("data/network_traffic_edges.csv")
-server_edges_df["timestamp"] = pd.to_datetime(server_edges_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
+server_edges_df["timestamp"] = pd.to_datetime(server_edges_df["timestamp"])
 
 server_nodes_df = pd.read_csv("data/network_traffic_nodes.csv")
-server_nodes_df["timestamp"] = pd.to_datetime(server_nodes_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
+server_nodes_df["timestamp"] = pd.to_datetime(server_nodes_df["timestamp"])
 
 print("Network Traffic Edges:")
 print(f"{server_edges_df}\n")
@@ -37,9 +33,7 @@ traffic_graph = Graph.load_from_pandas(
 monkey_edges_df = pd.read_csv(
     "data/OBS_data.txt", sep="\t", header=0, usecols=[0, 1, 2, 3, 4], parse_dates=[0]
 )
-monkey_edges_df["DateTime"] = pd.to_datetime(monkey_edges_df["DateTime"]).astype(
-    "datetime64[ms]"
-)
+monkey_edges_df["DateTime"] = pd.to_datetime(monkey_edges_df["DateTime"])
 monkey_edges_df.dropna(axis=0, inplace=True)
 monkey_edges_df["Weight"] = monkey_edges_df["Category"].apply(
     lambda c: 1 if (c == "Affiliative") else (-1 if (c == "Agonistic") else 0)
@@ -65,17 +59,12 @@ monkey_graph.load_edges_from_pandas(
 # --8<-- [start:node_df]
 
 df = traffic_graph.nodes.to_df()
-print("Dataframe with full history:")
+print("--- to_df with default parameters --- ")
 print(f"{df}\n")
-print("The properties of ServerA:")
-#TODO FIX THIS AND BELOW
-#print(f"{df[df['name'] == 'ServerA'].properties.iloc[0]}\n")
-
-df = traffic_graph.nodes.to_df()
-print("Dataframe with no history:")
+print()
+df = traffic_graph.nodes.to_df(include_property_history=True, convert_datetime=True)
+print("--- to_df with property history and datetime conversion ---")
 print(f"{df}\n")
-print("The properties of ServerA:")
-#print(f"{df[df['name'] == 'ServerA'].properties.iloc[0]}\n")
 
 # --8<-- [end:node_df]
 
@@ -97,12 +86,14 @@ print(df)
 # --8<-- [start:networkX]
 nx_g = traffic_graph.to_networkx()
 
-print("Networkx graph and the full property history of ServerA:")
+print("Networkx graph:")
 print(nx_g)
+print()
+print("Full property history of ServerA:")
 print(nx_g.nodes["ServerA"])
 print()
 
-nx_g = traffic_graph.to_networkx()
+nx_g = traffic_graph.to_networkx(include_property_history=False)
 
 print("Only the latest properties of ServerA:")
 print(nx_g.nodes["ServerA"])
@@ -118,9 +109,7 @@ from raphtory import Graph
 import pandas as pd
 
 server_edges_df = pd.read_csv("data/network_traffic_edges.csv")
-server_edges_df["timestamp"] = pd.to_datetime(server_edges_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
+server_edges_df["timestamp"] = pd.to_datetime(server_edges_df["timestamp"])
 
 traffic_graph = Graph.load_from_pandas(
     edge_df=server_edges_df,
