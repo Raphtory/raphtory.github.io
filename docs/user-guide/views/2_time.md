@@ -69,7 +69,7 @@ If you have data covering a large period of time, or have many time points of in
 
 `expanding()` will return an iterable of views as if you called `before()` from the earliest time to the latest time at increments of a given `step`. 
 
-The step can be given as a simple epoch integer, or a natural language string describing the interval. For the latter, this is converted it into a iterator of datetimes, handling all corner cases like varying month length and leap years.
+The step can be given as a simple epoch integer, or a natural language string describing the interval. For the latter, this is converted into a iterator of datetimes, handling all corner cases like varying month length and leap years.
 
 Within the string you can reference `years`, `months` `weeks`, `days`, `hours`, `minutes`, `seconds` and `milliseconds`. These can be singular or plural and the string can include 'and', spaces, and commas to improve readability. 
 

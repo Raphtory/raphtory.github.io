@@ -4,7 +4,7 @@ If you prefer to initially manipulate your data in a `dataframe` before converti
 ## Creating a graph from dataframes
 The all-in-one way to do this is via the `load_from_pandas()` function on the `Graph` which will take a dataframe for your edges (and optionally for nodes) and return a graph built from these. This function has optional arguments to cover everything we have seen in the prior [direct updates tutorial](2_direct-updates.md).
 
-In the example below we are ingesting some network traffic data which includes different types of interactions between servers. In the first half of the code we read this data from disk into two dataframes, one for the server information (nodes) and one for the server interactions (edges). We then convert the timestamp columns from nanoseconds to milliseconds, as this is what Raphtory uses internally. Finally, the two dataframes are then printed out so you can see the headers and values.
+In the example below we are ingesting some network traffic data which includes different types of interactions between servers. In the first half of the code we read this data from disk into two dataframes, one for the server information (nodes) and one for the server interactions (edges). We then convert the timestamp column to datetime objects. Finally, the two dataframes are printed out so you can see the headers and values.
 
 {{code_block('getting-started/ingestion','server_data',[])}}
 

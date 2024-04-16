@@ -50,7 +50,7 @@ Below you can see we are adding two nodes to the graph `User 1` and `200` and an
 ## Accepted timestamps
 While integer based timestamps (like in the above examples) can represent both [logical time](https://en.wikipedia.org/wiki/Logical_clock) and [epoch time](https://en.wikipedia.org/wiki/Unix_time), datasets can often have their timestamps stored in human readable formats or special datetime objects. As such, `add_node()` and `add_edge()` can accept integers, datetime strings and datetime objects interchangeably. 
 
-Below we can see node `10` being added into the graph at `2021-02-03 14:01:00` and `2021-01-01 12:32:00`. The first timestamp is kept as a string, with Raphtory internally handling the conversion, and the second has been converted into a python datetime object before ingestion.
+Below we can see node `10` being added into the graph at `2021-02-03 14:01:00` and `2021-01-01 12:32:00`. The first timestamp is kept as a string, with Raphtory internally handling the conversion, and the second has been converted into a python datetime object before ingestion. This datetime object can also have a timezone, with Raphtory storing everything internally in UTC.
 
 {{code_block('getting-started/ingestion','different_time_types',[])}}
 !!! Output

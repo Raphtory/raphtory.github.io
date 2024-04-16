@@ -4,7 +4,7 @@ import pandas as pd
 edges_df = pd.read_csv(
     "data/OBS_data.txt", sep="\t", header=0, usecols=[0, 1, 2, 3, 4], parse_dates=[0]
 )
-edges_df["DateTime"] = pd.to_datetime(edges_df["DateTime"]).astype("datetime64[ms]")
+edges_df["DateTime"] = pd.to_datetime(edges_df["DateTime"])
 edges_df.dropna(axis=0, inplace=True)
 edges_df["Weight"] = edges_df["Category"].apply(
     lambda c: 1 if (c == "Affiliative") else (-1 if (c == "Agonistic") else 0)
@@ -22,7 +22,7 @@ g.load_edges_from_pandas(
     dst="Recipient",
     time="DateTime",
     layer="Behavior",
-    props=["Weight"],
+    properties=["Weight"],
 )
 print(g)
 # --8<-- [end:new_graph]
@@ -59,7 +59,7 @@ print("Latest time (Unix Epoch):", latest_epoch)
 print("Checking if specific nodes and edges are in the graph:")
 if g.has_node(id="LOME"):
     print("Lomme is in the graph")
-if g.has_edge(src="LOME", dst="NEKKE", layer="Playing with"):
+if g.layer("Playing with").has_edge(src="LOME", dst="NEKKE"):
     print("Lomme has played with Nekke \n")
 
 print("Getting individual nodes and edges:")
@@ -353,7 +353,7 @@ from raphtory import Graph
 edges_df = pd.read_csv(
     "data/OBS_data.txt", sep="\t", header=0, usecols=[0, 1, 2, 3, 4], parse_dates=[0]
 )
-edges_df["DateTime"] = pd.to_datetime(edges_df["DateTime"]).astype("datetime64[ms]")
+edges_df["DateTime"] = pd.to_datetime(edges_df["DateTime"])
 edges_df.dropna(axis=0, inplace=True)
 edges_df["Weight"] = edges_df["Category"].apply(
     lambda c: 1 if (c == "Affiliative") else (-1 if (c == "Agonistic") else 0)
@@ -365,7 +365,7 @@ g = Graph.load_from_pandas(
     edge_dst="Recipient",
     edge_time="DateTime",
     edge_layer="Behavior",
-    edge_props=["Weight"],
+    edge_properties=["Weight"],
 )
 
 ###ACTUAL IMPORT CODE
@@ -424,9 +424,10 @@ print(
 
 # --8<-- [end:layered_hopping]
 
-
 # --8<-- [start:subgraph]
-print(f"There are {g.count_nodes()} monkeys in the whole graph")
+temp = g.count_nodes()
+print(f"There are {temp} monkeys in the whole graph")
+
 subgraph = g.subgraph(["FELIPE", "LIPS", "NEKKE", "LOME", "BOBO"])
 print(f"There are {subgraph.count_nodes()} monkeys in the subgraph")
 neighbours = g.node("FELIPE").neighbours.name.collect()
@@ -448,18 +449,20 @@ print(
 start_time = datetime.strptime("2019-06-17", "%Y-%m-%d")
 end_time = datetime.strptime("2019-06-18", "%Y-%m-%d")
 windowed_view = g.window(start_time, end_time)
-materialized_view = windowed_view.materialize()
+
+materialized_graph = windowed_view.materialize()
 print(
     f"Before the update the view had {windowed_view.count_temporal_edges()} edge updates"
 )
 print(
-    f"Before the update the materialized view had {materialized_view.count_temporal_edges()} edge updates"
+    f"Before the update the materialized graph had {materialized_graph.count_temporal_edges()} edge updates"
 )
-g.add_edge(start_time, "FELIPE", "LOME", properties={"Weight": 1}, layer="Grooming")
+print("Adding new update to materialized_graph")
+materialized_graph.add_edge(1, "FELIPE", "LOME", properties={"Weight": 1}, layer="Grooming")
 print(
     f"After the update the view had {windowed_view.count_temporal_edges()} edge updates"
 )
 print(
-    f"After the update the materialized view had {materialized_view.count_temporal_edges()} edge updates"
+    f"After the update the materialized graph had {materialized_graph.count_temporal_edges()} edge updates"
 )
 # --8<-- [end:materialize]

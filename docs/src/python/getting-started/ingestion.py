@@ -181,19 +181,17 @@ from raphtory import Graph
 import pandas as pd
 
 edges_df = pd.read_csv("data/network_traffic_edges.csv")
-edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
+edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"])
 
 nodes_df = pd.read_csv("data/network_traffic_nodes.csv")
-nodes_df["timestamp"] = pd.to_datetime(nodes_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
+nodes_df["timestamp"] = pd.to_datetime(nodes_df["timestamp"])
 
-print("Edge Dataframe:")
-print(f"{edges_df}\n")
-print("Node Dataframe:")
-print(f"{nodes_df}\n")
+pd.set_option('display.max_columns', None)  # so all columns are printed
+print("--- Edge Dataframe ---")
+print(f"{edges_df.head(2)}\n")
+print()
+print("--- Node Dataframe ---")
+print(f"{nodes_df.head(2)}\n")
 
 # --8<-- [end:server_data]
 
@@ -204,16 +202,16 @@ g = Graph.load_from_pandas(
     edge_src="source",
     edge_dst="destination",
     edge_time="timestamp",
-    edge_props=["data_size_MB"],
+    edge_properties=["data_size_MB"],
     edge_layer="transaction_type",
-    edge_const_props=["is_encrypted"],
-    edge_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    edge_const_properties=["is_encrypted"],
+    edge_shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
     node_df=nodes_df,
     node_id="server_id",
     node_time="timestamp",
-    node_props=["OS_version", "primary_function", "uptime_days"],
-    node_const_props=["server_name", "hardware_type"],
-    node_shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    node_properties=["OS_version", "primary_function", "uptime_days"],
+    node_const_properties=["server_name", "hardware_type"],
+    node_shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 print("The resulting graphs and example node/edge:")
@@ -229,19 +227,19 @@ g.load_edges_from_pandas(
     src="source",
     dst="destination",
     time="timestamp",
-    props=["data_size_MB"],
+    properties=["data_size_MB"],
     layer="transaction_type",
-    const_props=["is_encrypted"],
-    shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    const_properties=["is_encrypted"],
+    shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 g.load_nodes_from_pandas(
     df=nodes_df,
     id="server_id",
     time="timestamp",
-    props=["OS_version", "primary_function", "uptime_days"],
-    const_props=["server_name", "hardware_type"],
-    shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    properties=["OS_version", "primary_function", "uptime_days"],
+    const_properties=["server_name", "hardware_type"],
+    shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 print(g)
@@ -257,7 +255,7 @@ g.load_edges_from_pandas(
     src="source",
     dst="destination",
     time="timestamp",
-    props=["data_size_MB"],
+    properties=["data_size_MB"],
     layer="transaction_type",
 )
 
@@ -265,7 +263,7 @@ g.load_nodes_from_pandas(
     df=nodes_df,
     id="server_id",
     time="timestamp",
-    props=["OS_version", "primary_function", "uptime_days"],
+    properties=["OS_version", "primary_function", "uptime_days"],
 )
 
 g.load_edge_props_from_pandas(
@@ -273,15 +271,15 @@ g.load_edge_props_from_pandas(
     src="source",
     dst="destination",
     layer="transaction_type",
-    const_props=["is_encrypted"],
-    shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    const_properties=["is_encrypted"],
+    shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 g.load_node_props_from_pandas(
     df=nodes_df,
     id="server_id",
-    const_props=["server_name", "hardware_type"],
-    shared_const_props={"datasource": "data/network_traffic_edges.csv"},
+    const_properties=["server_name", "hardware_type"],
+    shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 print(g)
@@ -294,9 +292,7 @@ from raphtory import Graph
 import pandas as pd
 
 edges_df = pd.read_csv("data/network_traffic_edges.csv")
-edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"]).astype(
-    "datetime64[ms, UTC]"
-)
+edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"])
 
 g = Graph()
 g.load_edges_from_pandas(
@@ -304,7 +300,7 @@ g.load_edges_from_pandas(
     src="source",
     dst="destination",
     time="timestamp",
-    props=["data_size_MB"],
+    properties=["data_size_MB"],
     layer="transaction_type",
 )
 g.save_to_file("/tmp/saved_graph")
