@@ -1,8 +1,4 @@
 # Exporting to Pyvis
-
-!!! warning
-    There is currently a known issue with the to_pyvis conversion - this will be fixed ASAP in 0.8.1
-
 For a more interactive visualisation you can export your graphs to [Pyvis](https://pyvis.readthedocs.io/en/latest/), a network visualisation library built on top of [VisJS](https://visjs.github.io/vis-network/examples/).
 
 Due to the nature of Pyvis's model and API, the parameters for `to_pyvis()` are quite different to the other export functions discussed previously. These are split between Raphtory specific parameters and a `kwargs` (key word arguments) map which is passed directly to the pyvis graph during initialisation.

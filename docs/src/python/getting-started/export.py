@@ -127,8 +127,9 @@ nx.draw(nx_g, with_labels=True, node_color="lightblue", edge_color="gray")
 # --8<-- [start:pyvis]
 import json
 
+
 pyvis_g = traffic_graph.to_pyvis(
-    edge_weight="data_size_MB", edge_color="#8e9b9e", directed=True
+    edge_weight="data_size_MB", edge_color="#8e9b9e", directed=True,notebook=False
 )
 
 options = {
@@ -152,5 +153,5 @@ options = {
 
 pyvis_g.set_options(json.dumps(options))
 
-pyvis_g.show("nx.html")
+pyvis_g.write_html("nx.html")
 # --8<-- [end:pyvis]
