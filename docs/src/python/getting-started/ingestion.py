@@ -47,12 +47,12 @@ from raphtory import Graph
 g = Graph()
 
 g.add_node(timestamp=123, id="User 1")
-g.add_node(timestamp=456, id=200)
-g.add_edge(timestamp=789, src="User 1", dst=200)
+g.add_node(timestamp=456, id="User 2")
+g.add_edge(timestamp=789, src="User 1", dst="User 2")
 
 print(g.node("User 1"))
-print(g.node(200))
-print(g.edge("User 1", 200))
+print(g.node("User 2"))
+print(g.edge("User 1", "User 2"))
 # --8<-- [end:id_types]
 
 # --8<-- [start:property_types]
@@ -197,21 +197,25 @@ print(f"{nodes_df.head(2)}\n")
 
 
 # --8<-- [start:graph_from_dataframe]
-g = Graph.load_from_pandas(
-    edge_df=edges_df,
-    edge_src="source",
-    edge_dst="destination",
-    edge_time="timestamp",
-    edge_properties=["data_size_MB"],
-    edge_layer="transaction_type",
-    edge_const_properties=["is_encrypted"],
-    edge_shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
-    node_df=nodes_df,
-    node_id="server_id",
-    node_time="timestamp",
-    node_properties=["OS_version", "primary_function", "uptime_days"],
-    node_const_properties=["server_name", "hardware_type"],
-    node_shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
+g = Graph()
+g.load_edges_from_pandas(
+    df=edges_df,
+    time="timestamp",
+    src="source",
+    dst="destination",
+    properties=["data_size_MB"],
+    layer_col="transaction_type",
+    constant_properties=["is_encrypted"],
+    shared_constant_properties={"datasource": "data/network_traffic_edges.csv"},
+)
+g.load_nodes_from_pandas(
+    df=nodes_df,
+    time="timestamp",
+    id="server_id",
+    properties=["OS_version", "primary_function", "uptime_days"],
+    constant_properties=["server_name", "hardware_type"],
+    shared_constant_properties={"datasource": "data/network_traffic_edges.csv"},
+
 )
 
 print("The resulting graphs and example node/edge:")
@@ -228,9 +232,9 @@ g.load_edges_from_pandas(
     dst="destination",
     time="timestamp",
     properties=["data_size_MB"],
-    layer="transaction_type",
-    const_properties=["is_encrypted"],
-    shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
+    layer_col="transaction_type",
+    constant_properties=["is_encrypted"],
+    shared_constant_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 g.load_nodes_from_pandas(
@@ -238,8 +242,8 @@ g.load_nodes_from_pandas(
     id="server_id",
     time="timestamp",
     properties=["OS_version", "primary_function", "uptime_days"],
-    const_properties=["server_name", "hardware_type"],
-    shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
+    constant_properties=["server_name", "hardware_type"],
+    shared_constant_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 print(g)
@@ -256,7 +260,7 @@ g.load_edges_from_pandas(
     dst="destination",
     time="timestamp",
     properties=["data_size_MB"],
-    layer="transaction_type",
+    layer_col="transaction_type",
 )
 
 g.load_nodes_from_pandas(
@@ -270,16 +274,16 @@ g.load_edge_props_from_pandas(
     df=edges_df,
     src="source",
     dst="destination",
-    layer="transaction_type",
-    const_properties=["is_encrypted"],
-    shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
+    layer_col="transaction_type",
+    constant_properties=["is_encrypted"],
+    shared_constant_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 g.load_node_props_from_pandas(
     df=nodes_df,
     id="server_id",
-    const_properties=["server_name", "hardware_type"],
-    shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
+    constant_properties=["server_name", "hardware_type"],
+    shared_constant_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 print(g)
@@ -297,11 +301,11 @@ edges_df["timestamp"] = pd.to_datetime(edges_df["timestamp"])
 g = Graph()
 g.load_edges_from_pandas(
     df=edges_df,
+    time="timestamp",
     src="source",
     dst="destination",
-    time="timestamp",
     properties=["data_size_MB"],
-    layer="transaction_type",
+    layer_col="transaction_type",
 )
 g.save_to_file("/tmp/saved_graph")
 loaded_graph = Graph.load_from_file("/tmp/saved_graph")

@@ -13,21 +13,24 @@ print(f"{server_edges_df}\n")
 print("Network Traffic Servers:")
 print(f"{server_nodes_df}\n")
 
-traffic_graph = Graph.load_from_pandas(
-    edge_df=server_edges_df,
-    edge_src="source",
-    edge_dst="destination",
-    edge_time="timestamp",
-    edge_properties=["data_size_MB"],
-    edge_layer="transaction_type",
-    edge_const_properties=["is_encrypted"],
-    edge_shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
-    node_df=server_nodes_df,
-    node_id="server_id",
-    node_time="timestamp",
-    node_properties=["OS_version", "primary_function", "uptime_days"],
-    node_const_properties=["server_name", "hardware_type"],
-    node_shared_const_properties={"datasource": "data/network_traffic_edges.csv"},
+traffic_graph = Graph()
+traffic_graph.load_edges_from_pandas(
+    df=server_edges_df,
+    src="source",
+    dst="destination",
+    time="timestamp",
+    properties=["data_size_MB"],
+    layer_col="transaction_type",
+    constant_properties=["is_encrypted"],
+    shared_constant_properties={"datasource": "data/network_traffic_edges.csv"},
+)
+traffic_graph.load_nodes_from_pandas(
+    df=server_nodes_df,
+    id="server_id",
+    time="timestamp",
+    properties=["OS_version", "primary_function", "uptime_days"],
+    constant_properties=["server_name", "hardware_type"],
+    shared_constant_properties={"datasource": "data/network_traffic_edges.csv"},
 )
 
 monkey_edges_df = pd.read_csv(
@@ -48,7 +51,7 @@ monkey_graph.load_edges_from_pandas(
     src="Actor",
     dst="Recipient",
     time="DateTime",
-    layer="Behavior",
+    layer_col="Behavior",
     properties=["Weight"],
 )
 
@@ -111,11 +114,12 @@ import pandas as pd
 server_edges_df = pd.read_csv("data/network_traffic_edges.csv")
 server_edges_df["timestamp"] = pd.to_datetime(server_edges_df["timestamp"])
 
-traffic_graph = Graph.load_from_pandas(
-    edge_df=server_edges_df,
-    edge_src="source",
-    edge_dst="destination",
-    edge_time="timestamp",
+traffic_graph = Graph()
+traffic_graph.load_edges_from_pandas(
+    df=server_edges_df,
+    time="timestamp",
+    src="source",
+    dst="destination",
 )
 
 nx_g = traffic_graph.to_networkx()
