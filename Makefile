@@ -38,6 +38,9 @@ requirements: .venv
 	$(VENV_BIN)/python -m pip install --upgrade pip
 	$(VENV_BIN)/pip install -r requirements.txt
 
+mkdocs:
+	source /opt/anaconda3/bin/activate raphtory-new3 && mkdocs serve
+
 .PHONY: serve
 serve: .venv
 	@unset CONDA_PREFIX && source $(VENV_BIN)/activate && mkdocs serve

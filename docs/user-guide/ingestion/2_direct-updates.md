@@ -38,7 +38,8 @@ As an example of this below we are adding an edge to the graph from `15` to `16`
 ## Accepted ID types
 The data you want to use for node IDs may not always be integers, they can often be unique strings like a person's username or a blockchain wallet hash. As such `add_node()` and `add_edge()` will also accept strings for their `id`, `src` & `dst` arguments. 
 
-Below you can see we are adding two nodes to the graph `User 1` and `200` and an edge between them. 
+Below you can see we are adding two nodes to the graph `User 1` and `User 2` and an edge between them. 
+
 {{code_block('getting-started/ingestion','id_types',[])}}
 
 !!! Output
@@ -46,6 +47,9 @@ Below you can see we are adding two nodes to the graph `User 1` and `200` and an
     ```python exec="on" result="text" session="getting-started/id_types"
     --8<-- "python/getting-started/ingestion.py:id_types"
     ```
+
+!!! warning
+    Note: A graph can index nodes by either integers or strings, not both at the same time.This means, for example, you cannot have `User 1` (a string) and `200` (an integer) as ids in the same graph. 
 
 ## Accepted timestamps
 While integer based timestamps (like in the above examples) can represent both [logical time](https://en.wikipedia.org/wiki/Logical_clock) and [epoch time](https://en.wikipedia.org/wiki/Unix_time), datasets can often have their timestamps stored in human readable formats or special datetime objects. As such, `add_node()` and `add_edge()` can accept integers, datetime strings and datetime objects interchangeably. 

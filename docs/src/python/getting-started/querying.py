@@ -21,7 +21,7 @@ g.load_edges_from_pandas(
     src="Actor",
     dst="Recipient",
     time="DateTime",
-    layer="Behavior",
+    layer_col="Behavior",
     properties=["Weight"],
 )
 print(g)
@@ -359,13 +359,14 @@ edges_df["Weight"] = edges_df["Category"].apply(
     lambda c: 1 if (c == "Affiliative") else (-1 if (c == "Agonistic") else 0)
 )
 
-g = Graph.load_from_pandas(
-    edge_df=edges_df,
-    edge_src="Actor",
-    edge_dst="Recipient",
-    edge_time="DateTime",
-    edge_layer="Behavior",
-    edge_properties=["Weight"],
+g = Graph()
+g.load_edges_from_pandas(
+    df=edges_df,
+    time="DateTime",
+    src="Actor",
+    dst="Recipient",
+    layer_col="Behavior",
+    properties=["Weight"],
 )
 
 ###ACTUAL IMPORT CODE

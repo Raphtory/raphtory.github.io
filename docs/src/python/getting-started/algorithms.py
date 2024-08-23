@@ -5,8 +5,9 @@ import pandas as pd
 df = pd.read_csv("data/lotr.csv")
 print(df)
 
-lotr_graph = Graph.load_from_pandas(
-    edge_df=df, edge_src="src", edge_dst="dst", edge_time="time"
+lotr_graph = Graph()
+lotr_graph.load_edges_from_pandas(
+    df=df,time="time", src="src", dst="dst"
 )
 # --8<-- [end:data_loading]
 
@@ -68,8 +69,9 @@ from raphtory import algorithms as rp
 from raphtory import Graph
 
 df = pd.read_csv("data/lotr.csv")
-lotr_graph = Graph.load_from_pandas(
-    edge_df=df, edge_src="src", edge_dst="dst", edge_time="time"
+lotr_graph = Graph()
+lotr_graph.load_edges_from_pandas(
+    df=df, src="src", dst="dst", time="time"
 )
 
 importance = []
