@@ -104,6 +104,9 @@ nav:
       - user-guide/export/2_dataframes.md
       - user-guide/export/3_networkx.md
       - user-guide/export/4_pyvis.md
+    - Temporal graph representations:
+      - user-guide/persistent-graph/1_intro.md
+      - user-guide/persistent-graph/2_ambiguity.md
   - API: api.md 
   - Open House: open-house.md
 
