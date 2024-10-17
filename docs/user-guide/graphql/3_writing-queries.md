@@ -339,18 +339,3 @@ Once you have updated the graph such as adding an edge, adding a node, removing 
     ```python
     g = client.receive_graph("path/to/event_graph")
     ```
-
-## Batch updates
-
-If you would like to add multiple nodes or edges to your graph, this is possible via the add_edges() or add_nodes() methods.
-
-=== ":fontawesome-brands-python: Python"
-
-    ```python
-    work_dir = tempfile.mkdtemp()
-        with GraphServer(work_dir).start():
-            client = RaphtoryClient("http://localhost:1736")
-            client.new_graph("path/to/event_graph", "EVENT")
-            rg = client.remote_graph("path/to/event_graph")
-            rg.add_edges()
-    ```
