@@ -1,5 +1,5 @@
 # Saving and loading graphs
-The fastest way to ingest a graph is to load one from Raphtory's on-disk format using the `load_from_file()` function on the graph. This does require first ingesting via one of the prior methods and saving the produced graph via `save_to_file()`, but means for large datasets you do not need to parse the data every time you run a Raphtory script.
+The fastest way to ingest a graph is to load one from Raphtory's on-disk format using the `load_from_file()` function on the graph. This does require first ingesting via one of the prior methods and saving the produced graph via `save_to_file()` or `save_to_zip()`, but means for large datasets you do not need to parse the data every time you run a Raphtory script.
 !!! info
     You can also [pickle](https://docs.python.org/3/library/pickle.html) Raphtory graphs, which uses these functions under the hood.
 

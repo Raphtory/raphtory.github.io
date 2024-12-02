@@ -60,6 +60,15 @@ Below you can see an example of these APIs and the sort of questions you can ask
     --8<-- "python/home/example.py:example"
     ```
 
+### GraphQL Playground
+Once you have built some graphs, you can easily host them via Graphql. When you host a Raphtory GraphQL server you get a web playground bundled in, accessible on the same port within your browser (defaulting to 1736). Here you can experiment with queries on your graphs and explore the schema. An example of the playground can be seen below, running the same query as in the python example above.
+
+![GraphQL Playground](https://i.imgur.com/p0HH6v3.png)
+
+### Graph Visualisation and Explorations
+Once the GraphQL server is running, you can access the UI directly. If the server is hosted on port 1736, the UI will be available at http://localhost:1736. The UI allows you to search for data in Raphtory, explore connections, and visualise the graph effortlessly.
+
+![Graph User Interface](https://github.com/user-attachments/assets/65aec644-edf8-4db6-a932-5b63228e9e0d)
 
 ## Excited to give it a go?
 

@@ -68,7 +68,7 @@ In our output we can see the `history` of node `10` contains the two times at wh
 ## Properties
 Alongside the structural update history, Raphtory can maintain the changing value of properties associated with nodes and edges. Both the `add_node()` and `add_edge()` functions have an optional parameter `properties` which takes a dictionary of key value pairs to be stored at the given timestamp. 
 
-The graph itself may also have its own `global properties` via the `add_property()` function which takes only a `timestamp` and a `properties` dictionary. 
+The graph itself may also have its own `global properties` via the `add_properties()` function which takes only a `timestamp` and a `properties` dictionary. 
 
 Properties can consist of primitives (`Integer`, `Float`, `String`, `Boolean`, `Datetime`) and structures (`Dictionary`, `List`, `Graph`). This allows you to store both basic values as well as do complex hierarchical modelling depending on your use case.
 

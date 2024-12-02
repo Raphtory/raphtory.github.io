@@ -79,7 +79,7 @@ g.add_node(
 )
 
 # Dictionaries and Lists added to a graph
-g.add_property(
+g.add_properties(
     timestamp=1,
     properties={
         "inner data": {"name": "bob", "value list": [1, 2, 3]},
@@ -87,7 +87,7 @@ g.add_property(
     },
 )
 datetime_obj = datetime.strptime("2021-01-01 12:32:00", "%Y-%m-%d %H:%M:%S")
-g.add_property(
+g.add_properties(
     timestamp=2,
     properties={
         "inner data": {
