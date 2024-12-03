@@ -68,6 +68,7 @@ Once you have built some graphs, you can easily host them via Graphql. When you 
 ### Graph Visualisation and Explorations
 Once the GraphQL server is running, you can access the UI directly. If the server is hosted on port 1736, the UI will be available at http://localhost:1736. The UI allows you to search for data in Raphtory, explore connections, and visualise the graph effortlessly.
 
+
 ![Graph User Interface](https://github.com/user-attachments/assets/65aec644-edf8-4db6-a932-5b63228e9e0d)
 
 ## Excited to give it a go?
