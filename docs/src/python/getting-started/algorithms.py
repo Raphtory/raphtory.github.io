@@ -28,16 +28,13 @@ from raphtory import algorithms as rp
 
 results = rp.weakly_connected_components(lotr_graph)
 
-# Convert the results to a dataframe so we can have a look at them
-df = results.to_df()
-print(f"{df}\n")
+print(f"{results}\n")
 
 # Group the components together
-components = results.group_by()
-print(f"{components}\n")
+components = results.groups()
 
 # Get the size of each component
-component_sizes = {key: len(value) for key, value in components.items()}
+component_sizes = {key: len(value) for key, value in components}
 # Get the key for the largest component
 largest_component = max(component_sizes, key=component_sizes.get)
 # Print the size of the largest component
@@ -57,7 +54,7 @@ print(f"Gandalf's ranking is {gandalf_rank}\n")
 
 # Getting the top 5 most important characters and printing out their scores
 top_5 = results.top_k(5)
-for rank, (node, score) in enumerate(top_5, 1):
+for rank, (node, score) in enumerate(top_5.items(),1):
     print(f"Rank {rank}: {node.name} with a score of {score:.5f}")
 # --8<-- [end:pagerank]
 

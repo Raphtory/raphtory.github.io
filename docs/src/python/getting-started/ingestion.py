@@ -97,11 +97,8 @@ g.add_properties(
     },
 )
 
-# Graph property on an edge
-g2 = Graph()
-g2.add_node(timestamp=123, id="Inner User")
-
-g.add_edge(timestamp=4, src="User 1", dst="User 2", properties={"i_graph": g2})
+# Weight list on an edge
+g.add_edge(timestamp=4, src="User 1", dst="User 2", properties={"weights": [1,2,3]})
 
 # Printing everything out
 v = g.node(id="User 1")
@@ -307,7 +304,7 @@ g.load_edges_from_pandas(
     properties=["data_size_MB"],
     layer_col="transaction_type",
 )
-g.save_to_file("/tmp/saved_graph")
+g.save_to_file("/tmp/saved_graph") 
 loaded_graph = Graph.load_from_file("/tmp/saved_graph")
 print(g)
 print(loaded_graph)

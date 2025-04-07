@@ -45,11 +45,11 @@ print(
 )
 
 # Run pagerank and ask for the top ranked node
-top_node = algo.pagerank(graph).top_k(1)
+top_node = algo.pagerank(graph).top_k(1).max_item()
 print(
     "The most important node in the graph is",
-    top_node[0][0],
+    top_node[0].name,
     "with a score of",
-    top_node[0][1],
+    top_node[1],
 )
 # --8<-- [end:example]

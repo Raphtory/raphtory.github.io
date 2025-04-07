@@ -4,7 +4,7 @@ As with all the queries we saw in the [previous chapter](../views/1_intro.md), b
 
 To demonstrate this, below is an example of how you could track Gandaf's importance over the course of the story using rolling windows and the `PageRank` algorithm. 
 
-Within each windowed graph we use the [AlgorithmResult](https://docs.raphtory.com/en/master/reference/algorithms/algorithmresult.html) api to extract Gandalf's score and record it alongside the earliest timestamp in the window, which can then be plotted via matplotlib.
+Within each windowed graph we use the `NodeState` api to extract Gandalf's score and record it alongside the earliest timestamp in the window, which can then be plotted via matplotlib.
 
 
 {{code_block('getting-started/algorithms','rolling',['Graph'])}}

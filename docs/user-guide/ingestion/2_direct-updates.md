@@ -70,13 +70,13 @@ Alongside the structural update history, Raphtory can maintain the changing valu
 
 The graph itself may also have its own `global properties` via the `add_properties()` function which takes only a `timestamp` and a `properties` dictionary. 
 
-Properties can consist of primitives (`Integer`, `Float`, `String`, `Boolean`, `Datetime`) and structures (`Dictionary`, `List`, `Graph`). This allows you to store both basic values as well as do complex hierarchical modelling depending on your use case.
+Properties can consist of primitives (`Integer`, `Float`, `String`, `Boolean`, `Datetime`) and structures (`Dictionary`, `List`). This allows you to store both basic values as well as do complex hierarchical modelling depending on your use case.
 
 In the example below we are using all of these functions to add a mixture of properties to a node, an edge and the graph.
 
 
 !!! warning
-    Please note that once a `property key` is associated to one of the above types for a given node/edge/graph, attempting to add a value of a different type under the same key will result in an error. 
+    Please note that once a `property key` is associated to one of the above types for a given node/edge/graph, attempting to add a value of a different type under the same key will result in an error. For `Lists` the values must all be the same type and for `Dictionaries` the values for each key must always be the same type.
 
 {{code_block('getting-started/ingestion','property_types',[])}}
 

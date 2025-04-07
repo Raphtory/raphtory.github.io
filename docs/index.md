@@ -61,7 +61,7 @@ Below you can see an example of these APIs and the sort of questions you can ask
     ```
 
 ### GraphQL Playground
-Once you have built some graphs, you can easily host them via Graphql. When you host a Raphtory GraphQL server you get a web playground bundled in, accessible on the same port within your browser (defaulting to 1736). Here you can experiment with queries on your graphs and explore the schema. An example of the playground can be seen below, running the same query as in the python example above.
+Once you have built some graphs, you can easily host them via Graphql. When you host a Raphtory GraphQL server you get a web playground bundled in, accessible on the same port within your browser (defaulting to 1736). Here you can experiment with queries on your graphs and explore the schema. An example of the playground can be seen below, running a similar query as in the python example above.
 
 ![GraphQL Playground](https://i.imgur.com/p0HH6v3.png)
 
@@ -73,7 +73,7 @@ Once the GraphQL server is running, you can access the UI directly. If the serve
 
 ## Excited to give it a go?
 
-This site have been created to get new users of `Raphtory` up to speed by explaining the most important features via meaningful examples. You can get started straight away by heading to the [User Guide](user-guide/installation.md). If you prefer learning via APIs and reading into specific object or functions, your best best it to visit the API documentation: [Python](https://docs.raphtory.com/) | [Rust](https://docs.rs/raphtory/latest/raphtory/).
+This site has been created to get new users of `Raphtory` up to speed by explaining the most important features via meaningful examples. You can get started straight away by heading to the [User Guide](user-guide/installation.md). If you prefer learning via APIs and reading into specific object or functions, your best best it to visit the API documentation: [Python](https://docs.raphtory.com/) | [Rust](https://docs.rs/raphtory/latest/raphtory/).
 
 
 

@@ -80,7 +80,9 @@ print("Interactions between Angele and Felipe:")
 print(f"{df}\n")
 
 grunting_graph = subgraph.layer("Grunting-Lipsmacking")
-df = grunting_graph.edges.to_df(explode=True)
+print(grunting_graph)
+print(grunting_graph.edges)
+df = grunting_graph.edges.to_df()
 print("Exploding the grunting-Lipsmacking layer")
 print(df)
 # --8<-- [end:edge_df]

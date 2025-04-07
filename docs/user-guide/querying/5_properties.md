@@ -1,6 +1,6 @@
 
 # Property queries
-As you will have seen in the [ingestion tutorial](../ingestion/2_direct-updates.md), graphs, nodes and edges may all have `constant` and `temporal` properties, consisting of a wide range of data types. Raphtory provides a unified API for accessing this data via the [Properties](https://docs.raphtory.com/en/master/reference/core/properties.html) object available on all classes by calling `.properties`. 
+As you will have seen in the [ingestion tutorial](../ingestion/2_direct-updates.md), graphs, nodes and edges may all have `constant` and `temporal` properties, consisting of a wide range of data types. Raphtory provides a unified API for accessing this data via the `Properties` object available on all classes by calling `.properties`. 
 
 This `Properties` class offers several functions for you to access the values you are interested in in the most appropriate format. To demonstrate this let's create a simple graph with one node that has a variety of different properties, both temporal and constant. 
 
@@ -23,10 +23,10 @@ We can grab this nodes property object and call all of the functions to access t
 The `Properties` class also has two attributes `constant` and `temporal` which have all of the above functions, but are restricted to only the properties which fall within their respective catagories. 
 
 !!! info
-    The semantics for [ConstProperties](https://docs.raphtory.com/en/master/reference/core/properties.html#raphtory.ConstProperties) are exactly the same as described above. [TemporalProperties](https://docs.raphtory.com/en/master/reference/core/temporalproperties.html#raphtory.TemporalProperties) on the other hand allow you to do much more, as is discussed below.
+    The semantics for `ConstantProperties` are exactly the same as described above. `TemporalProperties` on the other hand allow you to do much more, as is discussed below.
 
 ## Temporal specific functions
-As temporal properties have a history, we may often want to do more than just look at the latest value. As such, calling `get()`, `values()` or `items()` on `TemporalProperties` will return a [TemporalProp](https://docs.raphtory.com/en/master/reference/core/temporalproperties.html#raphtory.TemporalProp) object which contains all of the value history.
+As temporal properties have a history, we may often want to do more than just look at the latest value. As such, calling `get()`, `values()` or `items()` on `TemporalProperties` will return a `TemporalProp` object which contains all of the value history.
 
 `TemporalProp` has a host of helper functions covering anything that you may want to do with this history. This includes:
 
