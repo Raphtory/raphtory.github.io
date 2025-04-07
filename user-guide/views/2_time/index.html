@@ -1,0 +1,1593 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://raphtory.github.io/user-guide/views/2_time/">
+      
+      
+        <link rel="prev" href="../1_intro/">
+      
+      
+        <link rel="next" href="../3_layer/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>Querying the graph over time - Raphtory User Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_ansi.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  
+    <script>var consent;"undefined"==typeof __md_analytics||(consent=__md_get("__consent"))&&consent.analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#querying-the-graph-over-time" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Raphtory User Guide" class="md-header__button md-logo" aria-label="Raphtory User Guide" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Raphtory User Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Querying the graph over time
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pometry/raphtory" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pometry/raphtory
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../installation/" class="md-tabs__link md-tabs__link--active">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../api/" class="md-tabs__link">
+      API
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Raphtory User Guide" class="md-nav__button md-logo" aria-label="Raphtory User Guide" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Raphtory User Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pometry/raphtory" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pometry/raphtory
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Getting data into Raphtory
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Getting data into Raphtory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ingestion/1_creating-a-graph/" class="md-nav__link">
+        Creating a graph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ingestion/2_direct-updates/" class="md-nav__link">
+        Direct Updates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ingestion/3_dataframes/" class="md-nav__link">
+        Ingesting from dataframes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ingestion/4_saving/" class="md-nav__link">
+        Saving and loading graphs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Querying
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Querying
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../querying/1_intro/" class="md-nav__link">
+        Introduction and dataset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../querying/2_graph-metrics/" class="md-nav__link">
+        Graph metrics and functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../querying/3_node-metrics/" class="md-nav__link">
+        Node metrics and functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../querying/4_edge-metrics/" class="md-nav__link">
+        Edge metrics and functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../querying/5_properties/" class="md-nav__link">
+        Property queries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../querying/6_chaining/" class="md-nav__link">
+        Chaining functions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          Graph views
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Graph views
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_intro/" class="md-nav__link">
+        Introduction and dataset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Querying the graph over time
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Querying the graph over time
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-at-and-after" class="md-nav__link">
+    Before, At and After
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#window" class="md-nav__link">
+    Window
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traversing-the-graph-with-views" class="md-nav__link">
+    Traversing the graph with views
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expanding" class="md-nav__link">
+    Expanding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rolling" class="md-nav__link">
+    Rolling
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_layer/" class="md-nav__link">
+        Layered graphs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_subgraph/" class="md-nav__link">
+        Subgraph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_materialize/" class="md-nav__link">
+        Materialize
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Running Algorithms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Running Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/1_intro/" class="md-nav__link">
+        Running algorithms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/2_graph-algorithms/" class="md-nav__link">
+        Graph wide algorithms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/3_node-algorithms/" class="md-nav__link">
+        Node centric algorithms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/4_view-algorithms/" class="md-nav__link">
+        Running algorithms on graph views
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          Exporting
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Exporting
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../export/1_intro/" class="md-nav__link">
+        Exporting and visualising your graph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../export/2_dataframes/" class="md-nav__link">
+        Exporting to Pandas dataframes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../export/3_networkx/" class="md-nav__link">
+        Exporting to NetworkX
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          GraphQL and User Interface
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          GraphQL and User Interface
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphql/1_intro/" class="md-nav__link">
+        Introduction to GraphQL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphql/2_run-server/" class="md-nav__link">
+        Running the GraphQL Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphql/3_writing-queries/" class="md-nav__link">
+        Writing Raphtory queries in GraphQL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphql/4_running-ui/" class="md-nav__link">
+        Running the UI
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Temporal graph representations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Temporal graph representations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../persistent-graph/1_intro/" class="md-nav__link">
+        Graph and persistent graph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../persistent-graph/2_ambiguity/" class="md-nav__link">
+        Handling of ambiguous updates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../persistent-graph/3_views/" class="md-nav__link">
+        Views on a persistent graph
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        API
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-at-and-after" class="md-nav__link">
+    Before, At and After
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#window" class="md-nav__link">
+    Window
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traversing-the-graph-with-views" class="md-nav__link">
+    Traversing the graph with views
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expanding" class="md-nav__link">
+    Expanding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rolling" class="md-nav__link">
+    Rolling
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="querying-the-graph-over-time">Querying the graph over time</h1>
+<p>The first set of view functions we will look at are for traveling through time, viewing the graph as it was at a specific point, or between two points (applying a time window). For this Raphtory provides six functions: <code>before()</code>, <code>at()</code>, <code>after()</code>, <code>window()</code>, <code>expand()</code> and <code>rolling()</code>.</p>
+<p>All of these functions can be called on a graph, node, or edge, returning an equivalent <code>Graph View</code>, <code>Node View</code> or <code>Edge View</code> which have all the same functions as its unfiltered counterpart. This means if you write a function which takes a Raphtory entity, it will work irrelevant of which filters have been applied.</p>
+<h2 id="before-at-and-after">Before, At and After</h2>
+<p>Beginning with the simplest of these filters, <code>before()</code>, <code>at()</code> and <code>after()</code> take a singular <code>time</code> argument in epoch (integer) or datetime (string/datetime object) format and return a <code>View</code> of the object which includes:</p>
+<ul>
+<li><code>before()</code> - All updates between the beginning of the graph's history and the provided time (<strong>exclusive of the time provided</strong>).</li>
+<li><code>after()</code> - All updates between the provided time and the end of the graph's history (<strong>exclusive of the time provided</strong>)</li>
+<li><code>at()</code>- Only updates which happened at exactly the time provided.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While the first two are more useful on continuous time datasets, <code>at()</code> can be very handy when you have snapshots or logical timestamps and want to look at them individually or compare/contrast.</p>
+</div>
+<p>As an example of these, in the code below where we print the degree of <code>Lome</code> on the full dataset, before 12:17 on the 13th of June and after 9:07 on the 30th of June.</p>
+<p>We also introduce two new time functions here, <code>start()</code> and <code>end()</code>, which specify the time range a view is filtered to, if one has been applied. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"/><div class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg></span> Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">v</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">"LOME"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Across the full dataset </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> interacted with </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span><span class="si">}</span><span class="s2"> other monkeys."</span><span class="p">)</span>
+
+<span class="n">v_before</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="mi">1560428239000</span><span class="p">)</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">"LOME"</span><span class="p">)</span>  <span class="c1"># 13/06/2019 12:17:19 as epoch</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Between </span><span class="si">{</span><span class="n">v_before</span><span class="o">.</span><span class="n">start_date_time</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">v_before</span><span class="o">.</span><span class="n">end_date_time</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">v_before</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> interacted with </span><span class="si">{</span><span class="n">v_before</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span><span class="si">}</span><span class="s2"> other monkeys."</span>
+<span class="p">)</span>
+
+<span class="n">v_after</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">"LOME"</span><span class="p">)</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="s2">"2019-06-30 9:07:31"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Between </span><span class="si">{</span><span class="n">v_after</span><span class="o">.</span><span class="n">start_date_time</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">v_after</span><span class="o">.</span><span class="n">end_date_time</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">v_after</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> interacted with </span><span class="si">{</span><span class="n">v_after</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span><span class="si">}</span><span class="s2"> other monkeys."</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition output">
+<p class="admonition-title">Output</p>
+<p><div class="highlight"><pre><span></span><code>Across the full dataset LOME interacted with 18 other monkeys.
+Between None and 2019-06-13 12:17:19+00:00, LOME interacted with 5 other monkeys.
+Between 2019-06-30 09:07:31.001000+00:00 and None, LOME interacted with 17 other monkeys.
+</code></pre></div><div class="markdown-exec"></div>
+</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may have noticed in the code we have called the <code>before()</code> on the graph and <code>after()</code> on the node. This is important, as there are some subtle differences in where these functions are called, which we shall discuss <a href="./#traversing-the-graph-with-views">below</a>.</p>
+</div>
+<h2 id="window">Window</h2>
+<p>The <code>window()</code> function is a more general version of the functions above, allowing you to set both a <code>start</code> time as well as an <code>end</code> time (<strong>inclusive of start, exclusive of end</strong>). </p>
+<p>This is useful for digging into specific ranges of the history that you are interested in, for example a given day within your data, filtering everything else outside this range. An example of this can be seen below where we look at the number of times <code>Lome</code> interacts wth <code>Nekke</code> within the full dataset and for one day between the 13th of June and the 14th of June.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>We use datetime objects in this example, but it would work exactly the same with string dates and epoch integers.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"/><div class="tabbed-labels"><label for="__tabbed_2_1"><span class="twemoji"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg></span> Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="n">start_day</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">"2019-06-13"</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">end_day</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">"2019-06-14"</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">"LOME"</span><span class="p">,</span> <span class="s2">"NEKKE"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Across the full dataset </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> interacted with </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">dst</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">history</span><span class="p">())</span><span class="si">}</span><span class="s2"> times"</span>
+<span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="n">start_day</span><span class="p">,</span> <span class="n">end_day</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Between </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">start_date_time</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">end_date_time</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> interacted with </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">dst</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">history</span><span class="p">())</span><span class="si">}</span><span class="s2"> times"</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Window start: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">start_date_time</span><span class="si">}</span><span class="s2">, First update: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">earliest_date_time</span><span class="si">}</span><span class="s2">, Last update: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">latest_date_time</span><span class="si">}</span><span class="s2">, Window End: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">end_date_time</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition output">
+<p class="admonition-title">Output</p>
+<p><div class="highlight"><pre><span></span><code>Across the full dataset LOME interacted with NEKKE 41 times
+Between 2019-06-13 00:00:00+00:00 and 2019-06-14 00:00:00+00:00, LOME interacted with NEKKE 8 times
+Window start: 2019-06-13 00:00:00+00:00, First update: 2019-06-13 10:18:00+00:00, Last update: 2019-06-13 15:05:00+00:00, Window End: 2019-06-14 00:00:00+00:00
+</code></pre></div><div class="markdown-exec"></div>
+</p>
+</div>
+<h2 id="traversing-the-graph-with-views">Traversing the graph with views</h2>
+<p>As mentioned above, there are some slight differences when applying views, depending on which object you call them on. This has to do with how the filters propagate as you traverse the graph.</p>
+<p>As a general rule, when you call any function on a <code>Graph View</code>, <code>Node View</code> or <code>Edge View</code> which returns another entity, the view's filters will be passed onto the entities it returns. For example, if you call <code>before()</code> on a graph and then call <code>node()</code>, this will return a <code>Node View</code> filtered to the time passed to the graph.</p>
+<p>However, if this was always the case, it would make it very annoying if we later wanted to explore outside of these bounds, especially as we traverse across the graph. </p>
+<p>To allow for both global bounds and moving bounds, if a filter is applied onto the graph, all entities extracted always have this filter applied. However, if it is applied to either a node or an edge, once you have traversed to a new node (neighbour) this filter is removed. </p>
+<p>As an example of this, below we look at LOME's one hop neighbours before the 20th of June and their neighbours (LOME's two hop neighbours) after the 25th of June. First we try calling <code>before()</code> on the graph, which works for the one hop neighbours, but once the <code>after()</code> has been applied, the graph is empty as their is no overlap in dates between the two filters. </p>
+<p>Next, we instead call <code>before()</code> on the node, which once the neighbours have been reached allows the <code>after()</code> to work as desired as the original filter has been removed.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"/><div class="tabbed-labels"><label for="__tabbed_3_1"><span class="twemoji"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg></span> Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">first_day</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">"2019-06-20"</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">second_day</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">"2019-06-25"</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">one_hop_neighbours</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="n">first_day</span><span class="p">)</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">"LOME"</span><span class="p">)</span><span class="o">.</span><span class="n">neighbours</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="n">two_hop_neighbours</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="n">first_day</span><span class="p">)</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">"LOME"</span><span class="p">)</span><span class="o">.</span><span class="n">neighbours</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">second_day</span><span class="p">)</span><span class="o">.</span><span class="n">neighbours</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"When the before is applied to the graph, LOME's one hop neighbours are: </span><span class="si">{</span><span class="n">one_hop_neighbours</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"When the before is applied to the graph, LOME's two hop neighbours are: </span><span class="si">{</span><span class="n">two_hop_neighbours</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
+<span class="n">one_hop_neighbours</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">"LOME"</span><span class="p">)</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="n">first_day</span><span class="p">)</span><span class="o">.</span><span class="n">neighbours</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="n">two_hop_neighbours</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">"LOME"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="n">first_day</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">neighbours</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">second_day</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">neighbours</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"When the before is applied to the node, LOME's one hop neighbours are: </span><span class="si">{</span><span class="n">one_hop_neighbours</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"When the before is applied to the node, LOME's two hop neighbours are: </span><span class="si">{</span><span class="n">two_hop_neighbours</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition output">
+<p class="admonition-title">Output</p>
+<p><div class="highlight"><pre><span></span><code>When the before is applied to the graph, LOME's one hop neighbours are: ['ATMOSPHERE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'LIPS', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'MAKO', 'BOBO', 'MUSE', 'VIOLETTE']
+When the before is applied to the graph, LOME's two hop neighbours are: []
+When the before is applied to the node, LOME's one hop neighbours are: ['ATMOSPHERE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'LIPS', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'MAKO', 'BOBO', 'MUSE', 'VIOLETTE']
+When the before is applied to the node, LOME's two hop neighbours are: ['FEYA', 'ANGELE', 'EWINE', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'PIPO', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'KALI', 'VIOLETTE', 'ATMOSPHERE', 'MALI', 'ANGELE', 'LIPS', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'VIOLETTE', 'PETOULETTE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'LIPS', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'VIOLETTE', 'PETOULETTE', 'ATMOSPHERE', 'FEYA', 'MALI', 'EWINE', 'LIPS', 'FANA', 'FELIPE', 'NEKKE', 'LOME', 'MAKO', 'MUSE', 'ARIELLE', 'KALI', 'VIOLETTE', 'PETOULETTE', 'MALI  ', 'ATMOSPHERE', 'MALI', 'ANGELE', 'LIPS', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'KALI', 'VIOLETTE', 'PETOULETTE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'PIPO', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'KALI', 'PETOULETTE', 'ATMOSPHERE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'LIPS', 'FELIPE', 'HARLEM', 'NEKKE', 'PIPO', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'KALI', 'PETOULETTE', 'ATMOSPHERE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'LIPS', 'FANA', 'HARLEM', 'NEKKE', 'PIPO', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'PETOULETTE', 'ATMOSPHERE', 'FEYA', 'MALI', 'EWINE', 'LIPS', 'FANA', 'FELIPE', 'NEKKE', 'PIPO', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'VIOLETTE', 'ATMOSPHERE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'LIPS', 'FANA', 'FELIPE', 'HARLEM', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'VIOLETTE', 'PETOULETTE', 'ATMOSPHERE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'LIPS', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'KALI', 'VIOLETTE', 'PETOULETTE', 'ATMOSPHERE', 'FEYA', 'MALI', 'EWINE', 'LIPS', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'PIPO', 'LOME', 'MAKO', 'MUSE', 'ARIELLE', 'KALI', 'VIOLETTE', 'PETOULETTE', 'ATMOSPHERE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'LIPS', 'FANA', 'FELIPE', 'HARLEM', 'NEKKE', 'PIPO', 'LOME', 'MAKO', 'BOBO', 'ARIELLE', 'VIOLETTE', 'PETOULETTE', 'ATMOSPHERE', 'FEYA', 'MALI', 'ANGELE', 'EWINE', 'HARLEM', 'NEKKE', 'PIPO', 'LOME', 'MAKO', 'BOBO', 'MUSE', 'ARIELLE', 'KALI', 'PETOULETTE', 'EXTERNE']
+</code></pre></div><div class="markdown-exec"></div>
+</p>
+</div>
+<h2 id="expanding">Expanding</h2>
+<p>If you have data covering a large period of time, or have many time points of interest, it is quite likely you will find yourself calling the above functions over and over. If there is a pattern to these calls, say you are interested in how your graph looks every morning for the last week, you can instead utilise <code>expanding()</code>. </p>
+<p><code>expanding()</code> will return an iterable of views as if you called <code>before()</code> from the earliest time to the latest time at increments of a given <code>step</code>. </p>
+<p>The step can be given as a simple epoch integer, or a natural language string describing the interval. For the latter, this is converted into a iterator of datetimes, handling all corner cases like varying month length and leap years.</p>
+<p>Within the string you can reference <code>years</code>, <code>months</code> <code>weeks</code>, <code>days</code>, <code>hours</code>, <code>minutes</code>, <code>seconds</code> and <code>milliseconds</code>. These can be singular or plural and the string can include 'and', spaces, and commas to improve readability. </p>
+<p>In the code below, we can see some examples of this where we first increment through the full history of the graph a week at a time. This creates four views, each of which we ask how many monkey interactions it has seen. You will notice the start time doesn't not change, but the end time increments by 7 days each view.</p>
+<p>The second example shows the complexity of increments Raphtory can handle, stepping by <code>2 days, 3 hours, 12 minutes and 6 seconds</code> each time. We have additionally bounded this expand via a window between the 13th and 23rd of June to demonstrate how these views may be chained.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"/><div class="tabbed-labels"><label for="__tabbed_4_1"><span class="twemoji"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg></span> Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"The full range of time in the graph is </span><span class="si">{</span><span class="n">g</span><span class="o">.</span><span class="n">earliest_date_time</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">g</span><span class="o">.</span><span class="n">latest_date_time</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">expanding_g</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">expanding</span><span class="p">(</span><span class="s2">"1 week"</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"From </span><span class="si">{</span><span class="n">expanding_g</span><span class="o">.</span><span class="n">start_date_time</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">expanding_g</span><span class="o">.</span><span class="n">end_date_time</span><span class="si">}</span><span class="s2"> there were </span><span class="si">{</span><span class="n">expanding_g</span><span class="o">.</span><span class="n">count_temporal_edges</span><span class="p">()</span><span class="si">}</span><span class="s2"> monkey interactions"</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">start_day</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">"2019-06-13"</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">end_day</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">"2019-06-23"</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">expanding_g</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="n">start_day</span><span class="p">,</span> <span class="n">end_day</span><span class="p">)</span><span class="o">.</span><span class="n">expanding</span><span class="p">(</span>
+    <span class="s2">"2 days, 3 hours, 12 minutes and 6 seconds"</span>
+<span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"From </span><span class="si">{</span><span class="n">expanding_g</span><span class="o">.</span><span class="n">start_date_time</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">expanding_g</span><span class="o">.</span><span class="n">end_date_time</span><span class="si">}</span><span class="s2"> there were </span><span class="si">{</span><span class="n">expanding_g</span><span class="o">.</span><span class="n">count_temporal_edges</span><span class="p">()</span><span class="si">}</span><span class="s2"> monkey interactions"</span>
+    <span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition output">
+<p class="admonition-title">Output</p>
+<p><div class="highlight"><pre><span></span><code>The full range of time in the graph is 2019-06-13 09:50:00+00:00 to 2019-07-10 11:05:00+00:00
+
+From None to 2019-06-20 09:50:00+00:00 there were 789 monkey interactions
+From None to 2019-06-27 09:50:00+00:00 there were 1724 monkey interactions
+From None to 2019-07-04 09:50:00+00:00 there were 2358 monkey interactions
+From None to 2019-07-11 09:50:00+00:00 there were 3196 monkey interactions
+
+From 2019-06-13 00:00:00+00:00 to 2019-06-15 03:12:06+00:00 there were 377 monkey interactions
+From 2019-06-13 00:00:00+00:00 to 2019-06-17 06:24:12+00:00 there were 377 monkey interactions
+From 2019-06-13 00:00:00+00:00 to 2019-06-19 09:36:18+00:00 there were 691 monkey interactions
+From 2019-06-13 00:00:00+00:00 to 2019-06-21 12:48:24+00:00 there were 1143 monkey interactions
+From 2019-06-13 00:00:00+00:00 to 2019-06-23 00:00:00+00:00 there were 1164 monkey interactions
+</code></pre></div><div class="markdown-exec"></div>
+</p>
+</div>
+<h2 id="rolling">Rolling</h2>
+<p>If instead of including all prior history, you want a rolling window, you may use <code>rolling()</code>. This function will return an iterable of views, incrementing by a <code>window</code> size and only including the history from inside the window period (<strong>Inclusive of start, exclusive of end</strong>). This allows you to easily extract daily or monthly metrics.</p>
+<p>For example, below we take the code from <a href="#expanding">expanding</a> and swap out the function for <code>rolling()</code>. In the first loop we can see both the start date and end date increase by seven days each time, and the number of monkey interactions sometimes decreases as older data is dropped from the window.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"/><div class="tabbed-labels"><label for="__tabbed_5_1"><span class="twemoji"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg></span> Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">"Rolling 1 week"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">rolling_g</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="s2">"1 week"</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"From </span><span class="si">{</span><span class="n">rolling_g</span><span class="o">.</span><span class="n">start_date_time</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">rolling_g</span><span class="o">.</span><span class="n">end_date_time</span><span class="si">}</span><span class="s2"> there were </span><span class="si">{</span><span class="n">rolling_g</span><span class="o">.</span><span class="n">count_temporal_edges</span><span class="p">()</span><span class="si">}</span><span class="s2"> monkey interactions"</span>
+    <span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition output">
+<p class="admonition-title">Output</p>
+<p><div class="highlight"><pre><span></span><code>Rolling 1 week
+From 2019-06-13 09:50:00+00:00 to 2019-06-20 09:50:00+00:00 there were 789 monkey interactions
+From 2019-06-20 09:50:00+00:00 to 2019-06-27 09:50:00+00:00 there were 935 monkey interactions
+From 2019-06-27 09:50:00+00:00 to 2019-07-04 09:50:00+00:00 there were 634 monkey interactions
+From 2019-07-04 09:50:00+00:00 to 2019-07-11 09:50:00+00:00 there were 838 monkey interactions
+</code></pre></div><div class="markdown-exec"></div>
+</p>
+</div>
+<p>Alongside the window size, <code>rolling()</code> takes an option <code>step</code> argument which specifies how far along the timeline it should increment before applying the next window. By default this is the same as <code>window</code>, allowing all updates to be analysed exactly once in non-overlapping windows. </p>
+<p>If, however, you would like to have overlapping or fully disconnected windows, you can set a <code>step</code> smaller or greater than the given <code>window</code> size. </p>
+<p>As a small example of how useful this can be, in the following segment we plot the daily unique interactions of <code>Lome</code> via <code>matplotlib</code> in only 10 lines! </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>We have to recreate the graph in the first section of this code block so that the output can be rendered as part of the documentation. Please ignore this. </p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio"/><div class="tabbed-labels"><label for="__tabbed_6_1"><span class="twemoji"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg></span> Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1"># mkdocs: render</span>
+<span class="c1">###RECREATION OF THE GRAPH SO IT CAN BE RENDERED</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">raphtory</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+
+<span class="n">edges_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">"data/OBS_data.txt"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">edges_df</span><span class="p">[</span><span class="s2">"DateTime"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">edges_df</span><span class="p">[</span><span class="s2">"DateTime"</span><span class="p">])</span>
+<span class="n">edges_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">edges_df</span><span class="p">[</span><span class="s2">"Weight"</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges_df</span><span class="p">[</span><span class="s2">"Category"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="s2">"Affiliative"</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="s2">"Agonistic"</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">load_edges_from_pandas</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">edges_df</span><span class="p">,</span>
+    <span class="n">time</span><span class="o">=</span><span class="s2">"DateTime"</span><span class="p">,</span>
+    <span class="n">src</span><span class="o">=</span><span class="s2">"Actor"</span><span class="p">,</span>
+    <span class="n">dst</span><span class="o">=</span><span class="s2">"Recipient"</span><span class="p">,</span>
+    <span class="n">layer_col</span><span class="o">=</span><span class="s2">"Behavior"</span><span class="p">,</span>
+    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s2">"Weight"</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1">###ACTUAL IMPORT CODE</span>
+<span class="n">importance</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">time</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">rolling_lome</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">"LOME"</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s2">"1 day"</span><span class="p">):</span>
+    <span class="n">importance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rolling_lome</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rolling_lome</span><span class="o">.</span><span class="n">end_date_time</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">importance</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Daily Unique Interactions"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Lome's daily interaction count"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</code></pre><center><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIKICAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgd2lkdGg9IjQwNC45MjMxMjVwdCIgaGVpZ2h0PSIzNjQuMjQ1NjdwdCIgdmlld0JveD0iMCAwIDQwNC45MjMxMjUgMzY0LjI0NTY3IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSI+CiA8bWV0YWRhdGE+CiAgPHJkZjpSREYgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICA8Y2M6V29yaz4KICAgIDxkYzp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiLz4KICAgIDxkYzpkYXRlPjIwMjUtMDQtMDdUMjE6NTg6MjAuODk5NTAwPC9kYzpkYXRlPgogICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICA8ZGM6Y3JlYXRvcj4KICAgICA8Y2M6QWdlbnQ+CiAgICAgIDxkYzp0aXRsZT5NYXRwbG90bGliIHYzLjkuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy88L2RjOnRpdGxlPgogICAgIDwvY2M6QWdlbnQ+CiAgICA8L2RjOmNyZWF0b3I+CiAgIDwvY2M6V29yaz4KICA8L3JkZjpSREY+CiA8L21ldGFkYXRhPgogPGRlZnM+CiAgPHN0eWxlIHR5cGU9InRleHQvY3NzIj4qe3N0cm9rZS1saW5lam9pbjogcm91bmQ7IHN0cm9rZS1saW5lY2FwOiBidXR0fTwvc3R5bGU+CiA8L2RlZnM+CiA8ZyBpZD0iZmlndXJlXzEiPgogIDxnIGlkPSJwYXRjaF8xIj4KICAgPHBhdGggZD0iTSAwIDM2NC4yNDU2NyAKTCA0MDQuOTIzMTI1IDM2NC4yNDU2NyAKTCA0MDQuOTIzMTI1IDAgCkwgMCAwIAp6CiIgc3R5bGU9ImZpbGw6ICNmZmZmZmYiLz4KICA8L2c+CiAgPGcgaWQ9ImF4ZXNfMSI+CiAgIDxnIGlkPSJwYXRjaF8yIj4KICAgIDxwYXRoIGQ9Ik0gNDAuNjAzMTI1IDI4OC40MzAxMjUgCkwgMzk3LjcyMzEyNSAyODguNDMwMTI1IApMIDM5Ny43MjMxMjUgMjIuMzE4MTI1IApMIDQwLjYwMzEyNSAyMi4zMTgxMjUgCnoKIiBzdHlsZT0iZmlsbDogI2ZmZmZmZiIvPgogICA8L2c+CiAgIDxnIGlkPSJtYXRwbG90bGliLmF4aXNfMSI+CiAgICA8ZyBpZD0ieHRpY2tfMSI+CiAgICAgPGcgaWQ9ImxpbmUyZF8xIj4KICAgICAgPHBhdGggZD0iTSA4Ny45ODE5OCAyODguNDMwMTI1IApMIDg3Ljk4MTk4IDIyLjMxODEyNSAKIiBjbGlwLXBhdGg9InVybCgjcDIyMTFiOTE4NjApIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjYjBiMGIwOyBzdHJva2Utd2lkdGg6IDAuODsgc3Ryb2tlLWxpbmVjYXA6IHNxdWFyZSIvPgogICAgIDwvZz4KICAgICA8ZyBpZD0ibGluZTJkXzIiPgogICAgICA8ZGVmcz4KICAgICAgIDxwYXRoIGlkPSJtODg2Y2RhYzJkYiIgZD0iTSAwIDAgCkwgMCAzLjUgCiIgc3R5bGU9InN0cm9rZTogIzAwMDAwMDsgc3Ryb2tlLXdpZHRoOiAwLjgiLz4KICAgICAgPC9kZWZzPgogICAgICA8Zz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI204ODZjZGFjMmRiIiB4PSI4Ny45ODE5OCIgeT0iMjg4LjQzMDEyNSIgc3R5bGU9InN0cm9rZTogIzAwMDAwMDsgc3Ryb2tlLXdpZHRoOiAwLjgiLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgICA8ZyBpZD0idGV4dF8xIj4KICAgICAgPCEtLSAyMDE5LTA2LTE3IC0tPgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2OS4zODYxNzcgMzQxLjg5Njk4NCkgcm90YXRlKC00NSkgc2NhbGUoMC4xIC0wLjEpIj4KICAgICAgIDxkZWZzPgogICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTMyIiBkPSJNIDEyMjggNTMxIApMIDM0MzEgNTMxIApMIDM0MzEgMCAKTCA0NjkgMCAKTCA0NjkgNTMxIApRIDgyOCA5MDMgMTQ0OCAxNTI5IApRIDIwNjkgMjE1NiAyMjI4IDIzMzggClEgMjUzMSAyNjc4IDI2NTEgMjkxNCAKUSAyNzcyIDMxNTAgMjc3MiAzMzc4IApRIDI3NzIgMzc1MCAyNTExIDM5ODQgClEgMjI1MCA0MjE5IDE4MzEgNDIxOSAKUSAxNTM0IDQyMTkgMTIwNCA0MTE2IApRIDg3NSA0MDEzIDUwMCAzODAzIApMIDUwMCA0NDQxIApRIDg4MSA0NTk0IDEyMTIgNDY3MiAKUSAxNTQ0IDQ3NTAgMTgxOSA0NzUwIApRIDI1NDQgNDc1MCAyOTc1IDQzODcgClEgMzQwNiA0MDI1IDM0MDYgMzQxOSAKUSAzNDA2IDMxMzEgMzI5OCAyODczIApRIDMxOTEgMjYxNiAyOTA2IDIyNjYgClEgMjgyOCAyMTc1IDI0MDkgMTc0MiAKUSAxOTkxIDEzMDkgMTIyOCA1MzEgCnoKIiB0cmFuc2Zvcm09InNjYWxlKDAuMDE1NjI1KSIvPgogICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTMwIiBkPSJNIDIwMzQgNDI1MCAKUSAxNTQ3IDQyNTAgMTMwMSAzNzcwIApRIDEwNTYgMzI5MSAxMDU2IDIzMjggClEgMTA1NiAxMzY5IDEzMDEgODg5IApRIDE1NDcgNDA5IDIwMzQgNDA5IApRIDI1MjUgNDA5IDI3NzAgODg5IApRIDMwMTYgMTM2OSAzMDE2IDIzMjggClEgMzAxNiAzMjkxIDI3NzAgMzc3MCAKUSAyNTI1IDQyNTAgMjAzNCA0MjUwIAp6Ck0gMjAzNCA0NzUwIApRIDI4MTkgNDc1MCAzMjMzIDQxMjkgClEgMzY0NyAzNTA5IDM2NDcgMjMyOCAKUSAzNjQ3IDExNTAgMzIzMyA1MjkgClEgMjgxOSAtOTEgMjAzNCAtOTEgClEgMTI1MCAtOTEgODM2IDUyOSAKUSA0MjIgMTE1MCA0MjIgMjMyOCAKUSA0MjIgMzUwOSA4MzYgNDEyOSAKUSAxMjUwIDQ3NTAgMjAzNCA0NzUwIAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgICA8cGF0aCBpZD0iRGVqYVZ1U2Fucy0zMSIgZD0iTSA3OTQgNTMxIApMIDE4MjUgNTMxIApMIDE4MjUgNDA5MSAKTCA3MDMgMzg2NiAKTCA3MDMgNDQ0MSAKTCAxODE5IDQ2NjYgCkwgMjQ1MCA0NjY2IApMIDI0NTAgNTMxIApMIDM0ODEgNTMxIApMIDM0ODEgMCAKTCA3OTQgMCAKTCA3OTQgNTMxIAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgICA8cGF0aCBpZD0iRGVqYVZ1U2Fucy0zOSIgZD0iTSA3MDMgOTcgCkwgNzAzIDY3MiAKUSA5NDEgNTU5IDExODQgNTAwIApRIDE0MjggNDQxIDE2NjMgNDQxIApRIDIyODggNDQxIDI2MTcgODYxIApRIDI5NDcgMTI4MSAyOTk0IDIxMzggClEgMjgxMyAxODY5IDI1MzQgMTcyNSAKUSAyMjU2IDE1ODEgMTkxOSAxNTgxIApRIDEyMTkgMTU4MSA4MTEgMjAwNCAKUSA0MDMgMjQyOCA0MDMgMzE2MyAKUSA0MDMgMzg4MSA4MjggNDMxNSAKUSAxMjUzIDQ3NTAgMTk1OSA0NzUwIApRIDI3NjkgNDc1MCAzMTk1IDQxMjkgClEgMzYyMiAzNTA5IDM2MjIgMjMyOCAKUSAzNjIyIDEyMjUgMzA5OCA1NjcgClEgMjU3NSAtOTEgMTY5MSAtOTEgClEgMTQ1MyAtOTEgMTIwOSAtNDQgClEgOTY2IDMgNzAzIDk3IAp6Ck0gMTk1OSAyMDc1IApRIDIzODQgMjA3NSAyNjMyIDIzNjUgClEgMjg4MSAyNjU2IDI4ODEgMzE2MyAKUSAyODgxIDM2NjYgMjYzMiAzOTU4IApRIDIzODQgNDI1MCAxOTU5IDQyNTAgClEgMTUzNCA0MjUwIDEyODYgMzk1OCAKUSAxMDM4IDM2NjYgMTAzOCAzMTYzIApRIDEwMzggMjY1NiAxMjg2IDIzNjUgClEgMTUzNCAyMDc1IDE5NTkgMjA3NSAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICAgPHBhdGggaWQ9IkRlamFWdVNhbnMtMmQiIGQ9Ik0gMzEzIDIwMDkgCkwgMTk5NyAyMDA5IApMIDE5OTcgMTQ5NyAKTCAzMTMgMTQ5NyAKTCAzMTMgMjAwOSAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICAgPHBhdGggaWQ9IkRlamFWdVNhbnMtMzYiIGQ9Ik0gMjExMyAyNTg0IApRIDE2ODggMjU4NCAxNDM5IDIyOTMgClEgMTE5MSAyMDAzIDExOTEgMTQ5NyAKUSAxMTkxIDk5NCAxNDM5IDcwMSAKUSAxNjg4IDQwOSAyMTEzIDQwOSAKUSAyNTM4IDQwOSAyNzg2IDcwMSAKUSAzMDM0IDk5NCAzMDM0IDE0OTcgClEgMzAzNCAyMDAzIDI3ODYgMjI5MyAKUSAyNTM4IDI1ODQgMjExMyAyNTg0IAp6Ck0gMzM2NiA0NTYzIApMIDMzNjYgMzk4OCAKUSAzMTI4IDQxMDAgMjg4NiA0MTU5IApRIDI2NDQgNDIxOSAyNDA2IDQyMTkgClEgMTc4MSA0MjE5IDE0NTEgMzc5NyAKUSAxMTIyIDMzNzUgMTA3NSAyNTIyIApRIDEyNTkgMjc5NCAxNTM3IDI5MzkgClEgMTgxNiAzMDg0IDIxNTAgMzA4NCAKUSAyODUzIDMwODQgMzI2MSAyNjU3IApRIDM2NjkgMjIzMSAzNjY5IDE0OTcgClEgMzY2OSA3NzggMzI0NCAzNDMgClEgMjgxOSAtOTEgMjExMyAtOTEgClEgMTMwMyAtOTEgODc1IDUyOSAKUSA0NDcgMTE1MCA0NDcgMjMyOCAKUSA0NDcgMzQzNCA5NzIgNDA5MiAKUSAxNDk3IDQ3NTAgMjM4MSA0NzUwIApRIDI2MTkgNDc1MCAyODYxIDQ3MDMgClEgMzEwMyA0NjU2IDMzNjYgNDU2MyAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICAgPHBhdGggaWQ9IkRlamFWdVNhbnMtMzciIGQ9Ik0gNTI1IDQ2NjYgCkwgMzUyNSA0NjY2IApMIDM1MjUgNDM5NyAKTCAxODMxIDAgCkwgMTE3MiAwIApMIDI3NjYgNDEzNCAKTCA1MjUgNDEzNCAKTCA1MjUgNDY2NiAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICA8L2RlZnM+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMyIi8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMwIiB4PSI2My42MjMwNDciLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzEiIHg9IjEyNy4yNDYwOTQiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzkiIHg9IjE5MC44NjkxNDEiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMmQiIHg9IjI1NC40OTIxODgiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzAiIHg9IjI5MC41NzYxNzIiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzYiIHg9IjM1NC4xOTkyMTkiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMmQiIHg9IjQxNy44MjIyNjYiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzEiIHg9IjQ1My45MDYyNSIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zNyIgeD0iNTE3LjUyOTI5NyIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgPC9nPgogICAgPGcgaWQ9Inh0aWNrXzIiPgogICAgIDxnIGlkPSJsaW5lMmRfMyI+CiAgICAgIDxwYXRoIGQ9Ik0gMTM2LjA3ODk1IDI4OC40MzAxMjUgCkwgMTM2LjA3ODk1IDIyLjMxODEyNSAKIiBjbGlwLXBhdGg9InVybCgjcDIyMTFiOTE4NjApIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjYjBiMGIwOyBzdHJva2Utd2lkdGg6IDAuODsgc3Ryb2tlLWxpbmVjYXA6IHNxdWFyZSIvPgogICAgIDwvZz4KICAgICA8ZyBpZD0ibGluZTJkXzQiPgogICAgICA8Zz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI204ODZjZGFjMmRiIiB4PSIxMzYuMDc4OTUiIHk9IjI4OC40MzAxMjUiIHN0eWxlPSJzdHJva2U6ICMwMDAwMDA7IHN0cm9rZS13aWR0aDogMC44Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICAgPGcgaWQ9InRleHRfMiI+CiAgICAgIDwhLS0gMjAxOS0wNi0yMSAtLT4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTE3LjQ4MzE0NiAzNDEuODk2OTg0KSByb3RhdGUoLTQ1KSBzY2FsZSgwLjEgLTAuMSkiPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMiIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIgeD0iNjMuNjIzMDQ3Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMxIiB4PSIxMjcuMjQ2MDk0Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM5IiB4PSIxOTAuODY5MTQxIi8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTJkIiB4PSIyNTQuNDkyMTg4Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMwIiB4PSIyOTAuNTc2MTcyIi8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM2IiB4PSIzNTQuMTk5MjE5Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTJkIiB4PSI0MTcuODIyMjY2Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMyIiB4PSI0NTMuOTA2MjUiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzEiIHg9IjUxNy41MjkyOTciLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgIDwvZz4KICAgIDxnIGlkPSJ4dGlja18zIj4KICAgICA8ZyBpZD0ibGluZTJkXzUiPgogICAgICA8cGF0aCBkPSJNIDE4NC4xNzU5MiAyODguNDMwMTI1IApMIDE4NC4xNzU5MiAyMi4zMTgxMjUgCiIgY2xpcC1wYXRoPSJ1cmwoI3AyMjExYjkxODYwKSIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogI2IwYjBiMDsgc3Ryb2tlLXdpZHRoOiAwLjg7IHN0cm9rZS1saW5lY2FwOiBzcXVhcmUiLz4KICAgICA8L2c+CiAgICAgPGcgaWQ9ImxpbmUyZF82Ij4KICAgICAgPGc+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtODg2Y2RhYzJkYiIgeD0iMTg0LjE3NTkyIiB5PSIyODguNDMwMTI1IiBzdHlsZT0ic3Ryb2tlOiAjMDAwMDAwOyBzdHJva2Utd2lkdGg6IDAuOCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgIDxnIGlkPSJ0ZXh0XzMiPgogICAgICA8IS0tIDIwMTktMDYtMjUgLS0+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE2NS41ODAxMTYgMzQxLjg5Njk4NCkgcm90YXRlKC00NSkgc2NhbGUoMC4xIC0wLjEpIj4KICAgICAgIDxkZWZzPgogICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTM1IiBkPSJNIDY5MSA0NjY2IApMIDMxNjkgNDY2NiAKTCAzMTY5IDQxMzQgCkwgMTI2OSA0MTM0IApMIDEyNjkgMjk5MSAKUSAxNDA2IDMwMzggMTU0MyAzMDYxIApRIDE2ODEgMzA4NCAxODE5IDMwODQgClEgMjYwMCAzMDg0IDMwNTYgMjY1NiAKUSAzNTEzIDIyMjggMzUxMyAxNDk3IApRIDM1MTMgNzQ0IDMwNDQgMzI2IApRIDI1NzUgLTkxIDE3MjIgLTkxIApRIDE0MjggLTkxIDExMjMgLTQxIApRIDgxOSA5IDQ5NCAxMDkgCkwgNDk0IDc0NCAKUSA3NzUgNTkxIDEwNzUgNTE2IApRIDEzNzUgNDQxIDE3MDkgNDQxIApRIDIyNTAgNDQxIDI1NjUgNzI1IApRIDI4ODEgMTAwOSAyODgxIDE0OTcgClEgMjg4MSAxOTg0IDI1NjUgMjI2OCAKUSAyMjUwIDI1NTMgMTcwOSAyNTUzIApRIDE0NTYgMjU1MyAxMjA0IDI0OTcgClEgOTUzIDI0NDEgNjkxIDIzMjIgCkwgNjkxIDQ2NjYgCnoKIiB0cmFuc2Zvcm09InNjYWxlKDAuMDE1NjI1KSIvPgogICAgICAgPC9kZWZzPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMiIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIgeD0iNjMuNjIzMDQ3Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMxIiB4PSIxMjcuMjQ2MDk0Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM5IiB4PSIxOTAuODY5MTQxIi8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTJkIiB4PSIyNTQuNDkyMTg4Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMwIiB4PSIyOTAuNTc2MTcyIi8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM2IiB4PSIzNTQuMTk5MjE5Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTJkIiB4PSI0MTcuODIyMjY2Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMyIiB4PSI0NTMuOTA2MjUiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzUiIHg9IjUxNy41MjkyOTciLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgIDwvZz4KICAgIDxnIGlkPSJ4dGlja180Ij4KICAgICA8ZyBpZD0ibGluZTJkXzciPgogICAgICA8cGF0aCBkPSJNIDIzMi4yNzI4ODkgMjg4LjQzMDEyNSAKTCAyMzIuMjcyODg5IDIyLjMxODEyNSAKIiBjbGlwLXBhdGg9InVybCgjcDIyMTFiOTE4NjApIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjYjBiMGIwOyBzdHJva2Utd2lkdGg6IDAuODsgc3Ryb2tlLWxpbmVjYXA6IHNxdWFyZSIvPgogICAgIDwvZz4KICAgICA8ZyBpZD0ibGluZTJkXzgiPgogICAgICA8Zz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI204ODZjZGFjMmRiIiB4PSIyMzIuMjcyODg5IiB5PSIyODguNDMwMTI1IiBzdHlsZT0ic3Ryb2tlOiAjMDAwMDAwOyBzdHJva2Utd2lkdGg6IDAuOCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgIDxnIGlkPSJ0ZXh0XzQiPgogICAgICA8IS0tIDIwMTktMDYtMjkgLS0+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIxMy42NzcwODYgMzQxLjg5Njk4NCkgcm90YXRlKC00NSkgc2NhbGUoMC4xIC0wLjEpIj4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzIiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzAiIHg9IjYzLjYyMzA0NyIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMSIgeD0iMTI3LjI0NjA5NCIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zOSIgeD0iMTkwLjg2OTE0MSIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0yZCIgeD0iMjU0LjQ5MjE4OCIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIgeD0iMjkwLjU3NjE3MiIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zNiIgeD0iMzU0LjE5OTIxOSIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0yZCIgeD0iNDE3LjgyMjI2NiIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMiIgeD0iNDUzLjkwNjI1Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM5IiB4PSI1MTcuNTI5Mjk3Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICA8L2c+CiAgICA8ZyBpZD0ieHRpY2tfNSI+CiAgICAgPGcgaWQ9ImxpbmUyZF85Ij4KICAgICAgPHBhdGggZD0iTSAyNTYuMzIxMzc0IDI4OC40MzAxMjUgCkwgMjU2LjMyMTM3NCAyMi4zMTgxMjUgCiIgY2xpcC1wYXRoPSJ1cmwoI3AyMjExYjkxODYwKSIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogI2IwYjBiMDsgc3Ryb2tlLXdpZHRoOiAwLjg7IHN0cm9rZS1saW5lY2FwOiBzcXVhcmUiLz4KICAgICA8L2c+CiAgICAgPGcgaWQ9ImxpbmUyZF8xMCI+CiAgICAgIDxnPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjbTg4NmNkYWMyZGIiIHg9IjI1Ni4zMjEzNzQiIHk9IjI4OC40MzAxMjUiIHN0eWxlPSJzdHJva2U6ICMwMDAwMDA7IHN0cm9rZS13aWR0aDogMC44Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICAgPGcgaWQ9InRleHRfNSI+CiAgICAgIDwhLS0gMjAxOS0wNy0wMSAtLT4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjM3LjcyNTU3MSAzNDEuODk2OTg0KSByb3RhdGUoLTQ1KSBzY2FsZSgwLjEgLTAuMSkiPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMiIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIgeD0iNjMuNjIzMDQ3Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMxIiB4PSIxMjcuMjQ2MDk0Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM5IiB4PSIxOTAuODY5MTQxIi8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTJkIiB4PSIyNTQuNDkyMTg4Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMwIiB4PSIyOTAuNTc2MTcyIi8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM3IiB4PSIzNTQuMTk5MjE5Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTJkIiB4PSI0MTcuODIyMjY2Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMwIiB4PSI0NTMuOTA2MjUiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzEiIHg9IjUxNy41MjkyOTciLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgIDwvZz4KICAgIDxnIGlkPSJ4dGlja182Ij4KICAgICA8ZyBpZD0ibGluZTJkXzExIj4KICAgICAgPHBhdGggZD0iTSAzMDQuNDE4MzQ0IDI4OC40MzAxMjUgCkwgMzA0LjQxODM0NCAyMi4zMTgxMjUgCiIgY2xpcC1wYXRoPSJ1cmwoI3AyMjExYjkxODYwKSIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogI2IwYjBiMDsgc3Ryb2tlLXdpZHRoOiAwLjg7IHN0cm9rZS1saW5lY2FwOiBzcXVhcmUiLz4KICAgICA8L2c+CiAgICAgPGcgaWQ9ImxpbmUyZF8xMiI+CiAgICAgIDxnPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjbTg4NmNkYWMyZGIiIHg9IjMwNC40MTgzNDQiIHk9IjI4OC40MzAxMjUiIHN0eWxlPSJzdHJva2U6ICMwMDAwMDA7IHN0cm9rZS13aWR0aDogMC44Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICAgPGcgaWQ9InRleHRfNiI+CiAgICAgIDwhLS0gMjAxOS0wNy0wNSAtLT4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjg1LjgyMjU0IDM0MS44OTY5ODQpIHJvdGF0ZSgtNDUpIHNjYWxlKDAuMSAtMC4xKSI+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMyIi8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMwIiB4PSI2My42MjMwNDciLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzEiIHg9IjEyNy4yNDYwOTQiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzkiIHg9IjE5MC44NjkxNDEiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMmQiIHg9IjI1NC40OTIxODgiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzAiIHg9IjI5MC41NzYxNzIiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzciIHg9IjM1NC4xOTkyMTkiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMmQiIHg9IjQxNy44MjIyNjYiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzAiIHg9IjQ1My45MDYyNSIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zNSIgeD0iNTE3LjUyOTI5NyIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgPC9nPgogICAgPGcgaWQ9Inh0aWNrXzciPgogICAgIDxnIGlkPSJsaW5lMmRfMTMiPgogICAgICA8cGF0aCBkPSJNIDM1Mi41MTUzMTQgMjg4LjQzMDEyNSAKTCAzNTIuNTE1MzE0IDIyLjMxODEyNSAKIiBjbGlwLXBhdGg9InVybCgjcDIyMTFiOTE4NjApIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjYjBiMGIwOyBzdHJva2Utd2lkdGg6IDAuODsgc3Ryb2tlLWxpbmVjYXA6IHNxdWFyZSIvPgogICAgIDwvZz4KICAgICA8ZyBpZD0ibGluZTJkXzE0Ij4KICAgICAgPGc+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtODg2Y2RhYzJkYiIgeD0iMzUyLjUxNTMxNCIgeT0iMjg4LjQzMDEyNSIgc3R5bGU9InN0cm9rZTogIzAwMDAwMDsgc3Ryb2tlLXdpZHRoOiAwLjgiLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgICA8ZyBpZD0idGV4dF83Ij4KICAgICAgPCEtLSAyMDE5LTA3LTA5IC0tPgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzMuOTE5NTEgMzQxLjg5Njk4NCkgcm90YXRlKC00NSkgc2NhbGUoMC4xIC0wLjEpIj4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzIiLz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzAiIHg9IjYzLjYyMzA0NyIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMSIgeD0iMTI3LjI0NjA5NCIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zOSIgeD0iMTkwLjg2OTE0MSIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0yZCIgeD0iMjU0LjQ5MjE4OCIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIgeD0iMjkwLjU3NjE3MiIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zNyIgeD0iMzU0LjE5OTIxOSIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0yZCIgeD0iNDE3LjgyMjI2NiIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIgeD0iNDUzLjkwNjI1Ii8+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM5IiB4PSI1MTcuNTI5Mjk3Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICA8L2c+CiAgICA8ZyBpZD0idGV4dF84Ij4KICAgICA8IS0tIERhdGUgLS0+CiAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjA3LjIxMjM0NCAzNTQuOTY1OTgzKSBzY2FsZSgwLjEgLTAuMSkiPgogICAgICA8ZGVmcz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTQ0IiBkPSJNIDEyNTkgNDE0NyAKTCAxMjU5IDUxOSAKTCAyMDIyIDUxOSAKUSAyOTg4IDUxOSAzNDM2IDk1NiAKUSAzODg0IDEzOTQgMzg4NCAyMzM4IApRIDM4ODQgMzI3NSAzNDM2IDM3MTEgClEgMjk4OCA0MTQ3IDIwMjIgNDE0NyAKTCAxMjU5IDQxNDcgCnoKTSA2MjggNDY2NiAKTCAxOTI1IDQ2NjYgClEgMzI4MSA0NjY2IDM5MTUgNDEwMiAKUSA0NTUwIDM1MzggNDU1MCAyMzM4IApRIDQ1NTAgMTEzMSAzOTEyIDU2NSAKUSAzMjc1IDAgMTkyNSAwIApMIDYyOCAwIApMIDYyOCA0NjY2IAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTYxIiBkPSJNIDIxOTQgMTc1OSAKUSAxNDk3IDE3NTkgMTIyOCAxNjAwIApRIDk1OSAxNDQxIDk1OSAxMDU2IApRIDk1OSA3NTAgMTE2MSA1NzAgClEgMTM2MyAzOTEgMTcwOSAzOTEgClEgMjE4OCAzOTEgMjQ3NyA3MzAgClEgMjc2NiAxMDY5IDI3NjYgMTYzMSAKTCAyNzY2IDE3NTkgCkwgMjE5NCAxNzU5IAp6Ck0gMzM0MSAxOTk3IApMIDMzNDEgMCAKTCAyNzY2IDAgCkwgMjc2NiA1MzEgClEgMjU2OSAyMTMgMjI3NSA2MSAKUSAxOTgxIC05MSAxNTU2IC05MSAKUSAxMDE5IC05MSA3MDEgMjExIApRIDM4NCA1MTMgMzg0IDEwMTkgClEgMzg0IDE2MDkgNzc5IDE5MDkgClEgMTE3NSAyMjA5IDE5NTkgMjIwOSAKTCAyNzY2IDIyMDkgCkwgMjc2NiAyMjY2IApRIDI3NjYgMjY2MyAyNTA1IDI4ODAgClEgMjI0NCAzMDk3IDE3NzIgMzA5NyAKUSAxNDcyIDMwOTcgMTE4NyAzMDI1IApRIDkwMyAyOTUzIDY0MSAyODA5IApMIDY0MSAzMzQxIApRIDk1NiAzNDYzIDEyNTMgMzUyMyAKUSAxNTUwIDM1ODQgMTgzMSAzNTg0IApRIDI1OTEgMzU4NCAyOTY2IDMxOTAgClEgMzM0MSAyNzk3IDMzNDEgMTk5NyAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICA8cGF0aCBpZD0iRGVqYVZ1U2Fucy03NCIgZD0iTSAxMTcyIDQ0OTQgCkwgMTE3MiAzNTAwIApMIDIzNTYgMzUwMCAKTCAyMzU2IDMwNTMgCkwgMTE3MiAzMDUzIApMIDExNzIgMTE1MyAKUSAxMTcyIDcyNSAxMjg5IDYwMyAKUSAxNDA2IDQ4MSAxNzY2IDQ4MSAKTCAyMzU2IDQ4MSAKTCAyMzU2IDAgCkwgMTc2NiAwIApRIDExMDAgMCA4NDcgMjQ4IApRIDU5NCA0OTcgNTk0IDExNTMgCkwgNTk0IDMwNTMgCkwgMTcyIDMwNTMgCkwgMTcyIDM1MDAgCkwgNTk0IDM1MDAgCkwgNTk0IDQ0OTQgCkwgMTE3MiA0NDk0IAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTY1IiBkPSJNIDM1OTcgMTg5NCAKTCAzNTk3IDE2MTMgCkwgOTUzIDE2MTMgClEgOTkxIDEwMTkgMTMxMSA3MDggClEgMTYzMSAzOTcgMjIwMyAzOTcgClEgMjUzNCAzOTcgMjg0NSA0NzggClEgMzE1NiA1NTkgMzQ2MyA3MjIgCkwgMzQ2MyAxNzggClEgMzE1MyA0NyAyODI4IC0yMiAKUSAyNTAzIC05MSAyMTY5IC05MSAKUSAxMzMxIC05MSA4NDIgMzk2IApRIDM1MyA4ODQgMzUzIDE3MTYgClEgMzUzIDI1NzUgODE3IDMwNzkgClEgMTI4MSAzNTg0IDIwNjkgMzU4NCAKUSAyNzc1IDM1ODQgMzE4NiAzMTI5IApRIDM1OTcgMjY3NSAzNTk3IDE4OTQgCnoKTSAzMDIyIDIwNjMgClEgMzAxNiAyNTM0IDI3NTggMjgxNSAKUSAyNTAwIDMwOTcgMjA3NSAzMDk3IApRIDE1OTQgMzA5NyAxMzA1IDI4MjUgClEgMTAxNiAyNTUzIDk3MiAyMDU5IApMIDMwMjIgMjA2MyAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgIDwvZGVmcz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy00NCIvPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTYxIiB4PSI3Ny4wMDE5NTMiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03NCIgeD0iMTM4LjI4MTI1Ii8+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNjUiIHg9IjE3Ny40OTAyMzQiLz4KICAgICA8L2c+CiAgICA8L2c+CiAgIDwvZz4KICAgPGcgaWQ9Im1hdHBsb3RsaWIuYXhpc18yIj4KICAgIDxnIGlkPSJ5dGlja18xIj4KICAgICA8ZyBpZD0ibGluZTJkXzE1Ij4KICAgICAgPHBhdGggZD0iTSA0MC42MDMxMjUgMjc2LjMzNDEyNSAKTCAzOTcuNzIzMTI1IDI3Ni4zMzQxMjUgCiIgY2xpcC1wYXRoPSJ1cmwoI3AyMjExYjkxODYwKSIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogI2IwYjBiMDsgc3Ryb2tlLXdpZHRoOiAwLjg7IHN0cm9rZS1saW5lY2FwOiBzcXVhcmUiLz4KICAgICA8L2c+CiAgICAgPGcgaWQ9ImxpbmUyZF8xNiI+CiAgICAgIDxkZWZzPgogICAgICAgPHBhdGggaWQ9Im1iMDM3ZDkzOTA2IiBkPSJNIDAgMCAKTCAtMy41IDAgCiIgc3R5bGU9InN0cm9rZTogIzAwMDAwMDsgc3Ryb2tlLXdpZHRoOiAwLjgiLz4KICAgICAgPC9kZWZzPgogICAgICA8Zz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI21iMDM3ZDkzOTA2IiB4PSI0MC42MDMxMjUiIHk9IjI3Ni4zMzQxMjUiIHN0eWxlPSJzdHJva2U6ICMwMDAwMDA7IHN0cm9rZS13aWR0aDogMC44Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICAgPGcgaWQ9InRleHRfOSI+CiAgICAgIDwhLS0gMCAtLT4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjcuMjQwNjI1IDI4MC4xMzMzNDQpIHNjYWxlKDAuMSAtMC4xKSI+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMwIi8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICA8L2c+CiAgICA8ZyBpZD0ieXRpY2tfMiI+CiAgICAgPGcgaWQ9ImxpbmUyZF8xNyI+CiAgICAgIDxwYXRoIGQ9Ik0gNDAuNjAzMTI1IDIzMi4zNDg2NyAKTCAzOTcuNzIzMTI1IDIzMi4zNDg2NyAKIiBjbGlwLXBhdGg9InVybCgjcDIyMTFiOTE4NjApIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjYjBiMGIwOyBzdHJva2Utd2lkdGg6IDAuODsgc3Ryb2tlLWxpbmVjYXA6IHNxdWFyZSIvPgogICAgIDwvZz4KICAgICA8ZyBpZD0ibGluZTJkXzE4Ij4KICAgICAgPGc+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtYjAzN2Q5MzkwNiIgeD0iNDAuNjAzMTI1IiB5PSIyMzIuMzQ4NjciIHN0eWxlPSJzdHJva2U6ICMwMDAwMDA7IHN0cm9rZS13aWR0aDogMC44Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICAgPGcgaWQ9InRleHRfMTAiPgogICAgICA8IS0tIDIgLS0+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI3LjI0MDYyNSAyMzYuMTQ3ODg5KSBzY2FsZSgwLjEgLTAuMSkiPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMiIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgPC9nPgogICAgPGcgaWQ9Inl0aWNrXzMiPgogICAgIDxnIGlkPSJsaW5lMmRfMTkiPgogICAgICA8cGF0aCBkPSJNIDQwLjYwMzEyNSAxODguMzYzMjE2IApMIDM5Ny43MjMxMjUgMTg4LjM2MzIxNiAKIiBjbGlwLXBhdGg9InVybCgjcDIyMTFiOTE4NjApIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjYjBiMGIwOyBzdHJva2Utd2lkdGg6IDAuODsgc3Ryb2tlLWxpbmVjYXA6IHNxdWFyZSIvPgogICAgIDwvZz4KICAgICA8ZyBpZD0ibGluZTJkXzIwIj4KICAgICAgPGc+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtYjAzN2Q5MzkwNiIgeD0iNDAuNjAzMTI1IiB5PSIxODguMzYzMjE2IiBzdHlsZT0ic3Ryb2tlOiAjMDAwMDAwOyBzdHJva2Utd2lkdGg6IDAuOCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgIDxnIGlkPSJ0ZXh0XzExIj4KICAgICAgPCEtLSA0IC0tPgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNy4yNDA2MjUgMTkyLjE2MjQzNSkgc2NhbGUoMC4xIC0wLjEpIj4KICAgICAgIDxkZWZzPgogICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTM0IiBkPSJNIDI0MTkgNDExNiAKTCA4MjUgMTYyNSAKTCAyNDE5IDE2MjUgCkwgMjQxOSA0MTE2IAp6Ck0gMjI1MyA0NjY2IApMIDMwNDcgNDY2NiAKTCAzMDQ3IDE2MjUgCkwgMzcxMyAxNjI1IApMIDM3MTMgMTEwMCAKTCAzMDQ3IDExMDAgCkwgMzA0NyAwIApMIDI0MTkgMCAKTCAyNDE5IDExMDAgCkwgMzEzIDExMDAgCkwgMzEzIDE3MDkgCkwgMjI1MyA0NjY2IAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgIDwvZGVmcz4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzQiLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgIDwvZz4KICAgIDxnIGlkPSJ5dGlja180Ij4KICAgICA8ZyBpZD0ibGluZTJkXzIxIj4KICAgICAgPHBhdGggZD0iTSA0MC42MDMxMjUgMTQ0LjM3Nzc2MSAKTCAzOTcuNzIzMTI1IDE0NC4zNzc3NjEgCiIgY2xpcC1wYXRoPSJ1cmwoI3AyMjExYjkxODYwKSIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogI2IwYjBiMDsgc3Ryb2tlLXdpZHRoOiAwLjg7IHN0cm9rZS1saW5lY2FwOiBzcXVhcmUiLz4KICAgICA8L2c+CiAgICAgPGcgaWQ9ImxpbmUyZF8yMiI+CiAgICAgIDxnPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjbWIwMzdkOTM5MDYiIHg9IjQwLjYwMzEyNSIgeT0iMTQ0LjM3Nzc2MSIgc3R5bGU9InN0cm9rZTogIzAwMDAwMDsgc3Ryb2tlLXdpZHRoOiAwLjgiLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgICA8ZyBpZD0idGV4dF8xMiI+CiAgICAgIDwhLS0gNiAtLT4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjcuMjQwNjI1IDE0OC4xNzY5OCkgc2NhbGUoMC4xIC0wLjEpIj4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzYiLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgIDwvZz4KICAgIDxnIGlkPSJ5dGlja181Ij4KICAgICA8ZyBpZD0ibGluZTJkXzIzIj4KICAgICAgPHBhdGggZD0iTSA0MC42MDMxMjUgMTAwLjM5MjMwNyAKTCAzOTcuNzIzMTI1IDEwMC4zOTIzMDcgCiIgY2xpcC1wYXRoPSJ1cmwoI3AyMjExYjkxODYwKSIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogI2IwYjBiMDsgc3Ryb2tlLXdpZHRoOiAwLjg7IHN0cm9rZS1saW5lY2FwOiBzcXVhcmUiLz4KICAgICA8L2c+CiAgICAgPGcgaWQ9ImxpbmUyZF8yNCI+CiAgICAgIDxnPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjbWIwMzdkOTM5MDYiIHg9IjQwLjYwMzEyNSIgeT0iMTAwLjM5MjMwNyIgc3R5bGU9InN0cm9rZTogIzAwMDAwMDsgc3Ryb2tlLXdpZHRoOiAwLjgiLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgICA8ZyBpZD0idGV4dF8xMyI+CiAgICAgIDwhLS0gOCAtLT4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjcuMjQwNjI1IDEwNC4xOTE1MjYpIHNjYWxlKDAuMSAtMC4xKSI+CiAgICAgICA8ZGVmcz4KICAgICAgICA8cGF0aCBpZD0iRGVqYVZ1U2Fucy0zOCIgZD0iTSAyMDM0IDIyMTYgClEgMTU4NCAyMjE2IDEzMjYgMTk3NSAKUSAxMDY5IDE3MzQgMTA2OSAxMzEzIApRIDEwNjkgODkxIDEzMjYgNjUwIApRIDE1ODQgNDA5IDIwMzQgNDA5IApRIDI0ODQgNDA5IDI3NDMgNjUxIApRIDMwMDMgODk0IDMwMDMgMTMxMyAKUSAzMDAzIDE3MzQgMjc0NSAxOTc1IApRIDI0ODggMjIxNiAyMDM0IDIyMTYgCnoKTSAxNDAzIDI0ODQgClEgOTk3IDI1ODQgNzcwIDI4NjIgClEgNTQ0IDMxNDEgNTQ0IDM1NDEgClEgNTQ0IDQxMDAgOTQyIDQ0MjUgClEgMTM0MSA0NzUwIDIwMzQgNDc1MCAKUSAyNzMxIDQ3NTAgMzEyOCA0NDI1IApRIDM1MjUgNDEwMCAzNTI1IDM1NDEgClEgMzUyNSAzMTQxIDMyOTggMjg2MiAKUSAzMDcyIDI1ODQgMjY2OSAyNDg0IApRIDMxMjUgMjM3OCAzMzc5IDIwNjggClEgMzYzNCAxNzU5IDM2MzQgMTMxMyAKUSAzNjM0IDYzNCAzMjIwIDI3MSAKUSAyODA2IC05MSAyMDM0IC05MSAKUSAxMjYzIC05MSA4NDggMjcxIApRIDQzNCA2MzQgNDM0IDEzMTMgClEgNDM0IDE3NTkgNjkwIDIwNjggClEgOTQ3IDIzNzggMTQwMyAyNDg0IAp6Ck0gMTE3MiAzNDgxIApRIDExNzIgMzExOSAxMzk4IDI5MTYgClEgMTYyNSAyNzEzIDIwMzQgMjcxMyAKUSAyNDQxIDI3MTMgMjY3MCAyOTE2IApRIDI5MDAgMzExOSAyOTAwIDM0ODEgClEgMjkwMCAzODQ0IDI2NzAgNDA0NyAKUSAyNDQxIDQyNTAgMjAzNCA0MjUwIApRIDE2MjUgNDI1MCAxMzk4IDQwNDcgClEgMTE3MiAzODQ0IDExNzIgMzQ4MSAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICA8L2RlZnM+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM4Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICA8L2c+CiAgICA8ZyBpZD0ieXRpY2tfNiI+CiAgICAgPGcgaWQ9ImxpbmUyZF8yNSI+CiAgICAgIDxwYXRoIGQ9Ik0gNDAuNjAzMTI1IDU2LjQwNjg1MiAKTCAzOTcuNzIzMTI1IDU2LjQwNjg1MiAKIiBjbGlwLXBhdGg9InVybCgjcDIyMTFiOTE4NjApIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjYjBiMGIwOyBzdHJva2Utd2lkdGg6IDAuODsgc3Ryb2tlLWxpbmVjYXA6IHNxdWFyZSIvPgogICAgIDwvZz4KICAgICA8ZyBpZD0ibGluZTJkXzI2Ij4KICAgICAgPGc+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtYjAzN2Q5MzkwNiIgeD0iNDAuNjAzMTI1IiB5PSI1Ni40MDY4NTIiIHN0eWxlPSJzdHJva2U6ICMwMDAwMDA7IHN0cm9rZS13aWR0aDogMC44Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICAgPGcgaWQ9InRleHRfMTQiPgogICAgICA8IS0tIDEwIC0tPgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMC44NzgxMjUgNjAuMjA2MDcxKSBzY2FsZSgwLjEgLTAuMSkiPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMSIvPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIgeD0iNjMuNjIzMDQ3Ii8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICA8L2c+CiAgICA8ZyBpZD0idGV4dF8xNSI+CiAgICAgPCEtLSBEYWlseSBVbmlxdWUgSW50ZXJhY3Rpb25zIC0tPgogICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE0Ljc5ODQzOCAyMTguNTcxNzgxKSByb3RhdGUoLTkwKSBzY2FsZSgwLjEgLTAuMSkiPgogICAgICA8ZGVmcz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTY5IiBkPSJNIDYwMyAzNTAwIApMIDExNzggMzUwMCAKTCAxMTc4IDAgCkwgNjAzIDAgCkwgNjAzIDM1MDAgCnoKTSA2MDMgNDg2MyAKTCAxMTc4IDQ4NjMgCkwgMTE3OCA0MTM0IApMIDYwMyA0MTM0IApMIDYwMyA0ODYzIAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTZjIiBkPSJNIDYwMyA0ODYzIApMIDExNzggNDg2MyAKTCAxMTc4IDAgCkwgNjAzIDAgCkwgNjAzIDQ4NjMgCnoKIiB0cmFuc2Zvcm09InNjYWxlKDAuMDE1NjI1KSIvPgogICAgICAgPHBhdGggaWQ9IkRlamFWdVNhbnMtNzkiIGQ9Ik0gMjA1OSAtMzI1IApRIDE4MTYgLTk1MCAxNTg0IC0xMTQwIApRIDEzNTMgLTEzMzEgOTY2IC0xMzMxIApMIDUwNiAtMTMzMSAKTCA1MDYgLTg1MCAKTCA4NDQgLTg1MCAKUSAxMDgxIC04NTAgMTIxMiAtNzM3IApRIDEzNDQgLTYyNSAxNTAzIC0yMDYgCkwgMTYwNiA1NiAKTCAxOTEgMzUwMCAKTCA4MDAgMzUwMCAKTCAxODk0IDc2MyAKTCAyOTg4IDM1MDAgCkwgMzU5NyAzNTAwIApMIDIwNTkgLTMyNSAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICA8cGF0aCBpZD0iRGVqYVZ1U2Fucy0yMCIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTU1IiBkPSJNIDU1NiA0NjY2IApMIDExOTEgNDY2NiAKTCAxMTkxIDE4MzEgClEgMTE5MSAxMDgxIDE0NjIgNzUxIApRIDE3MzQgNDIyIDIzNDQgNDIyIApRIDI5NTAgNDIyIDMyMjIgNzUxIApRIDM0OTQgMTA4MSAzNDk0IDE4MzEgCkwgMzQ5NCA0NjY2IApMIDQxMjggNDY2NiAKTCA0MTI4IDE3NTMgClEgNDEyOCA4NDEgMzY3NiAzNzUgClEgMzIyNSAtOTEgMjM0NCAtOTEgClEgMTQ1OSAtOTEgMTAwNyAzNzUgClEgNTU2IDg0MSA1NTYgMTc1MyAKTCA1NTYgNDY2NiAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICA8cGF0aCBpZD0iRGVqYVZ1U2Fucy02ZSIgZD0iTSAzNTEzIDIxMTMgCkwgMzUxMyAwIApMIDI5MzggMCAKTCAyOTM4IDIwOTQgClEgMjkzOCAyNTkxIDI3NDQgMjgzNyAKUSAyNTUwIDMwODQgMjE2MyAzMDg0IApRIDE2OTcgMzA4NCAxNDI4IDI3ODcgClEgMTE1OSAyNDkxIDExNTkgMTk3OCAKTCAxMTU5IDAgCkwgNTgxIDAgCkwgNTgxIDM1MDAgCkwgMTE1OSAzNTAwIApMIDExNTkgMjk1NiAKUSAxMzY2IDMyNzIgMTY0NSAzNDI4IApRIDE5MjUgMzU4NCAyMjkxIDM1ODQgClEgMjg5NCAzNTg0IDMyMDMgMzIxMSAKUSAzNTEzIDI4MzggMzUxMyAyMTEzIAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTcxIiBkPSJNIDk0NyAxNzQ3IApRIDk0NyAxMTEzIDEyMDggNzUyIApRIDE0NjkgMzkxIDE5MjUgMzkxIApRIDIzODEgMzkxIDI2NDMgNzUyIApRIDI5MDYgMTExMyAyOTA2IDE3NDcgClEgMjkwNiAyMzgxIDI2NDMgMjc0MiAKUSAyMzgxIDMxMDMgMTkyNSAzMTAzIApRIDE0NjkgMzEwMyAxMjA4IDI3NDIgClEgOTQ3IDIzODEgOTQ3IDE3NDcgCnoKTSAyOTA2IDUyNSAKUSAyNzI1IDIxMyAyNDQ4IDYxIApRIDIxNzIgLTkxIDE3ODQgLTkxIApRIDExNTAgLTkxIDc1MSA0MTUgClEgMzUzIDkyMiAzNTMgMTc0NyAKUSAzNTMgMjU3MiA3NTEgMzA3OCAKUSAxMTUwIDM1ODQgMTc4NCAzNTg0IApRIDIxNzIgMzU4NCAyNDQ4IDM0MzIgClEgMjcyNSAzMjgxIDI5MDYgMjk2OSAKTCAyOTA2IDM1MDAgCkwgMzQ4MSAzNTAwIApMIDM0ODEgLTEzMzEgCkwgMjkwNiAtMTMzMSAKTCAyOTA2IDUyNSAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICA8cGF0aCBpZD0iRGVqYVZ1U2Fucy03NSIgZD0iTSA1NDQgMTM4MSAKTCA1NDQgMzUwMCAKTCAxMTE5IDM1MDAgCkwgMTExOSAxNDAzIApRIDExMTkgOTA2IDEzMTIgNjU3IApRIDE1MDYgNDA5IDE4OTQgNDA5IApRIDIzNTkgNDA5IDI2MjkgNzA2IApRIDI5MDAgMTAwMyAyOTAwIDE1MTYgCkwgMjkwMCAzNTAwIApMIDM0NzUgMzUwMCAKTCAzNDc1IDAgCkwgMjkwMCAwIApMIDI5MDAgNTM4IApRIDI2OTEgMjE5IDI0MTQgNjQgClEgMjEzOCAtOTEgMTc3MiAtOTEgClEgMTE2OSAtOTEgODU2IDI4NCAKUSA1NDQgNjU5IDU0NCAxMzgxIAp6Ck0gMTk5MSAzNTg0IApMIDE5OTEgMzU4NCAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgICA8cGF0aCBpZD0iRGVqYVZ1U2Fucy00OSIgZD0iTSA2MjggNDY2NiAKTCAxMjU5IDQ2NjYgCkwgMTI1OSAwIApMIDYyOCAwIApMIDYyOCA0NjY2IAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTcyIiBkPSJNIDI2MzEgMjk2MyAKUSAyNTM0IDMwMTkgMjQyMCAzMDQ1IApRIDIzMDYgMzA3MiAyMTY5IDMwNzIgClEgMTY4MSAzMDcyIDE0MjAgMjc1NSAKUSAxMTU5IDI0MzggMTE1OSAxODQ0IApMIDExNTkgMCAKTCA1ODEgMCAKTCA1ODEgMzUwMCAKTCAxMTU5IDM1MDAgCkwgMTE1OSAyOTU2IApRIDEzNDEgMzI3NSAxNjMxIDM0MjkgClEgMTkyMiAzNTg0IDIzMzggMzU4NCAKUSAyMzk3IDM1ODQgMjQ2OSAzNTc2IApRIDI1NDEgMzU2OSAyNjI4IDM1NTMgCkwgMjYzMSAyOTYzIAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTYzIiBkPSJNIDMxMjIgMzM2NiAKTCAzMTIyIDI4MjggClEgMjg3OCAyOTYzIDI2MzMgMzAzMCAKUSAyMzg4IDMwOTcgMjEzOCAzMDk3IApRIDE1NzggMzA5NyAxMjY4IDI3NDIgClEgOTU5IDIzODggOTU5IDE3NDcgClEgOTU5IDExMDYgMTI2OCA3NTEgClEgMTU3OCAzOTcgMjEzOCAzOTcgClEgMjM4OCAzOTcgMjYzMyA0NjQgClEgMjg3OCA1MzEgMzEyMiA2NjYgCkwgMzEyMiAxMzQgClEgMjg4MSAyMiAyNjIzIC0zNCAKUSAyMzY2IC05MSAyMDc1IC05MSAKUSAxMjg0IC05MSA4MTggNDA2IApRIDM1MyA5MDMgMzUzIDE3NDcgClEgMzUzIDI2MDMgODIzIDMwOTMgClEgMTI5NCAzNTg0IDIxMTMgMzU4NCAKUSAyMzc4IDM1ODQgMjYzMSAzNTI5IApRIDI4ODQgMzQ3NSAzMTIyIDMzNjYgCnoKIiB0cmFuc2Zvcm09InNjYWxlKDAuMDE1NjI1KSIvPgogICAgICAgPHBhdGggaWQ9IkRlamFWdVNhbnMtNmYiIGQ9Ik0gMTk1OSAzMDk3IApRIDE0OTcgMzA5NyAxMjI4IDI3MzYgClEgOTU5IDIzNzUgOTU5IDE3NDcgClEgOTU5IDExMTkgMTIyNiA3NTggClEgMTQ5NCAzOTcgMTk1OSAzOTcgClEgMjQxOSAzOTcgMjY4NyA3NTkgClEgMjk1NiAxMTIyIDI5NTYgMTc0NyAKUSAyOTU2IDIzNjkgMjY4NyAyNzMzIApRIDI0MTkgMzA5NyAxOTU5IDMwOTcgCnoKTSAxOTU5IDM1ODQgClEgMjcwOSAzNTg0IDMxMzcgMzA5NiAKUSAzNTY2IDI2MDkgMzU2NiAxNzQ3IApRIDM1NjYgODg4IDMxMzcgMzk4IApRIDI3MDkgLTkxIDE5NTkgLTkxIApRIDEyMDYgLTkxIDc3OSAzOTggClEgMzUzIDg4OCAzNTMgMTc0NyAKUSAzNTMgMjYwOSA3NzkgMzA5NiAKUSAxMjA2IDM1ODQgMTk1OSAzNTg0IAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTczIiBkPSJNIDI4MzQgMzM5NyAKTCAyODM0IDI4NTMgClEgMjU5MSAyOTc4IDIzMjggMzA0MCAKUSAyMDY2IDMxMDMgMTc4NCAzMTAzIApRIDEzNTYgMzEwMyAxMTQyIDI5NzIgClEgOTI4IDI4NDEgOTI4IDI1NzggClEgOTI4IDIzNzggMTA4MSAyMjY0IApRIDEyMzQgMjE1MCAxNjk3IDIwNDcgCkwgMTg5NCAyMDAzIApRIDI1MDYgMTg3MiAyNzY0IDE2MzMgClEgMzAyMiAxMzk0IDMwMjIgOTY2IApRIDMwMjIgNDc4IDI2MzYgMTkzIApRIDIyNTAgLTkxIDE1NzUgLTkxIApRIDEyOTQgLTkxIDk4OSAtMzYgClEgNjg0IDE5IDM0NyAxMjggCkwgMzQ3IDcyMiAKUSA2NjYgNTU2IDk3NSA0NzMgClEgMTI4NCAzOTEgMTU4OCAzOTEgClEgMTk5NCAzOTEgMjIxMiA1MzAgClEgMjQzMSA2NjkgMjQzMSA5MjIgClEgMjQzMSAxMTU2IDIyNzMgMTI4MSAKUSAyMTE2IDE0MDYgMTU4MSAxNTIyIApMIDEzODEgMTU2OSAKUSA4NDcgMTY4MSA2MDkgMTkxNCAKUSAzNzIgMjE0NyAzNzIgMjU1MyAKUSAzNzIgMzA0NyA3MjIgMzMxNSAKUSAxMDcyIDM1ODQgMTcxNiAzNTg0IApRIDIwMzQgMzU4NCAyMzE1IDM1MzcgClEgMjU5NyAzNDkxIDI4MzQgMzM5NyAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgIDwvZGVmcz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy00NCIvPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTYxIiB4PSI3Ny4wMDE5NTMiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02OSIgeD0iMTM4LjI4MTI1Ii8+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNmMiIHg9IjE2Ni4wNjQ0NTMiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03OSIgeD0iMTkzLjg0NzY1NiIvPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTIwIiB4PSIyNTMuMDI3MzQ0Ii8+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNTUiIHg9IjI4NC44MTQ0NTMiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02ZSIgeD0iMzU4LjAwNzgxMiIvPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTY5IiB4PSI0MjEuMzg2NzE5Ii8+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNzEiIHg9IjQ0OS4xNjk5MjIiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03NSIgeD0iNTEyLjY0NjQ4NCIvPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTY1IiB4PSI1NzYuMDI1MzkxIi8+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMjAiIHg9IjYzNy41NDg4MjgiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy00OSIgeD0iNjY5LjMzNTkzOCIvPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTZlIiB4PSI2OTguODI4MTI1Ii8+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNzQiIHg9Ijc2Mi4yMDcwMzEiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02NSIgeD0iODAxLjQxNjAxNiIvPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTcyIiB4PSI4NjIuOTM5NDUzIi8+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNjEiIHg9IjkwNC4wNTI3MzQiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02MyIgeD0iOTY1LjMzMjAzMSIvPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTc0IiB4PSIxMDIwLjMxMjUiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02OSIgeD0iMTA1OS41MjE0ODQiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02ZiIgeD0iMTA4Ny4zMDQ2ODgiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02ZSIgeD0iMTE0OC40ODYzMjgiLz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03MyIgeD0iMTIxMS44NjUyMzQiLz4KICAgICA8L2c+CiAgICA8L2c+CiAgIDwvZz4KICAgPGcgaWQ9ImxpbmUyZF8yNyI+CiAgICA8cGF0aCBkPSJNIDU2LjgzNTg1MiA3OC4zOTk1OCAKTCA2OC44NjAwOTUgMTIyLjM4NTAzNCAKTCA4MC44ODQzMzcgMjc2LjMzNDEyNSAKTCA5Mi45MDg1OCAyNzYuMzM0MTI1IApMIDEwNC45MzI4MjIgMTg4LjM2MzIxNiAKTCAxMTYuOTU3MDY0IDU2LjQwNjg1MiAKTCAxMjguOTgxMzA3IDE0NC4zNzc3NjEgCkwgMTQxLjAwNTU0OSAxNDQuMzc3NzYxIApMIDE1My4wMjk3OTIgMzQuNDE0MTI1IApMIDE2NS4wNTQwMzQgMjc2LjMzNDEyNSAKTCAxNzcuMDc4Mjc3IDI3Ni4zMzQxMjUgCkwgMTg5LjEwMjUxOSAxNDQuMzc3NzYxIApMIDIwMS4xMjY3NjEgNTYuNDA2ODUyIApMIDIxMy4xNTEwMDQgMTg4LjM2MzIxNiAKTCAyMjUuMTc1MjQ2IDE0NC4zNzc3NjEgCkwgMjM3LjE5OTQ4OSAxMjIuMzg1MDM0IApMIDI0OS4yMjM3MzEgMjc2LjMzNDEyNSAKTCAyNjEuMjQ3OTczIDIzMi4zNDg2NyAKTCAyNzMuMjcyMjE2IDE2Ni4zNzA0ODkgCkwgMjg1LjI5NjQ1OCAxNDQuMzc3NzYxIApMIDI5Ny4zMjA3MDEgNzguMzk5NTggCkwgMzA5LjM0NDk0MyAxODguMzYzMjE2IApMIDMyMS4zNjkxODYgNzguMzk5NTggCkwgMzMzLjM5MzQyOCAyNzYuMzM0MTI1IApMIDM0NS40MTc2NyAyNzYuMzM0MTI1IApMIDM1Ny40NDE5MTMgNTYuNDA2ODUyIApMIDM2OS40NjYxNTUgMTIyLjM4NTAzNCAKTCAzODEuNDkwMzk4IDE0NC4zNzc3NjEgCiIgY2xpcC1wYXRoPSJ1cmwoI3AyMjExYjkxODYwKSIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogIzFmNzdiNDsgc3Ryb2tlLXdpZHRoOiAxLjU7IHN0cm9rZS1saW5lY2FwOiBzcXVhcmUiLz4KICAgIDxkZWZzPgogICAgIDxwYXRoIGlkPSJtOGNhMGMyYWQ4MyIgZD0iTSAwIDMgCkMgMC43OTU2MDkgMyAxLjU1ODc0IDIuNjgzOTAxIDIuMTIxMzIgMi4xMjEzMiAKQyAyLjY4MzkwMSAxLjU1ODc0IDMgMC43OTU2MDkgMyAwIApDIDMgLTAuNzk1NjA5IDIuNjgzOTAxIC0xLjU1ODc0IDIuMTIxMzIgLTIuMTIxMzIgCkMgMS41NTg3NCAtMi42ODM5MDEgMC43OTU2MDkgLTMgMCAtMyAKQyAtMC43OTU2MDkgLTMgLTEuNTU4NzQgLTIuNjgzOTAxIC0yLjEyMTMyIC0yLjEyMTMyIApDIC0yLjY4MzkwMSAtMS41NTg3NCAtMyAtMC43OTU2MDkgLTMgMCAKQyAtMyAwLjc5NTYwOSAtMi42ODM5MDEgMS41NTg3NCAtMi4xMjEzMiAyLjEyMTMyIApDIC0xLjU1ODc0IDIuNjgzOTAxIC0wLjc5NTYwOSAzIDAgMyAKegoiIHN0eWxlPSJzdHJva2U6ICMxZjc3YjQiLz4KICAgIDwvZGVmcz4KICAgIDxnIGNsaXAtcGF0aD0idXJsKCNwMjIxMWI5MTg2MCkiPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSI1Ni44MzU4NTIiIHk9Ijc4LjM5OTU4IiBzdHlsZT0iZmlsbDogIzFmNzdiNDsgc3Ryb2tlOiAjMWY3N2I0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjbThjYTBjMmFkODMiIHg9IjY4Ljg2MDA5NSIgeT0iMTIyLjM4NTAzNCIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSI4MC44ODQzMzciIHk9IjI3Ni4zMzQxMjUiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iOTIuOTA4NTgiIHk9IjI3Ni4zMzQxMjUiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMTA0LjkzMjgyMiIgeT0iMTg4LjM2MzIxNiIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSIxMTYuOTU3MDY0IiB5PSI1Ni40MDY4NTIiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMTI4Ljk4MTMwNyIgeT0iMTQ0LjM3Nzc2MSIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSIxNDEuMDA1NTQ5IiB5PSIxNDQuMzc3NzYxIiBzdHlsZT0iZmlsbDogIzFmNzdiNDsgc3Ryb2tlOiAjMWY3N2I0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjbThjYTBjMmFkODMiIHg9IjE1My4wMjk3OTIiIHk9IjM0LjQxNDEyNSIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSIxNjUuMDU0MDM0IiB5PSIyNzYuMzM0MTI1IiBzdHlsZT0iZmlsbDogIzFmNzdiNDsgc3Ryb2tlOiAjMWY3N2I0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjbThjYTBjMmFkODMiIHg9IjE3Ny4wNzgyNzciIHk9IjI3Ni4zMzQxMjUiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMTg5LjEwMjUxOSIgeT0iMTQ0LjM3Nzc2MSIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSIyMDEuMTI2NzYxIiB5PSI1Ni40MDY4NTIiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMjEzLjE1MTAwNCIgeT0iMTg4LjM2MzIxNiIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSIyMjUuMTc1MjQ2IiB5PSIxNDQuMzc3NzYxIiBzdHlsZT0iZmlsbDogIzFmNzdiNDsgc3Ryb2tlOiAjMWY3N2I0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjbThjYTBjMmFkODMiIHg9IjIzNy4xOTk0ODkiIHk9IjEyMi4zODUwMzQiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMjQ5LjIyMzczMSIgeT0iMjc2LjMzNDEyNSIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSIyNjEuMjQ3OTczIiB5PSIyMzIuMzQ4NjciIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMjczLjI3MjIxNiIgeT0iMTY2LjM3MDQ4OSIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSIyODUuMjk2NDU4IiB5PSIxNDQuMzc3NzYxIiBzdHlsZT0iZmlsbDogIzFmNzdiNDsgc3Ryb2tlOiAjMWY3N2I0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjbThjYTBjMmFkODMiIHg9IjI5Ny4zMjA3MDEiIHk9Ijc4LjM5OTU4IiBzdHlsZT0iZmlsbDogIzFmNzdiNDsgc3Ryb2tlOiAjMWY3N2I0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjbThjYTBjMmFkODMiIHg9IjMwOS4zNDQ5NDMiIHk9IjE4OC4zNjMyMTYiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMzIxLjM2OTE4NiIgeT0iNzguMzk5NTgiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMzMzLjM5MzQyOCIgeT0iMjc2LjMzNDEyNSIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI204Y2EwYzJhZDgzIiB4PSIzNDUuNDE3NjciIHk9IjI3Ni4zMzQxMjUiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMzU3LjQ0MTkxMyIgeT0iNTYuNDA2ODUyIiBzdHlsZT0iZmlsbDogIzFmNzdiNDsgc3Ryb2tlOiAjMWY3N2I0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjbThjYTBjMmFkODMiIHg9IjM2OS40NjYxNTUiIHk9IjEyMi4zODUwMzQiIHN0eWxlPSJmaWxsOiAjMWY3N2I0OyBzdHJva2U6ICMxZjc3YjQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNtOGNhMGMyYWQ4MyIgeD0iMzgxLjQ5MDM5OCIgeT0iMTQ0LjM3Nzc2MSIgc3R5bGU9ImZpbGw6ICMxZjc3YjQ7IHN0cm9rZTogIzFmNzdiNCIvPgogICAgPC9nPgogICA8L2c+CiAgIDxnIGlkPSJwYXRjaF8zIj4KICAgIDxwYXRoIGQ9Ik0gNDAuNjAzMTI1IDI4OC40MzAxMjUgCkwgNDAuNjAzMTI1IDIyLjMxODEyNSAKIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjMDAwMDAwOyBzdHJva2Utd2lkdGg6IDAuODsgc3Ryb2tlLWxpbmVqb2luOiBtaXRlcjsgc3Ryb2tlLWxpbmVjYXA6IHNxdWFyZSIvPgogICA8L2c+CiAgIDxnIGlkPSJwYXRjaF80Ij4KICAgIDxwYXRoIGQ9Ik0gMzk3LjcyMzEyNSAyODguNDMwMTI1IApMIDM5Ny43MjMxMjUgMjIuMzE4MTI1IAoiIHN0eWxlPSJmaWxsOiBub25lOyBzdHJva2U6ICMwMDAwMDA7IHN0cm9rZS13aWR0aDogMC44OyBzdHJva2UtbGluZWpvaW46IG1pdGVyOyBzdHJva2UtbGluZWNhcDogc3F1YXJlIi8+CiAgIDwvZz4KICAgPGcgaWQ9InBhdGNoXzUiPgogICAgPHBhdGggZD0iTSA0MC42MDMxMjUgMjg4LjQzMDEyNSAKTCAzOTcuNzIzMTI1IDI4OC40MzAxMjUgCiIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogIzAwMDAwMDsgc3Ryb2tlLXdpZHRoOiAwLjg7IHN0cm9rZS1saW5lam9pbjogbWl0ZXI7IHN0cm9rZS1saW5lY2FwOiBzcXVhcmUiLz4KICAgPC9nPgogICA8ZyBpZD0icGF0Y2hfNiI+CiAgICA8cGF0aCBkPSJNIDQwLjYwMzEyNSAyMi4zMTgxMjUgCkwgMzk3LjcyMzEyNSAyMi4zMTgxMjUgCiIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogIzAwMDAwMDsgc3Ryb2tlLXdpZHRoOiAwLjg7IHN0cm9rZS1saW5lam9pbjogbWl0ZXI7IHN0cm9rZS1saW5lY2FwOiBzcXVhcmUiLz4KICAgPC9nPgogICA8ZyBpZD0idGV4dF8xNiI+CiAgICA8IS0tIExvbWUncyBkYWlseSBpbnRlcmFjdGlvbiBjb3VudCAtLT4KICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyOC40NzUgMTYuMzE4MTI1KSBzY2FsZSgwLjEyIC0wLjEyKSI+CiAgICAgPGRlZnM+CiAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTRjIiBkPSJNIDYyOCA0NjY2IApMIDEyNTkgNDY2NiAKTCAxMjU5IDUzMSAKTCAzNTMxIDUzMSAKTCAzNTMxIDAgCkwgNjI4IDAgCkwgNjI4IDQ2NjYgCnoKIiB0cmFuc2Zvcm09InNjYWxlKDAuMDE1NjI1KSIvPgogICAgICA8cGF0aCBpZD0iRGVqYVZ1U2Fucy02ZCIgZD0iTSAzMzI4IDI4MjggClEgMzU0NCAzMjE2IDM4NDQgMzQwMCAKUSA0MTQ0IDM1ODQgNDU1MCAzNTg0IApRIDUwOTcgMzU4NCA1Mzk0IDMyMDEgClEgNTY5MSAyODE5IDU2OTEgMjExMyAKTCA1NjkxIDAgCkwgNTExMyAwIApMIDUxMTMgMjA5NCAKUSA1MTEzIDI1OTcgNDkzNCAyODQwIApRIDQ3NTYgMzA4NCA0MzkxIDMwODQgClEgMzk0NCAzMDg0IDM2ODQgMjc4NyAKUSAzNDI1IDI0OTEgMzQyNSAxOTc4IApMIDM0MjUgMCAKTCAyODQ3IDAgCkwgMjg0NyAyMDk0IApRIDI4NDcgMjYwMCAyNjY5IDI4NDIgClEgMjQ5MSAzMDg0IDIxMTkgMzA4NCAKUSAxNjc4IDMwODQgMTQxOCAyNzg2IApRIDExNTkgMjQ4OCAxMTU5IDE5NzggCkwgMTE1OSAwIApMIDU4MSAwIApMIDU4MSAzNTAwIApMIDExNTkgMzUwMCAKTCAxMTU5IDI5NTYgClEgMTM1NiAzMjc4IDE2MzEgMzQzMSAKUSAxOTA2IDM1ODQgMjI4NCAzNTg0IApRIDI2NjYgMzU4NCAyOTMzIDMzOTAgClEgMzIwMCAzMTk3IDMzMjggMjgyOCAKegoiIHRyYW5zZm9ybT0ic2NhbGUoMC4wMTU2MjUpIi8+CiAgICAgIDxwYXRoIGlkPSJEZWphVnVTYW5zLTI3IiBkPSJNIDExNDcgNDY2NiAKTCAxMTQ3IDI5MzEgCkwgNjE2IDI5MzEgCkwgNjE2IDQ2NjYgCkwgMTE0NyA0NjY2IAp6CiIgdHJhbnNmb3JtPSJzY2FsZSgwLjAxNTYyNSkiLz4KICAgICAgPHBhdGggaWQ9IkRlamFWdVNhbnMtNjQiIGQ9Ik0gMjkwNiAyOTY5IApMIDI5MDYgNDg2MyAKTCAzNDgxIDQ4NjMgCkwgMzQ4MSAwIApMIDI5MDYgMCAKTCAyOTA2IDUyNSAKUSAyNzI1IDIxMyAyNDQ4IDYxIApRIDIxNzIgLTkxIDE3ODQgLTkxIApRIDExNTAgLTkxIDc1MSA0MTUgClEgMzUzIDkyMiAzNTMgMTc0NyAKUSAzNTMgMjU3MiA3NTEgMzA3OCAKUSAxMTUwIDM1ODQgMTc4NCAzNTg0IApRIDIxNzIgMzU4NCAyNDQ4IDM0MzIgClEgMjcyNSAzMjgxIDI5MDYgMjk2OSAKegpNIDk0NyAxNzQ3IApRIDk0NyAxMTEzIDEyMDggNzUyIApRIDE0NjkgMzkxIDE5MjUgMzkxIApRIDIzODEgMzkxIDI2NDMgNzUyIApRIDI5MDYgMTExMyAyOTA2IDE3NDcgClEgMjkwNiAyMzgxIDI2NDMgMjc0MiAKUSAyMzgxIDMxMDMgMTkyNSAzMTAzIApRIDE0NjkgMzEwMyAxMjA4IDI3NDIgClEgOTQ3IDIzODEgOTQ3IDE3NDcgCnoKIiB0cmFuc2Zvcm09InNjYWxlKDAuMDE1NjI1KSIvPgogICAgIDwvZGVmcz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTRjIi8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02ZiIgeD0iNTMuOTYyODkxIi8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02ZCIgeD0iMTE1LjE0NDUzMSIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNjUiIHg9IjIxMi41NTY2NDEiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTI3IiB4PSIyNzQuMDgwMDc4Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03MyIgeD0iMzAxLjU3MDMxMiIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMjAiIHg9IjM1My42Njk5MjIiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTY0IiB4PSIzODUuNDU3MDMxIi8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02MSIgeD0iNDQ4LjkzMzU5NCIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNjkiIHg9IjUxMC4yMTI4OTEiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTZjIiB4PSI1MzcuOTk2MDk0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03OSIgeD0iNTY1Ljc3OTI5NyIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMjAiIHg9IjYyNC45NTg5ODQiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTY5IiB4PSI2NTYuNzQ2MDk0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02ZSIgeD0iNjg0LjUyOTI5NyIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNzQiIHg9Ijc0Ny45MDgyMDMiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTY1IiB4PSI3ODcuMTE3MTg4Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03MiIgeD0iODQ4LjY0MDYyNSIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNjEiIHg9Ijg4OS43NTM5MDYiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTYzIiB4PSI5NTEuMDMzMjAzIi8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03NCIgeD0iMTAwNi4wMTM2NzIiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTY5IiB4PSIxMDQ1LjIyMjY1NiIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNmYiIHg9IjEwNzMuMDA1ODU5Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02ZSIgeD0iMTEzNC4xODc1Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0yMCIgeD0iMTE5Ny41NjY0MDYiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTYzIiB4PSIxMjI5LjM1MzUxNiIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNmYiIHg9IjEyODQuMzMzOTg0Ii8+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03NSIgeD0iMTM0NS41MTU2MjUiLz4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTZlIiB4PSIxNDA4Ljg5NDUzMSIvPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNzQiIHg9IjE0NzIuMjczNDM4Ii8+CiAgICA8L2c+CiAgIDwvZz4KICA8L2c+CiA8L2c+CiA8ZGVmcz4KICA8Y2xpcFBhdGggaWQ9InAyMjExYjkxODYwIj4KICAgPHJlY3QgeD0iNDAuNjAzMTI1IiB5PSIyMi4zMTgxMjUiIHdpZHRoPSIzNTcuMTIiIGhlaWdodD0iMjY2LjExMiIvPgogIDwvY2xpcFBhdGg+CiA8L2RlZnM+Cjwvc3ZnPgo="/></center></div>
+</div>
+</div>
+</div>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../1_intro/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction and dataset" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Introduction and dataset
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../3_layer/" class="md-footer__link md-footer__link--next" aria-label="Next: Layered graphs" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Layered graphs
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+  
+    
+  
+
+
+  
+    
+  
+
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="analytics" checked>
+          <span class="task-list-indicator"></span>
+          Google Analytics
+        </label>
+      </li>
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="github" checked>
+          <span class="task-list-indicator"></span>
+          GitHub
+        </label>
+      </li>
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tracking", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.footer", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>
