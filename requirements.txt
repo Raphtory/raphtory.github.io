@@ -7,6 +7,6 @@ matplotlib==3.9.3
 raphtory
 markdown-exec[ansi]==1.6.0
 mkdocs-macros-plugin==0.7.0
-PyYAML==6.0
+PyYAML==6.0.2
 mkdocs-jupyter
 mkdocs-matplotlib
