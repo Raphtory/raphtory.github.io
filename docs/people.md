@@ -20,6 +20,7 @@
 [![brandon-haugen](https://avatars.githubusercontent.com/u/182728?v=4){.contributor_icon}](https://github.com/brandon-haugen)
 [![BaCk7](https://avatars.githubusercontent.com/u/25950261?v=4){.contributor_icon}](https://github.com/BaCk7)
 [![D4rkisek](https://avatars.githubusercontent.com/u/106534376?v=4){.contributor_icon}](https://github.com/D4rkisek)
+[![david-mrn](https://avatars.githubusercontent.com/u/71909980?v=4){.contributor_icon}](https://github.com/david-mrn)
 [![HelleKev](https://avatars.githubusercontent.com/u/80215162?v=4){.contributor_icon}](https://github.com/HelleKev)
 [![jatindersangha](https://avatars.githubusercontent.com/u/62962154?v=4){.contributor_icon}](https://github.com/jatindersangha)
 [![hallofstairs](https://avatars.githubusercontent.com/u/51125632?v=4){.contributor_icon}](https://github.com/hallofstairs)
