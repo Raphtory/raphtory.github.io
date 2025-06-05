@@ -114,7 +114,4 @@ nav:
           - user-guide/persistent-graph/2_ambiguity.md
           - user-guide/persistent-graph/3_views.md
   - API: api.md
-  #- Open House: open-house.md
 
-hooks:
-  - scripts/people.py

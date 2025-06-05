@@ -85,8 +85,6 @@ Join the growing community of open-source enthusiasts using Raphtory to power th
 
 - Join our [![Slack](https://img.shields.io/badge/community-Slack-red)](https://join.slack.com/t/raphtory/shared_invite/zt-xbebws9j-VgPIFRleJFJBwmpf81tvxA) to chat with us and get answers to your questions!
 
---8<-- "docs/people.md"
-
 ### Sponsors
 [<img src="https://github.com/Pometry/Raphtory/assets/6665739/3953c945-e8b4-4b4b-a01a-dd595ffb06e9" style="height:75px"/>](https://www.pometry.com/)
 
