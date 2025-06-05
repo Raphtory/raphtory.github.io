@@ -12,3 +12,4 @@ package.json
 .tweet-cache/*
 .vscode
 .venv
+*__pycache__
