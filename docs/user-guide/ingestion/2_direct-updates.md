@@ -103,13 +103,13 @@ In the example below, three different constant properties are added to the `grap
 ```    
 
 ## Edge Layers
-If you have worked with other graph libraries you may be expecting two calls to `add_edge()` between the same nodes to generate two distinct edge objects. As we have seen above, in Raphtory, these calls will append the information together into the history of a single edge. 
+If you have worked with other graph libraries you may be expecting two calls to `add_edge()` between the same nodes to generate two distinct edge objects. In Raphtory, these calls append the information together into the history of a single edge. 
 
-These edges can be `exploded` to interact with all updates independently (as you shall see in [Exploded edges](../querying/4_edge-metrics.md/#exploded-edges)), but Raphtory also allows you to represent totally different relationships between the same nodes via `edge layers`.
+Edges can be [exploded](../querying/4_edge-metrics.md/#exploded-edges) to interact with all updates independently and Raphtory also allows you to represent totally different relationships between the same nodes via `edge layers`.
 
-The `add_edge()` function takes a second optional parameter, `layer`, allowing the user to name the type of relationship being added. All calls to `add_edge` with the same `layer` value will be stored together allowing them to be accessed separately or merged with other layers as required.
+The `add_edge()` function takes a second optional parameter, `layer` that allows you to name the type of relationship being added. All calls to `add_edge` with the same `layer` value will be stored together allowing them to be accessed separately or merged with other layers as required.
 
-You can see this in the example below where we add five updates between `Person 1` and `Person 2` across the layers `Friends`, `Co Workers` and `Family`. When we query the history of the `weight` property on the edge we initially get all of the values back. However, after applying the [`layers()` graph view](../views/3_layer.md) we only return updates from `Co Workers` and `Family`. 
+You can see this in the example below where we add five updates between `Person 1` and `Person 2` across the layers `Friends`, `Co Workers` and `Family`. When we query the history of the `weight` property on the edge we initially get all of the values back. However, by applying the [`layers()` graph view](../views/3_layer.md) we can return only updates from `Co Workers` and `Family`. 
 
 {{code_block('getting-started/ingestion','edge_layers',[])}}
 
