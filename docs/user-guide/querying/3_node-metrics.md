@@ -4,7 +4,7 @@ Nodes can be accessed by storing the object returned from a call to `add_node()`
 
 ## Update history 
 
-Nodes have functions for querying their earliest and latest update time (as an epoch or datetime) as well as for accessing their full history (`history()`/`history_date_time()`). In the code below we create a node object for the monkey `Felipe` and see when their updates occurred. 
+Nodes have functions for querying their earliest and latest update time (as an epoch or datetime) as well as for accessing their full history (using `history()` or `history_date_time()`). In the code below we create a node object for the monkey `Felipe` and see when their updates occurred. 
 
 {{code_block('getting-started/querying','node_metrics',['Node'])}}
 !!! Output
