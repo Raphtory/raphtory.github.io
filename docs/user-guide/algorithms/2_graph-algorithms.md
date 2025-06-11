@@ -1,5 +1,6 @@
 # Graph wide algorithms
-The first category of algorithms we can run are `graph wide`, returning one value for the whole graph. There are many useful metrics that fall into this category, of which we run three in the code below:
+
+The following examples cover three `graphwide` algorithms:
 
 * [Graph Density](https://en.wikipedia.org/wiki/Dense_graph) - which represents the ratio between the edges present in a graph and the maximum number of edges that the graph could contain.
 * [Clustering coefficient](https://en.wikipedia.org/wiki/Clustering_coefficient) - which is a measure of the degree to which nodes in a graph tend to cluster together e.g. how many of your friends are also friends.
