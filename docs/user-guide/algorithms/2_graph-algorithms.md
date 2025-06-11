@@ -6,7 +6,7 @@ The following examples cover three `graphwide` algorithms:
 * [Clustering coefficient](https://en.wikipedia.org/wiki/Clustering_coefficient) - which is a measure of the degree to which nodes in a graph tend to cluster together e.g. how many of your friends are also friends.
 * [Reciprocity](https://en.wikipedia.org/wiki/Reciprocity_(network_science)) - which is a measure of the likelihood of nodes in a directed network to be mutually connected e.g. if you follow someone on twitter, whats the change of them following you back.
 
-As you can see below, to run an algorithm you simply need to import the algorithm package, choose an algorithm to run and hand it your graph.
+To run an algorithm you simply need to import the algorithm package, choose an algorithm to run, and give it your graph.
 
 {{code_block('getting-started/algorithms','global',['Graph'])}}
 
