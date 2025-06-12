@@ -5,7 +5,9 @@
   type="text/javascript">
 </script>
 
-When dealing with the `Graph` object previously where edges are formed from instantaneous event streams, views were used to create a temporal bound on the graph to ultimately see how the graph changes over time. Single views were created using `at`, `before`, `after` and `window`, and iterators of windows were created using `expanding` and `rolling`. Functionality with the same name is available for the persistent graph. It shares similarities with the functionality for `Graph` but has some important differences. Through the use of example, this page aims to cover the behaviour of this time-bounding behaviour on the `PersistentGraph`.
+When dealing with *link-stream* graphs where edges are formed from instantaneous event streams, views were used to create a temporal bound on the graph to ultimately see how the graph changes over time. Single views were created using `at`, `before`, `after` and `window`, and iterators of windows were created using `expanding` and `rolling`.
+
+Functionality with the same name is available for the *PersistentGraph*. This shares similarities with the functionality for *link-stream* graphs but has some important differences. This page covers the differences in time-bounding behavior on the Raphtory `PersistentGraph`.
 
 ## Querying an instant of the graph with `at()`
 
@@ -16,9 +18,11 @@ When dealing with the `Graph` object previously where edges are formed from inst
     --8<-- "python/getting-started/persistent-graph.py:at_1"
     ```
 
-As we can see, the edge's presence in the graph is _inclusive_ of the timestamp at which it was added, but _exclusive_ of the timestamp at which it was deleted. You might think of it being present on a interval \\(1 \leq t < 5 \subseteq \mathbb{Z}\\). Note that the earliest and latest times for each edge is adjusted to the time bound in the query.
+As we can see, the edge's presence in the graph is _inclusive_ of the timestamp at which it was added, but _exclusive_ of the timestamp at which it was deleted. Equivalently, it is present on a interval \\(1 \leq t < 5 \subseteq \mathbb{Z}\\). The earliest and latest times for each edge is adjusted to the time bound in the query.
 
-Another thing to note is that while nodes are not present until they are added (see example at time 1), but once they are added they are in the graph forever (see example at time 6). This differs from the `Graph` equivalent where nodes are present only when they contain an update within the time bounds. Crucially, this means that while performing a node count on a `Graph` will count the nodes who have activity (a property update, an adjacent edge added) within the time bounds specified, the same is not true for `PersistentGraph`s. As this may not be desirable, we are currently working on an alternative in which nodes without any edge within the time window will be treated as not present.
+While nodes are not present until they are added (see example at time 1), once they are added they are in the graph forever (see example at time 6). This differs from the `Graph` equivalent where nodes are present only when they contain an update within the time bounds. 
+
+Crucially, this means that while performing a node count on a `Graph` will count the nodes who have activity (a property update, an adjacent edge added) within the time bounds specified. The same is not true for `PersistentGraph`s.
 
 ## Getting the graph before a certain point with `before()`
 
@@ -51,4 +55,4 @@ Here we see that the `before(T)` bound is exclusive of the end point \\(T\\), cr
     --8<-- "python/getting-started/persistent-graph.py:window_1"
     ```
 
-A `window(T1, T2)` creates a half-open interval \\(T_1 \leq t < T_2\\) intersecting the edge's active time ( \\(2 \leq t < 5 \\) in this case). Some examples to note are when the window is completely inside the edge active time and when the edge's active time is strictly inside the window. In both cases, the edge is treated as present in the graph. For some applications, it may be useful to consider edges whose last update inside the window is a deletion as being absent. This option is going to be explored in coming versions of Raphtory.
+A `window(T1, T2)` creates a half-open interval \\(T_1 \leq t < T_2\\) intersecting the edge's active time ( \\(2 \leq t < 5 \\) in this case). When the window is completely inside the edge active time and when the edge's active time is strictly inside the window. In both cases, the edge is treated as present in the graph.
