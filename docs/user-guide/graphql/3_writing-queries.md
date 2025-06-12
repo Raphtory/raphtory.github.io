@@ -1,89 +1,98 @@
 # Writing Raphtory queries in GraphQL
 
-Once you have started your GraphQL server, you will be able to find your GraphQL UI in the browser via the port that you set.
+When you start a GraphQL server, you can find your GraphQL UI in the browser at `localhost:1736/playground` or an alternative port if you specified one.
 
 The schema for the queries can be found on the right hand side in a pull out toggle.
+
 ![alt text](schema.png)
 
 ## Example Queries in GraphQL
 
 Here are some example queries to get you started:
 
-Query to show list of all the nodes
+### List of all the nodes
 
-```
-query {
-  	graph(path: "your_graph") {
-    	nodes {
-            list {
-                name
-            }
-        }
-    }
-}
-```
+=== "![GraphQL](https://img.icons8.com/ios-filled/15/graphql.png) GraphQL"
 
-Query to show list of all the edges, with node properties `age`.
-
-```
-query {
-  	graph(path: "your_graph") {
-    	edges {
-       	    list {
-                src {
+    ```
+    query {
+        graph(path: "your_graph") {
+            nodes {
+                list {
                     name
-                    properties {
-                        get(key:"age") {
-                            value
-                        }
-                    }
-                }
-                dst {
-                    name
-                    properties {
-                        get(key:"age") {
-                            value
-                        }
-                    }
                 }
             }
         }
     }
-}
-```
+    ```
+
+## List of all the edges, with specific node properties 
+
+To find nodes with `age`:
+
+=== "![GraphQL](https://img.icons8.com/ios-filled/15/graphql.png) GraphQL"
+
+    ```
+    query {
+        graph(path: "your_graph") {
+            edges {
+                list {
+                    src {
+                        name
+                        properties {
+                            get(key:"age") {
+                                value
+                            }
+                        }
+                    }
+                    dst {
+                        name
+                        properties {
+                            get(key:"age") {
+                                value
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ```
 
 This will return something like this:
 
-```
-{
-  "data": {
-    "graph": {
-      "edges": {
-        "list": [
-          {
-            "src": {
-              "name": "Ben",
-              "properties": {
-                "get": {
-                  "value": 30
+!!! Output
+
+    ```json
+    {
+    "data": {
+        "graph": {
+        "edges": {
+            "list": [
+            {
+                "src": {
+                "name": "Ben",
+                "properties": {
+                    "get": {
+                    "value": 30
+                    }
                 }
-              }
+                },
+                "dst": {
+                "name": "Hamza",
+                "properties": {
+                    "get": {
+                    "value": 30
+                    }
+                }
+                }
             },
-            "dst": {
-              "name": "Hamza",
-              "properties": {
-                "get": {
-                  "value": 30
-                }
-              }
-            }
-          },
-        ]
-      }
+            ]
+        }
+        }
     }
-  }
-}
-```
+    }
+    ```
 
 All the queries that can be done in Python can also be done in GraphQL.
 
@@ -114,32 +123,57 @@ Here is an example:
 
 ## Querying GraphQL in Python
 
-It is possible to send GraphQL queries in Python without the in-browser IDE. This can be handy if you would like to update your Raphtory graph in Python. Here is some example code that shows you how to do this with the Raphtory client:
+It is possible to send GraphQL queries in Python without the in-browser IDE. This can be useful if you want to update your Raphtory graph in Python. This example shows you how to do this with the Raphtory client:
 
-```python
-with GraphServer(work_dir).start():
-    client = RaphtoryClient("http://localhost:1736")
+=== ":fontawesome-brands-python: Python"
 
-    query = """{graph(path: "graph") { created lastOpened lastUpdated }}"""
-    result = client.query(query)
-```
+    ```python
+    with GraphServer(work_dir).start():
+        client = RaphtoryClient("http://localhost:1736")
 
-Simply pass your graph object string into the client.query() method to execute the GraphQL query and retrieve the result in a python dictionary object.
+        query = """{graph(path: "graph") { created lastOpened lastUpdated }}"""
+        result = client.query(query)
+    ```
 
-```python
-{'graph': {'created': 1729075008085, 'lastOpened': 1729075036222, 'lastUpdated': 1729075008085}}
-```
+Pass your graph object string into the `client.query()` method to execute the GraphQL query and retrieve the result in a python dictionary object.
+
+=== ":fontawesome-brands-python: Python"
+
+    ```python
+    {'graph': {'created': 1729075008085, 'lastOpened': 1729075036222, 'lastUpdated': 1729075008085}}
+    ```
 
 ## Mutation Queries
 
 In GraphQL, you can write two different types of queries - a query to search through your data or a query that mutates your data.
 
-The examples in the previous section are all queries used to search through your data. However in our API, you are also able to mutate your graph. This can be done both in the GraphQL IDE and in Python.
+The examples in the previous section are all queries used to search through your data. However in our API, you can also mutate your graph. This can be done both in the GraphQL IDE and in Python.
 
 The schema in the GraphQL IDE shows how you can mutate the graph within the IDE:
-![alt text](mutate_schema.png)
 
-There are additional methods to mutate the graph exclusively in Python such as sending, receiving and updating a graph, these will all be explained below.
+```
+type MutRoot {
+  plugins: MutationPlugin!
+  deleteGraph(path: String!): Boolean!
+  newGraph(path: String!, graphType: GqlGraphType!): Boolean!
+  moveGraph(path: String!, newPath: String!): Boolean!
+  copyGraph(path: String!, newPath: String!): Boolean!
+
+  # Use GQL multipart upload to send new graphs to server
+  #
+  # Returns::
+  # name of the new graph
+  uploadGraph(path: String!, graph: Upload!, overwrite: Boolean!): String!
+
+  # Send graph bincode as base64 encoded string
+  #
+  # Returns::
+  # path of the new graph
+  sendGraph(path: String!, graph: String!, overwrite: Boolean!): String!
+}
+```
+
+There are additional methods to mutate the graph exclusive to Python such as sending, receiving and updating a graph, these will all be explained below.
 
 ## Sending a graph
 
@@ -160,36 +194,42 @@ You can send a graph to the server and overwrite an existing graph if needed.
 
 To check your query:
 
-```python
-  query = """{graph(path: "g") {nodes {list {name}}}}"""
-  client.query(query)
-```
+=== ":fontawesome-brands-python: Python"
+
+    ```python
+    query = """{graph(path: "g") {nodes {list {name}}}}"""
+    client.query(query)
+    ```
 
 This should return:
 
-```python
-{
-    "graph": {
-        "nodes": {
-            "list": [
-                {"name": "bob"},
-                {"name": "emma"},
-                {"name": "sally"},
-                {"name": "tony"},
-            ]
+!!! Output
+
+    ```json
+    {
+        "graph": {
+            "nodes": {
+                "list": [
+                    {"name": "bob"},
+                    {"name": "emma"},
+                    {"name": "sally"},
+                    {"name": "tony"},
+                ]
+            }
         }
     }
-}
-```
+    ```
 
 ## Receiving graphs
 
-You can receive graphs from a "path" from the server. From this, you will get a Python Raphtory graph object back from the server.
+You can retrieve graphs from a "path" on the server which returns a Python Raphtory graph object.
 
-```python
- g = client.receive_graph("path/to/graph")
- g.edge("sally", "tony")
-```
+=== ":fontawesome-brands-python: Python"
+
+    ```python
+    g = client.receive_graph("path/to/graph")
+    g.edge("sally", "tony")
+    ```
 
 ## Creating a new graph
 
@@ -217,13 +257,15 @@ An explanation of the different types of graph can be found [here](../../user-gu
 
 The returning result to confirm that a new graph has been created:
 
-```graphql
-{
-  "data": {
-    "newGraph": true
-  }
-}
-```
+!!! Output
+
+    ```json
+    {
+    "data": {
+        "newGraph": true
+    }
+    }
+    ```
 
 ## Moving a graph
 
@@ -248,13 +290,15 @@ It is possible to move a graph to a new path on the server.
 
 The returning GraphQL result to confirm that the graph has been moved:
 
-```graphql
-{
-  "data": {
-    "moveGraph": true
-  }
-}
-```
+!!! Output
+
+    ```json
+    {
+    "data": {
+        "moveGraph": true
+    }
+    }
+    ```
 
 ## Copying a graph
 
@@ -279,13 +323,15 @@ It is possible to copy a graph to a new path on the server.
 
 The returning GraphQL result to confirm that the graph has been copied:
 
-```graphql
-{
-  "data": {
-    "copyGraph": true
-  }
-}
-```
+!!! Output
+
+    ```json
+    {
+    "data": {
+        "copyGraph": true
+    }
+    }
+    ```
 
 ## Deleting a graph
 
@@ -310,13 +356,15 @@ It is possible to delete a graph on the server.
 
 The returning GraphQL result to confirm that the graph has been deleted:
 
-```graphql
-{
-  "data": {
-    "deleteGraph": true
-  }
-}
-```
+!!! Output
+
+    ```json
+    {
+    "data": {
+        "deleteGraph": true
+    }
+    }
+    ```
 
 ## Updating the graph
 
@@ -332,7 +380,7 @@ It is possible to update the graph using the `remote_graph()` method.
             rg.add_edge(1, "sally", "tony", layer="friendship")
     ```
 
-Once you have updated the graph such as adding an edge, adding a node, removing an edge etc. You can receive a graph using `receive_graph()` and stating the path of the graph you would like to receive.
+Once you have updated the graph, for example by adding an edge, you can receive a graph by using `receive_graph()` and specifying the path of the graph you would like to receive.
 
 === ":fontawesome-brands-python: Python"
 
