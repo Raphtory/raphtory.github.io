@@ -20,7 +20,7 @@ Raphtory is a library for Python and Rust. Installation is as simple as invoking
 
 ## Importing
 
-To use the library import it into your project
+To use the library import it into your project:
 
 
 === ":fontawesome-brands-python: Python"

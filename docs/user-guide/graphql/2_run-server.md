@@ -1,10 +1,16 @@
 # Running the GraphQL Server
 
-Before you run the GraphQL server, you will need to follow our tutorials on how to get your data into Raphtory. These tutorials can be found following this [link](../../ingestion/1_creating-a-graph).
+## Prerequisites
+
+Before reading this topic, please ensure you are familiar with:
+
+- [Ingesting data](../ingestion/1_creating-a-graph.md)
 
 ## Saving your Raphtory graph into a directory
 
-Once your graph is loaded into Raphtory, the graph needs to be saved into your working directory. This can be done with the following code snippet (change `g` to the constant that your Raphtory graph is saved under):
+You will need some test data to complete the following examples. This can be your own data or one of the examples in the Raphtory documentation.
+
+Once your data is loaded into a Raphtory graph, the graph needs to be saved into your working directory. This can be done with the following code, where `g` is your graph:
 
 === ":fontawesome-brands-python: Python"
 
@@ -40,7 +46,7 @@ server = graphql.GraphServer(args.working_dir)
 server.run()
 ```
 
-To run the server, type this command into the terminal:
+To run the server:
 
 ```bash
 python run_server.py --working_dir ../your_working_dir
@@ -48,7 +54,7 @@ python run_server.py --working_dir ../your_working_dir
 
 ## Starting a server with .start()
 
-It is also possible to start the server in Python with `.start()`. This is an example of how to start the server and send a Raphtory graph to the server (rename `new_graph` to your Raphtory graph object).
+It is also possible to start the server in Python with `.start()`. Below is an example of how to start the server and send a Raphtory graph to the server, where `new_graph` is your Raphtory graph object.
 
 === ":fontawesome-brands-python: Python"
 
@@ -62,8 +68,8 @@ with GraphServer(tmp_work_dir, tracing=True).start():
     client.query(query)
 ```
 
-You can set the port in `RaphtoryClient()` to the port that you desire the GraphQL server to be run on.
+You can set the port in `RaphtoryClient()` to the port the GraphQL server should run on.
 
-The path parameter is always the graph in your server that you would like to change/read. So in this example, we want to send new_graph to graph "g" on the server.
+The `path` parameter is always the graph in your server that you would like to read or update. So in this example, we want to send `new_graph` to graph `g` on the server to update it.
 
-The graph parameter is set to the Raphtory graph that we would like to send. An additional `overwrite` parameter can be stated if we want this new graph to overwrite the old graph.
+The `graph` parameter is set to the Raphtory graph that you would like to send. An additional `overwrite` parameter can be stated if we want this new graph to overwrite the old graph.

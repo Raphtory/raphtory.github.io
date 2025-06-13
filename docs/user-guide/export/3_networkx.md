@@ -1,14 +1,14 @@
 
 # Exporting to NetworkX
 
-For converting to a networkx graph there is only one function (`to_networkx()`), which has flags for node/edge history and for exploding edges. By default all history is included and the edges are separated by layer. 
+When converting to a networkx graph there is only one function (`to_networkx()`), which has flags for node and edge history and for exploding edges. By default all history is included and the edges are separated by layer. 
 
-In the below code snippet we call `to_networkx()` on the network traffic graph, keeping all the default arguments and, therefore, exporting the full history. We have extracted `ServerA` from this graph and printed it so that you may see how the history is modelled. 
+In the below example we call `to_networkx()` on the network traffic graph, keeping all the default arguments so that it exports the full history. We extract `ServerA` from this graph and print to show how the history is modelled.
 
 !!! info 
-    Note that the resulting graph is a networkx `MultiDiGraph` as Raphtory graphs are both directed and have multiple edges between nodes.
+    The resulting graph is a networkx `MultiDiGraph` since Raphtory graphs are both directed and have multiple edges between nodes.
 
- We then call `to_networkx()` again, disabling the property/update history and reprint `ServerA` allowing you to see the difference.   
+We call `to_networkx()` again, disabling the property and update history and reprint `ServerA` to show the difference.   
 
 {{code_block('getting-started/export','networkX',['Graph'])}}
 
@@ -19,8 +19,9 @@ In the below code snippet we call `to_networkx()` on the network traffic graph, 
     ```
 
 ## Visualisation
-Once converted into a networkX graph you are free to use their full suite of functionality. One great use of this conversion is to make use of their [drawing](https://networkx.org/documentation/stable/reference/drawing.html) library for visualising graphs.
 
-In the code snippet below we use this functionality to draw the network traffic graph, labelling the nodes with their Server ID. These visualisations can become as complex as your like, but we refer you to the [networkx](https://networkx.org/documentation/stable/reference/drawing.html) documentation for this.
+Once converted into a networkX graph you have access to their full suite of functionality. For example, using their [drawing](https://networkx.org/documentation/stable/reference/drawing.html) library for visualising graphs.
+
+In the code snippet below we use this functionality to draw a network traffic graph, labelling the nodes with their Server ID. For more information, see the [networkx](https://networkx.org/documentation/stable/reference/drawing.html) documentation.
 
 {{code_block('getting-started/export','networkX_vis',['Graph'])}}

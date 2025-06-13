@@ -61,21 +61,18 @@ Below you can see an example of these APIs and the sort of questions you can ask
     ```
 
 ### GraphQL Playground
-Once you have built some graphs, you can easily host them via Graphql. When you host a Raphtory GraphQL server you get a web playground bundled in, accessible on the same port within your browser (defaulting to 1736). Here you can experiment with queries on your graphs and explore the schema. An example of the playground can be seen below, running a similar query as in the python example above.
+Once you have built some graphs, you can easily host them via Graphql. When you host a Raphtory GraphQL server you also get a web playground. Here you can experiment with queries on your graphs and explore the schema. You can see an example of the playground below, running a similar query to the previous python example.
 
 ![GraphQL Playground](https://i.imgur.com/p0HH6v3.png)
 
 ### Graph Visualisation and Explorations
-Once the GraphQL server is running, you can access the UI directly. If the server is hosted on port 1736, the UI will be available at http://localhost:1736. The UI allows you to search for data in Raphtory, explore connections, and visualise the graph effortlessly.
-
+Once the GraphQL server is running, you can access the UI directly. If the server is hosted on port `1736`, the UI will be available at `http://localhost:1736`. This interface allows you to search for data in Raphtory, explore connections, and visualise the graph effortlessly.
 
 ![Graph User Interface](https://github.com/user-attachments/assets/65aec644-edf8-4db6-a932-5b63228e9e0d)
 
 ## Excited to give it a go?
 
 This site has been created to get new users of `Raphtory` up to speed by explaining the most important features via meaningful examples. You can get started straight away by heading to the [User Guide](user-guide/installation.md). If you prefer learning via APIs and reading into specific object or functions, your best best it to visit the API documentation: [Python](https://docs.raphtory.com/) | [Rust](https://docs.rs/raphtory/latest/raphtory/).
-
-
 
 ## Community  
 
@@ -85,16 +82,12 @@ Join the growing community of open-source enthusiasts using Raphtory to power th
 
 - Join our [![Slack](https://img.shields.io/badge/community-Slack-red)](https://join.slack.com/t/raphtory/shared_invite/zt-xbebws9j-VgPIFRleJFJBwmpf81tvxA) to chat with us and get answers to your questions!
 
---8<-- "docs/people.md"
-
 ### Sponsors
 [<img src="https://github.com/Pometry/Raphtory/assets/6665739/3953c945-e8b4-4b4b-a01a-dd595ffb06e9" style="height:75px"/>](https://www.pometry.com/)
 
 ## Contribute 
 
 The best way to start contributing is to give Raphtory a :star: on github! Once you have done that, if you want to raise an issue, submit a PR or give us some feedback, you can checkout our [Contributing Guide](https://github.com/Pometry/Raphtory/blob/master/CONTRIBUTING.md), the open [list of issues](https://github.com/Pometry/Raphtory/issues), or hit us up directly on [slack](https://join.slack.com/t/raphtory/shared_invite/zt-xbebws9j-VgPIFRleJFJBwmpf81tvxA). 
-
-
 
 ## License
 

@@ -128,36 +128,3 @@ nx_g = traffic_graph.to_networkx()
 nx.draw(nx_g, with_labels=True, node_color="lightblue", edge_color="gray")
 
 # --8<-- [end:networkX_vis]
-
-
-# --8<-- [start:pyvis]
-import json
-
-
-pyvis_g = traffic_graph.to_pyvis(
-    edge_weight="data_size_MB", edge_color="#8e9b9e", directed=True,notebook=False
-)
-
-options = {
-    "edges": {
-        "scaling": {
-            "min": 1,
-            "max": 10,
-        },
-    },
-    "physics": {
-        "barnesHut": {
-            "gravitationalConstant": -30000,
-            "centralGravity": 0.3,
-            "springLength": 100,
-            "springConstant": 0.05,
-        },
-        "maxVelocity": 50,
-        "timestep": 0.5,
-    },
-}
-
-pyvis_g.set_options(json.dumps(options))
-
-pyvis_g.write_html("nx.html")
-# --8<-- [end:pyvis]
