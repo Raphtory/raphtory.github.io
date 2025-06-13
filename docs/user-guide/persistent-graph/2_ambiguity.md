@@ -24,7 +24,7 @@ In this example, the order is: edge addition at time 1, edge addition at time 3,
 
 ## Hanging deletions
 
-Adding edges without a deletion afterwards results in an edge which lasts forever, while deleting an edge without a prior addition does not effect the history. However, hanging deletions are tracked and if the history is later modified to add the corresponding edge at an earlier time the delete will occur as expected. 
+Adding edges without a deletion afterwards results in an edge which lasts forever, while deleting an edge without a prior addition does not effect the history. However, hanging deletions are tracked as an object and if the history is later modified to add the corresponding edge at an earlier time the delete will become valid and occur as expected.
 
 {{code_block('getting-started/persistent-graph','hanging_deletions',['Graph'])}}
 
