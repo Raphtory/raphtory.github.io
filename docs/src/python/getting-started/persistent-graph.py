@@ -23,8 +23,9 @@ print(f"G's exploded edges are {G.edges.explode()}")
 G = PersistentGraph()
 
 G.delete_edge(5, "Alice", "Bob")
-
-print(G.edges.explode())
+print(f"G's edges are {G.edges.explode()}")
+G.add_edge(1, "Alice", "Bob")
+print(f"G's edges are {G.edges.explode()}")
 # --8<-- [end:hanging_deletions]
 
 # --8<-- [start:behaviour_1]
@@ -44,13 +45,7 @@ G1 = PersistentGraph()
 G1.add_edge(1, 1, 2, properties={"message":"hi"})
 G1.delete_edge(1, 1, 2)
 
-G2 = PersistentGraph()
-
-G2.delete_edge(1, 1, 2)
-G2.add_edge(1, 1, 2, properties={"message":"hi"})
-
 print(f"G1's edges are {G1.edges.explode()}")
-print(f"G2's edges are {G2.edges.explode()}")
 
 # --8<-- [end:behaviour_2]
 
