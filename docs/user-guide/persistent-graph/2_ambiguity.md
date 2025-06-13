@@ -16,7 +16,7 @@ For *link-stream* graphs in Raphtory are allowed to have edges between the same 
     --8<-- "python/getting-started/persistent-graph.py:behaviour_1"
     ```
 
-Here, we see two edges which are mutually exclusive with each other in time: one from time 1 to time 3 and one from time 3 to time 5. The second deletion at time 7 is ignored. 
+Two edges are created, one that exists from time 1 to time 3 and another that exists from time 3 to time 5. The second deletion at time 7 is ignored. 
 
 The reason for this is that Raphtory's graph updates are inserted in chronological order, so that the same graph is constructed regardless of the order in which the updates are made. With an exception for events which have the same timestamp, which will be covered shortly. 
 
